@@ -1,0 +1,23 @@
+.movie-card {
+  flex-direction: column;
+}
+
+.movie-poster {
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.movie-year {
+  border-left: 1px solid $accent-color;
+  padding-left: 5px;
+  color: $accent-color;
+}
+.movie-genre {
+  color: $accent-color;
+}
+.movie-rating {
+  background-color: $accent-color;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 1px 9px;
+}

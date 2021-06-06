@@ -1,0 +1,10 @@
+
+{{#each this}}
+<div class="movie-card">
+    <img class="movie-poster" src={{poster_path}} alt="{{original_title}}" width="275px" />
+    <span class="movie-desc">
+        <span class="movie-name">{{title}}<br />
+            {{#each genre_ids}}{{<span class="movie-genre">{{this}}</span> }}{{/each}}
+            <span class="movie-year">{{release_date}}</span>
+</div>
+{{/each}}
