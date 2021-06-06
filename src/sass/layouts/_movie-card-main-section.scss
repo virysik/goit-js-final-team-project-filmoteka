@@ -2,10 +2,15 @@
   margin-bottom: 10px;
 }
 .movie-name {
+  font-weight: 500px;
+  font-size: 12px;
+  font-family: var(--primary-font);
   text-transform: uppercase;
   margin: 0;
 }
 .movie-details {
+  font-weight: 500px;
+  font-size: 12px;
   margin: 0;
   color: var(--accent-color);
 }
