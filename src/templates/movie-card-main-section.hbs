@@ -1,9 +1,9 @@
 
-{{#each this}}
+{{#each results}}
 
  <div class="movie-card">
         <img class="movie-poster" data-popularity="{{popularity}}"
-            src="https://image.tmdb.org/t/p/w500${{poster_path}}"
+            src="https://image.tmdb.org/t/p/w500{{poster_path}}"
             alt="{{original_title}}" width="275px" />
     
         <div class="movie-desc">
