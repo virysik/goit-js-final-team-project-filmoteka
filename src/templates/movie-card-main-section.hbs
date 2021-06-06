@@ -1,10 +1,17 @@
 
 {{#each this}}
-<div class="movie-card">
-    <img class="movie-poster" src={{poster_path}} alt="{{original_title}}" width="275px" />
-    <span class="movie-desc">
-        <span class="movie-name">{{title}}<br />
-            {{#each genre_ids}}{{<span class="movie-genre">{{this}}</span> }}{{/each}}
-            <span class="movie-year">{{release_date}}</span>
-</div>
-{{/each}}
+
+ <div class="movie-card">
+        <img class="movie-poster"
+            src="https://image.tmdb.org/t/p/w500${{poster_path}}"
+            alt="{{original_title}}" width="275px" />
+    
+        <div class="movie-desc">
+            <p class="movie-name">{{title}}</p>
+            <p class="movie-details">
+                {{#each genre_ids}}{{this}}{{/each}} | {{release_date}} <span class="movie-rating">{{vote_average}}</span>
+            </p>
+        </div>
+    </div>
+
+    {{/each}}
