@@ -110,40 +110,71 @@
 //   text-align: center;
 //   align-items: center;
 // }
-.input-header {
-  position: relative;
-  max-width: 336px;
+// .input-header {
+//   position: relative;
+//   max-width: 336px;
 
-  & .input-form {
-    color: #ffffff;
-    //   position: absolute;
-    //   top: 50%;
-    //   left: 50%;
-    //   transform: translate(-50%, -50%);
+//   & .input-form {
+//     color: #ffffff;
+//     //   position: absolute;
+//     //   top: 50%;
+//     //   left: 50%;
+//     //   transform: translate(-50%, -50%);
+//     background: rgba(0, 0, 0, 0.6);
+//     width: 100%;
+//     height: 20px;
+//     margin-top: 4px;
+//     padding: 0px;
+//     margin-left: auto;
+//     margin-right: auto;
+
+//     @media screen and (min-width: 768px) {
+//       width: 336px;
+//       height: 20px;
+//     }
+//   }
+//   & .input-form-icon {
+//     display: block;
+//     position: absolute;
+//     bottom: 7px;
+//     right: 25px;
+//     width: 12px;
+//     height: 12px;
+//     fill: #ffffff;
+//     @media screen and (min-width: 768px) {
+//       bottom: 7px;
+//       right: -65px;
+//     }
+//   }
+// }
+
+.search-form {
+  display: flex;
+  //   text-align: center;
+  align-items: center;
+  height: 20px;
+  max-width: 336px;
+  @media screen and (min-width: 768px) {
+    width: 336px;
+    height: 20px;
+  }
+
+  &_input {
+    position: relative;
     background: rgba(0, 0, 0, 0.6);
     width: 100%;
-    height: 20px;
+
     margin-top: 4px;
     padding: 0px;
-
-    @media screen and (min-width: 768px) {
-      width: 336px;
-      height: 20px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    margin-left: auto;
+    margin-right: auto;
   }
-  & .input-form-icon {
-    display: block;
+
+  &_icon_btn {
     position: absolute;
-    bottom: 7px;
-    right: 25px;
-    width: 12px;
-    height: 12px;
-    fill: #ffffff;
-    @media screen and (min-width: 768px) {
-      bottom: 7px;
-      right: -65px;
-    }
+    top: 50%;
+    right: 4px;
+    transform: translate(0, -50%);
+    @include button-reset();
   }
 }
