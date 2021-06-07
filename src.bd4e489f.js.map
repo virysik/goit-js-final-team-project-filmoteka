@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;AAAA,aAAA,QAAA","file":"src.bd4e489f.js","sourceRoot":"../src","sourcesContent":["import './sass/main.scss';\n//import * as basicLightbox from 'basiclightbox';\n//import '/basiclightbox/dist/basicLightbox.min.css';\n"]}
