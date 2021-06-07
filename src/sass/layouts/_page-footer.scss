@@ -14,12 +14,27 @@
     line-height: 18px;
   }
 
+  &__content {
+    margin: 0 auto;
+
+    @media screen and (min-width: $mob) {
+      max-width: 236px;
+    }
+
+    @media screen and (min-width: 600px) {
+      max-width: 100%;
+    }
+  }
+  // .page-footer__content
+
   &__action-btn {
     @include button-reset();
     text-decoration: underline;
     transition: color var(--transition-timing);
+
     @include hover() {
       color: var(--accent-color);
     }
   }
+  // .page-footer__action-btn
 }
