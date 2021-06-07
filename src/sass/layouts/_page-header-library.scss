@@ -1,0 +1,72 @@
+.header-library {
+  color: var(--white-text-color);
+  font-style: medium;
+  line-height: 100%;
+  text-align: center;
+  vertical-align: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));
+  padding-top: 41px;
+  padding-bottom: 65px;
+
+  /* @media screen and (min-width: 320px) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../../images/header-library/rectangle1m.jpg);
+  }
+  @media screen and (min-width: 768px) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../../images/header-library/rectangle1t.jpg);
+  }*/
+  @media screen and (min-width: 1024px) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));
+    //url(../../images/header-library/rectangle1d.jpg);
+  }
+}
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 45px;
+}
+
+.logo {
+  color: var(--white-text-color);
+  font-size: 30px;
+  line-height: 35px;
+}
+
+.navigation {
+  display: flex;
+}
+
+.nav {
+  font-size: 12px;
+  line-height: 14px;
+}
+.nav:not(:last-child),
+.btn:not(:last-child) {
+  margin-right: 15px;
+}
+
+.btn {
+  font-style: medium;
+  font-size: 12px;
+  line-height: 16px;
+  line-height: 114%;
+  text-align: center;
+  vertical-align: center;
+  color: var(--white-text-color);
+  padding: 14px 38px 12px 38px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: var(--white-text-color);
+}
+.current,
+.btn:hover {
+  background-color: rgba(255, 107, 1, 0.6);
+  border-style: none;
+}
+.current:hover {
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: var(--white-text-color);
+  background-color: none;
+}
