@@ -1,5 +1,6 @@
 .movie-poster {
-  margin-bottom: 10px;
+  height: 100%;
+  width: 100%;
 }
 .movie-name {
   font-weight: 500px;
@@ -19,4 +20,15 @@
   border-radius: 10px;
   background-color: var(--accent-color);
   color: var(--white-text-color);
+}
+.img-wrapper {
+  margin-bottom: 10px;
+
+  @media screen and (min-width: 768px) {
+    width: 294px;
+    height: 398px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 274px;
+  }
 }
