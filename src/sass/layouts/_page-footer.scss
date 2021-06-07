@@ -1,17 +1,17 @@
 .page-footer {
   background-color: var(--bg-light);
   color: var(--footer-text-color);
-  padding: rem(28) 0;
+  padding: 28px 0;
   text-align: center;
 
   @media screen and (min-width: $mob) {
-    font-size: rem(14);
-    line-height: rem(22);
+    font-size: 14px;
+    line-height: 22px;
   }
 
   @media screen and (min-width: $tablet) {
-    font-size: rem(16);
-    line-height: rem(18);
+    font-size: 16px;
+    line-height: 18px;
   }
 
   &__action-btn {
