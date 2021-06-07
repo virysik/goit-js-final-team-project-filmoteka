@@ -1,25 +1,34 @@
-<header class="container header-library">
+<header class="header-library">
+    <div class="container">
     <div class="header-nav">
-    <h1 class="logo">
-        Filmoteka
-    </h1>
+    <div class="logo">
+        <svg class="logo-svg" width="24" height="24">
+            <use href="./img/sprite.svg#icon-film"></use>
+        </svg>
+      <span class="logo-film">Filmoteka</span> 
+    </div>
     <nav>
         <ul class="navigation">
             <li class="nav">
+                <a href="" class="link-nav">
                 HOME
+                </a>
             </li>
-            <li class="nav">
+            <li class="nav" >
+                <a href="" class="link-nav curent">
                 MY LIBRARY
+                </a>
             </li>
         </ul>
     </nav>
     </div>
-    <div>
+    <div class="btn-flex">
         <button type="button" class="btn current">
          WATCHED
         </button>
         <button type="button" class="btn">
            QUEUE 
         </button>
+    </div>
     </div>
 </header>
