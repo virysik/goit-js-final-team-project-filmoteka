@@ -52,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+
   margin-bottom: 38px;
 }
 
@@ -60,7 +60,7 @@
   /*альтернатива .site-nav .item:not(:last-child), но при использовании :last-child необходимо использовать - margin-right: 50px; */
   /*outline: 1px solid red;*/
 
-  margin-left: 40px;
+  margin-left: 20px;
 }
 
 .site-nav .link {
