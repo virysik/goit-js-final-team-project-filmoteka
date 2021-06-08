@@ -37,3 +37,11 @@
     width: 274px;
   }
 }
+
+.movie-date {
+  display: inline-flex;
+  width: 27px;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+}

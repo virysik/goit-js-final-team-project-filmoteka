@@ -17,8 +17,8 @@
           <p class='movie-details'>
             {{#each genre_ids}}
               {{this}}
-            {{/each}}
-            | {{release_date}}
+            {{/each}}  
+            | <span class="movie-date">{{release_date}}</span>
             <span class='movie-rating'>
               {{vote_average}}
             </span>
