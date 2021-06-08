@@ -1,4 +1,5 @@
-import API from './api-key.js';
+import API_KEY from './api-key.js';
+import API from './api-service.js';
 import movieCardTpl from '../templates/movie-card-template.hbs';
 
 const refs = {
