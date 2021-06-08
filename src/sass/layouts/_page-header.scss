@@ -149,31 +149,37 @@
 // }
 
 .search-form {
-  display: flex;
   //   text-align: center;
-  align-items: center;
+
   height: 20px;
   max-width: 336px;
   @media screen and (min-width: 768px) {
-    width: 336px;
+    max-width: 336px;
     height: 20px;
+  }
+  &-relative {
+    position: relative;
   }
 
   &_input {
-    position: relative;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(14, 10, 10, 0.6);
     width: 100%;
+    color: #ffffff;
 
     margin-top: 4px;
     padding: 0px;
     margin-left: auto;
     margin-right: auto;
+    @media screen and (min-width: 768px) {
+      width: 336px;
+      height: 20px;
+    }
   }
 
   &_icon_btn {
     position: absolute;
-    top: 50%;
-    right: 4px;
+    top: 38%;
+    right: 12px;
     transform: translate(0, -50%);
     @include button-reset();
   }
