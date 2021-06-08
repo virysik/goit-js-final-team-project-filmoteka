@@ -128,7 +128,7 @@
 }
 .current,
 .btn:hover {
-  background-color: rgba(255, 107, 1, 0.6);
+  background-color: var(--accent-color);
   color: var(--white-text-color);
   border-style: none;
 }
