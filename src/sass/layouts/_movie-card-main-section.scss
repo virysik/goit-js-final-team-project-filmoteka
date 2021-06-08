@@ -1,0 +1,39 @@
+.movie-poster {
+  height: 100%;
+  width: 100%;
+}
+.movie-name {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.167;
+  font-family: var(--primary-font);
+  color: var(--primary-text-color);
+  text-transform: uppercase;
+  @media screen and(min-widht: $tablet) {
+    line-height: 1.132;
+  }
+}
+.movie-details {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.132;
+  color: var(--accent-color);
+}
+.movie-rating {
+  line-height: 1.167;
+  padding: 1px 9px;
+  border-radius: 10px;
+  background-color: var(--accent-color);
+  color: var(--white-text-color);
+}
+.img-wrapper {
+  margin-bottom: 10px;
+
+  @media screen and (min-width: 768px) {
+    width: 294px;
+    height: 398px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 274px;
+  }
+}

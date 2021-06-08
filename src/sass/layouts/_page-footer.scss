@@ -1,25 +1,38 @@
 .page-footer {
   background-color: var(--bg-light);
   color: var(--footer-text-color);
-  padding: rem(28) 0;
+  padding: 28px 0;
   text-align: center;
-
-  @media screen and (min-width: $mob) {
-    font-size: rem(14);
-    line-height: rem(22);
-  }
+  font-size: 14px;
+  line-height: 22px;
+  
 
   @media screen and (min-width: $tablet) {
-    font-size: rem(16);
-    line-height: rem(18);
+    font-size: 16px;
+    line-height: 18px;
   }
+
+  &__content {
+    margin: 0 auto;
+
+    @media screen and (min-width: $mob) {
+      max-width: 236px;
+    }
+
+    @media screen and (min-width: 600px) {
+      max-width: 100%;
+    }
+  }
+  // .page-footer__content
 
   &__action-btn {
     @include button-reset();
     text-decoration: underline;
     transition: color var(--transition-timing);
+
     @include hover() {
       color: var(--accent-color);
     }
   }
+  // .page-footer__action-btn
 }

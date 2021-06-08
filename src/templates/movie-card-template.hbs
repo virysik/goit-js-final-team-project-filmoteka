@@ -1,0 +1,30 @@
+{{#each this}}
+  <li class='main__section-item'>
+    <a href='#' class='main__section-link'>
+      <div class='movie-card'>
+        <div class='img-wrapper'>
+          <img
+            class='movie-poster'
+            data-popularity="{{popularity}}"
+            src="https://image.tmdb.org/t/p/w500{{poster_path}}"
+            alt="{{original_title}}"
+          />
+        </div>
+        <div class='movie-desc'>
+          <p class='movie-name'>
+            {{title}}
+          </p>
+          <p class='movie-details'>
+            {{#each genre_ids}}
+              {{this}}
+            {{/each}}
+            | {{release_date}}
+            <span class='movie-rating'>
+              {{vote_average}}
+            </span>
+          </p>
+        </div>
+      </div>
+    </a>
+  </li>
+{{/each}}
