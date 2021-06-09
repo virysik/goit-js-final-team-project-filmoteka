@@ -1,56 +1,61 @@
-
 <!-- <div class="container"> -->
-<header class="header-background header-first">
-    <!--class="header-library"-->
-    <div class="container">
-        <!-- Главный блок навигации -->
-        <nav class="header-nav">
-            <a href="" class="logo">
-                <svg class="logo-svg" width="24" height="24" aria-label="Логотип Фильмотеки">
-                    <use href="./img/sprite.svg#icon-film"></use>
-                </svg>
-                <!--"/" - вернуться на главную страницу-->
-                <span class="logo-film">Filmoteka</span>
-            </a>
-            <ul class="nav">
-                <li class="nav-item">
-                    <a href="" class="link-nav current">
-                        home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="link-nav">
-                        my library
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="link-nav">
-                        login
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    <form action="search-form search-form-js"> <!--class="is-hidden"-->
-        <span class="search-form-relative"><input class="search-form_input" type="text" placeholder="Поиск фильмов" name="query"\>
-            <button class="search-form_icon_btn" type="submit">
-                <svg width="12" height="12" class="input-form-icon" aria-label="Логотип Фильмотеки">
-                    <use href="./img/sprite.svg#icon-search"></use>
-                </svg>
-            </button>
-        </span>
+<header class="header header-library-bg">
+  <!--class="header-library"-->
+  <div class="container">
+    <!-- Главный блок навигации -->
+    <nav class="header-nav">
+      <a href="" class="logo">
+        <svg class="logo-svg" width="24" height="24" aria-label="Логотип Фильмотеки">
+          <use href="./img/sprite.svg#icon-film"></use>
+        </svg>
+        <!--"/" - вернуться на главную страницу-->
+        <span class="logo-film">Filmoteka</span>
+      </a>
+
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="#" class="link-nav current">
+            home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="link-nav">
+            my library
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="link-nav">
+            login
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <form action="search-form search-form-js">
+      <!--class="visually-hidden"-->
+      <span class="search-form-relative visually-hidden"
+        ><input class="search-form_input" type="text" placeholder="Поиск фильмов" name="query" />
+        <button class="search-form_icon_btn" type="submit">
+          <svg width="12" height="12" class="input-form-icon" aria-label="Логотип Фильмотеки">
+            <use href="./img/sprite.svg#icon-search"></use>
+          </svg>
+        </button>
+      </span>
     </form>
-<div class="is-hidden">
-<div class="btn-flex">
-    <button type="button" class="btn is-hidden">
+
+    <div class="btn-flex">
+      <button type="button" class="btn">
         watched
-    </button>
-    <button type="button" class="btn is-hidden">
+      </button>
+      <button type="button" class="btn">
         queue
-    </button>
-</div>
-</div>
+      </button>
+    </div>
+  </div>
 
-</div>
+  <p class="warning visually-hidden">
+    Search result not successful. Enter the correct movie name and try again
+  </p>
 
-<!-- </div> -->
-
+  <!-- </div> -->
+</header>
