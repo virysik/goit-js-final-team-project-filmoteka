@@ -166,6 +166,8 @@
 
   height: 20px;
   max-width: 336px;
+
+
   @media screen and (min-width: $tablet) {
     max-width: 336px;
     height: 20px;
@@ -175,24 +177,40 @@
   }
 
   &_input {
-    background: rgba(14, 10, 10, 0.6);
+    background: rgba(0, 0, 0, 0);
     width: 100%;
-    color: #ffffff;
+
+    color: var(--white-text-color);
+    border: none;
+
+    border-bottom: 1px solid var(--white-text-color);
 
     margin-top: 4px;
-    padding: 0px;
+    padding: 2px 5px;
     margin-left: auto;
     margin-right: auto;
+
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.142;
+  
     @media screen and (min-width: $tablet) {
+
       width: 336px;
       height: 20px;
+    }
+    &::placeholder {
+      color: var(--white-text-color);
     }
   }
 
   &_icon_btn {
     position: absolute;
-    top: 38%;
-    right: 12px;
+    top: 44%;
+    right: 6px;
     transform: translate(0, -50%);
     @include button-reset();
   }
@@ -231,4 +249,6 @@
   background-color: var(--accent-color);
   color: var(--white-text-color);
   border-style: none;
+
 }
+
