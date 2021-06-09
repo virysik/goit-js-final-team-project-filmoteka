@@ -1,14 +1,11 @@
 import API_KEY from './api-key.js';
 import API from './api-service.js';
+import refs from './refs.js';
 import movieCardTpl from '../templates/movie-card-template.hbs';
 
-const refs = {
-  movieList: document.querySelector('.main__section-list'),
-  homePage: document.querySelector('.js-home-page'),
-};
 getTrendMovies();
 
-refs.homePage.addEventListener('click', onHomePage);
+refs.homePageBtn.addEventListener('click', onHomePage);
 
 function onHomePage(e) {
   e.preventDefault();
