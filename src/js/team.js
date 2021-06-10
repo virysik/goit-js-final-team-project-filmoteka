@@ -8,10 +8,9 @@ refs.teamBtn.addEventListener('click', onTeamBtnClick);
 console.log(refs.lightboxContainer);
 
 function onTeamBtnClick() {
-  // refs.lightboxContainer.classList.remove('is-hidden');
   const modal = basicLightbox.create(document.querySelector('.lightbox'));
   modal.show();
-  // refs.lightboxBtn.addEventListener('click', modal.close);
+  refs.lightboxBtn.addEventListener('click', modal.close);
 }
 
 markupTeamCards(teamOfList);
