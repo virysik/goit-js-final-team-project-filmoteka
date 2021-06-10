@@ -1,5 +1,6 @@
 // Класс поиска по запросу
- import axios from 'axios'
+import axios from 'axios'
+import API_KEY from '../api-key'
 class MovieDataBaseSearchService {
   constructor() {
     this._searchQuery = '';
@@ -7,9 +8,7 @@ class MovieDataBaseSearchService {
     }
   async fetchMoviesByName() {
     
-    const APIKEY = 'fce924273e7307535891dd09fc2f7662'
- 
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`
+    try{      const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`
 
     const response = await axios(url);
     
@@ -20,7 +19,11 @@ class MovieDataBaseSearchService {
     // }
     // Переходит на след страницу поиска
     this._page += 1;
-    return response.results;
+    return response.results;}
+ 
+    catch (error) {
+      console.log(error);
+}
     }
   get query() {
   return this._searchQuery
