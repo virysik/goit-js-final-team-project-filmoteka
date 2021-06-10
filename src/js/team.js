@@ -7,8 +7,8 @@ import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 refs.teamBtn.addEventListener('click', onTeamBtnClick);
 console.log(refs.lightboxContainer);
 
+const modal = basicLightbox.create(document.querySelector('.lightbox-content'));
 function onTeamBtnClick() {
-  const modal = basicLightbox.create(document.querySelector('.lightbox'));
   modal.show();
   refs.lightboxBtn.addEventListener('click', modal.close);
 }

@@ -87,7 +87,7 @@
   color: var(--accent-color);
 }
 
-.lightbox__button {
+.lightbox-button {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -111,7 +111,7 @@
   background-repeat: no-repeat;
 }
 
-.lightbox__button:hover,
-.lightbox__button:focus {
+.lightbox-button:hover,
+.lightbox-button:focus {
   background-color: var(--accent-color);
 }
