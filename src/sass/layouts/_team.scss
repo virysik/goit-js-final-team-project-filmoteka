@@ -1,0 +1,60 @@
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(224, 211, 211, 0.25);
+  overflow: auto;
+}
+// .lightbox.is-hidden {
+//   opacity: 0;
+//   pointer-events: none;
+// }
+.team-heading {
+  text-align: center;
+  color: var(--white-text-color);
+}
+.team-info {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.team-list {
+  width: 880px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white-text-color);
+}
+
+.team-item {
+  width: calc((100% - 25 * 5px) / 5);
+}
+.team-link {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: 130px;
+    left: 80px;
+    background-image: url(../img/team/github.svg);
+    background-position: center;
+    background-color: var(--primary-text-color);
+    background-repeat: no-repeat;
+  }
+}
+
+.team-position {
+  color: var(--accent-color);
+}
+.team-img {
+  &:hover {
+    transform: scale(1.03);
+  }
+}
