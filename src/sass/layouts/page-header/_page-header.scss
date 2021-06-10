@@ -1,0 +1,88 @@
+$btn-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+
+.header {
+  padding: 46px 0;
+  text-align: center;
+  min-height: 230px;
+}
+
+.header-home-bg {
+  // padding-bottom: 95px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  &-svg {
+    @media screen and (min-width: $tablet) {
+      margin-right: 10px;
+    }
+  }
+  &-film {
+    color: var(--white-text-color);
+    font-size: 26px;
+    line-height: 1.167;
+    font-weight: 500;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    @media screen and (max-width: 767px) {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      border: 0;
+      padding: 0;
+
+      white-space: nowrap;
+      clip-path: inset(100%);
+      clip: rect(0 0 0 0);
+      overflow: hidden;
+    }
+  }
+}
+
+.btn {
+  @include button-reset();
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.132;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  color: var(--white-text-color);
+  padding: 15px 36px;
+  border-radius: 5px;
+  border: 1px solid var(--white-text-color);
+  min-width: 130px;
+
+  @include hover {
+    border-color: var(--accent-color);
+    box-shadow: $btn-shadow;
+  }
+
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  @media screen and (min-width: $tablet) {
+    padding: 14px 39px;
+  }
+
+  &-flex {
+    @media screen and (max-width: $mob) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.current-btn {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  box-shadow: $btn-shadow;
+}

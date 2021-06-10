@@ -1,11 +1,9 @@
-<!-- <div class="container"> -->
-<header class="header header-home-bg">
+<header id="page-header" class="header header-home">
   <!--class="header-library"-->
   <div class="container">
-    <!-- Главный блок навигации -->
     
-    <nav class="header-nav header-nav-home">
-      <a href="" class="logo">
+    <nav class="header-nav header__nav">
+      <a href="#home" class="logo" data-link>
         <svg class="logo-svg" width="24" height="24" aria-label="Логотип Фильмотеки">
           <use href="./img/sprite.svg#icon-film"></use>
         </svg>
@@ -13,14 +11,14 @@
         <span class="logo-film">Filmoteka</span>
       </a>
 
-      <ul class="nav">
+      <ul id="page-nav" class="nav">
         <li class="nav-item">
-          <a href="#" class="link-nav current">
+          <a href="#home" class="link-nav current" data-link>
             home
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="link-nav">
+          <a href="#library" class="link-nav" data-link>
             my library
           </a>
         </li>
@@ -32,30 +30,31 @@
       </ul>
     </nav>
 
-    <form action="search-form search-form-js">
-      <span class="search-form-relative "
-        ><input class="search-form_input" type="text" placeholder="Search for a movie.." name="query" />
-        <button class="search-form_icon_btn" type="submit">
+    <form class="search-form search-form-js header__search">
+
+      <div class="search-form__field-group">
+        <input class="search-form__input" type="text" placeholder="Search for a movie..." name="query" autocomplete="off"/>
+        <button class="search-form__icon-btn" type="submit">
           <svg width="12" height="12" class="input-form-icon" aria-label="Логотип Фильмотеки">
             <use href="./img/sprite.svg#icon-search"></use>
           </svg>
         </button>
-      </span>
-      
+      </div>
+
+      <p class="search-form__field-error">
+        Search result not successful. Enter the correct movie name and try again
+      </p>
     </form>
 
-    <!-- <div class="btn-flex">
-      <button type="button" class="btn">
+    <div class="btn-flex header__actions">
+      <button type="button" class="btn current-btn">
         watched
       </button>
       <button type="button" class="btn">
         queue
       </button>
     </div>
-  </div> -->
- <p class="warning">
-    Search result not successful. Enter the correct movie name and try again
-  </p>
 
-  <!-- </div> -->
+  </div>
+  
 </header>
