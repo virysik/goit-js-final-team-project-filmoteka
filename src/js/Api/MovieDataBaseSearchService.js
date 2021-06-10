@@ -1,10 +1,7 @@
 // Класс поиска по запросу
 import axios from 'axios';
 import API_KEY from '../api-key';
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 class MovieDataBaseSearchService {
   constructor() {
     this._searchQuery = '';
@@ -23,11 +20,9 @@ class MovieDataBaseSearchService {
       // }
       // Переходит на след страницу поиска
       this._page += 1;
-<<<<<<< Updated upstream
+
       return response.data.results;
-=======
-      return response.results;
->>>>>>> Stashed changes
+
     } catch (error) {
       console.log(error);
     }
