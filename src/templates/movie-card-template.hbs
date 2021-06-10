@@ -1,9 +1,10 @@
 {{#each this}}
   <li class='main__section-item'>
-    <a href='#' class='main__section-link'>
+    <a href='#' class='main__section-link' id={{id}}>
       <div class='movie-card'>
         <div class='img-wrapper'>
           <img
+            loading='lazy'
             class='movie-poster'
             data-popularity="{{popularity}}"
             src="https://image.tmdb.org/t/p/w500{{poster_path}}"
