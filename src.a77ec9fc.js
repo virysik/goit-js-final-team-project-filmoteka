@@ -67,4 +67,4 @@ module.exports=require("./lib/axios");
 },{"axios":"dZBD","../api-key":"xKyL"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/toggleHeaders"),require("./js/Api/MovieDataBaseSearchService");
 },{"./sass/main.scss":"clu1","./js/toggleHeaders":"wjhs","./js/Api/MovieDataBaseSearchService":"YVWD"}]},{},["Focm"], null)
-//# sourceMappingURL=/goit-js-final-team-project-filmoteka/src.e8f3b239.js.map
+//# sourceMappingURL=/goit-js-final-team-project-filmoteka/src.a77ec9fc.js.map
