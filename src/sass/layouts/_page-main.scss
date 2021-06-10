@@ -32,4 +32,15 @@
   &__section-link {
     display: block;
   }
+
+  &__section-wrapper {
+    margin-bottom: 40px;
+
+    @media screen and(min-width:$tablet) {
+      margin-bottom: 50px;
+    }
+    @media screen and(min-width:$desktop) {
+      margin-bottom: 48px;
+    }
+  }
 }
