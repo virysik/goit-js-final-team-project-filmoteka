@@ -1,7 +1,6 @@
 <header id="page-header" class="header header-home">
   <!--class="header-library"-->
   <div class="container">
-    
     <nav class="header-nav header__nav">
       <a href="#home" class="logo" data-link>
         <svg class="logo-svg" width="24" height="24" aria-label="Логотип Фильмотеки">
@@ -13,27 +12,26 @@
 
       <ul id="page-nav" class="nav">
         <li class="nav-item">
-          <a href="#home" class="link-nav current" data-link>
-            home
-          </a>
+          <a href="#home" class="link-nav current" data-link> home </a>
         </li>
         <li class="nav-item">
-          <a href="#library" class="link-nav" data-link>
-            my library
-          </a>
+          <a href="#library" class="link-nav" data-link> my library </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="link-nav">
-            login
-          </a>
+          <a href="#login" class="link-nav" id="login"> login </a>
         </li>
       </ul>
     </nav>
 
     <form class="search-form search-form-js header__search">
-
       <div class="search-form__field-group">
-        <input class="search-form__input" type="text" placeholder="Search for a movie..." name="query" autocomplete="off"/>
+        <input
+          class="search-form__input"
+          type="text"
+          placeholder="Search for a movie..."
+          name="query"
+          autocomplete="off"
+        />
         <button class="search-form__icon-btn" type="submit">
           <svg width="12" height="12" class="input-form-icon" aria-label="Логотип Фильмотеки">
             <use href="./img/sprite.svg#icon-search"></use>
@@ -47,14 +45,8 @@
     </form>
 
     <div class="btn-flex header__actions">
-      <button type="button" class="btn current-btn">
-        watched
-      </button>
-      <button type="button" class="btn">
-        queue
-      </button>
+      <button type="button" class="btn current-btn">watched</button>
+      <button type="button" class="btn">queue</button>
     </div>
-
   </div>
-  
 </header>
