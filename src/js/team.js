@@ -5,7 +5,6 @@ import * as basicLightbox from 'basiclightbox';
 import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
 refs.teamBtn.addEventListener('click', onTeamBtnClick);
-console.log(refs.lightboxContainer);
 
 const modal = basicLightbox.create(document.querySelector('.lightbox'));
 function onTeamBtnClick() {
