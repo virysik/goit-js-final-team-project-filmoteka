@@ -1,10 +1,12 @@
 import photoNika from '../img/team/nika.jpg';
 import photoCat from '../img/team/cat.jpg';
+import photoVera from '../img/team/vera.jpg';
+import photoMikhail from '../img/team/mikhail.jpeg';
 
 export default [
   {
     name: 'Vera',
-    photo: photoCat,
+    photo: photoVera,
     position: 'Team Leader',
     git: 'https://github.com/virysik',
   },
@@ -46,7 +48,7 @@ export default [
   },
   {
     name: 'Mikhail',
-    photo: photoCat,
+    photo: photoMikhail,
     position: 'Developer',
     git: 'https://github.com/maralov',
   },
