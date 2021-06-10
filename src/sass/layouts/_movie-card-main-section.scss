@@ -1,21 +1,27 @@
 .movie-poster {
   height: 100%;
   width: 100%;
+  border-radius: 5px;
 }
 .movie-name {
-  font-weight: 500px;
+  font-weight: 500;
   font-size: 12px;
+  line-height: 1.167;
   font-family: var(--primary-font);
+  color: var(--primary-text-color);
   text-transform: uppercase;
-  margin: 0;
+  @media screen and(min-widht: $tablet) {
+    line-height: 1.132;
+  }
 }
 .movie-details {
-  font-weight: 500px;
+  font-weight: 500;
   font-size: 12px;
-  margin: 0;
+  line-height: 1.132;
   color: var(--accent-color);
 }
 .movie-rating {
+  line-height: 1.167;
   padding: 1px 9px;
   border-radius: 10px;
   background-color: var(--accent-color);
@@ -23,6 +29,11 @@
 }
 .img-wrapper {
   margin-bottom: 10px;
+  transition: all 0.2s ease;
+  @include hover {
+    transform: scale(1.03);
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  }
 
   @media screen and (min-width: 768px) {
     width: 294px;
