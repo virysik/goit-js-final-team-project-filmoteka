@@ -79,4 +79,4 @@ var e,t=arguments[3];!function(t,r){"object"==typeof exports&&"object"==typeof m
 },{"./Api/MovieDataBaseSearchService":"YVWD","../templates/movie-card-template.hbs":"XNBc"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/toggleHeaders"),require("./js/Api/MovieDataBaseSearchService");var e=s(require("./js/Api/genreTranspil")),r=s(require("./js/search-on-query"));function s(e){return e&&e.__esModule?e:{default:e}}(0,e.default)(),document.querySelector('[href="#home"]').addEventListener("click",e.default),document.querySelector('[href="#library"]').addEventListener("click",r.default);
 },{"./sass/main.scss":"clu1","./js/toggleHeaders":"wjhs","./js/Api/MovieDataBaseSearchService":"YVWD","./js/Api/genreTranspil":"PLLY","./js/search-on-query":"AiXP"}]},{},["Focm"], null)
-//# sourceMappingURL=/goit-js-final-team-project-filmoteka/src.9ffcc69e.js.map
+//# sourceMappingURL=/goit-js-final-team-project-filmoteka/src.7e47e803.js.map
