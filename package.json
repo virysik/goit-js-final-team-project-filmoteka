@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "basiclightbox": "^5.0.4"
+    "basiclightbox": "^5.0.4",
+    "firebase": "^8.6.6"
   }
 }
