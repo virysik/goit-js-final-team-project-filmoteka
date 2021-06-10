@@ -1,13 +1,13 @@
-.lightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+.lightbox-overlay {
+  position: relative;
   height: 100vh;
-  background-color: rgba(224, 211, 211, 0.25);
   overflow: auto;
 }
 
+.lightbox-content {
+  position: relative;
+  top: 20%;
+}
 .team-info {
   position: relative;
   margin: 0 auto;
