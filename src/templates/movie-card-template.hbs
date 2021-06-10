@@ -15,10 +15,9 @@
             {{title}}
           </p>
           <p class='movie-details'>
-            {{#each genre_ids}}
-              {{this}}
-            {{/each}}
-            | {{release_date}}
+            <span class='movie-genre'></span>
+            |
+            <span class='movie-year'></span>
             <span class='movie-rating'>
               {{vote_average}}
             </span>
