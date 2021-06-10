@@ -20,7 +20,9 @@ class MovieDataBaseSearchService {
       // }
       // Переходит на след страницу поиска
       this._page += 1;
+
       return response.data.results;
+
     } catch (error) {
       console.log(error);
     }
