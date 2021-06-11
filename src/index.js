@@ -4,7 +4,7 @@ import './js/toggleHeaders';
 //import '/basiclightbox/dist/basicLightbox.min.css';
 import './js/Api/MovieDataBaseSearchService'
 import './js/render-year-on-movie-card'
-
+import './js/theme-switch'
 
 import './js/Api/MovieDataBaseSearchService';
 import './js/Api/genreTranspil';
