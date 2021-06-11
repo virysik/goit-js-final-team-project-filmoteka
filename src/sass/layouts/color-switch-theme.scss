@@ -19,15 +19,16 @@ body.dark-theme {
 
 /* THEME SWITCH */
 .theme-switch {
+  position: absolute;
+
+  bottom: 35%;
   display: flex;
   align-items: center;
-  align-items: baseline;
   justify-content: flex-end;
-  margin-bottom: 30px;
 }
 
 .theme-switch__icon {
-  color: currentColor;
+  color: #d3d3d3;
   height: 24px;
   width: 24px;
   margin-right: 8px;
@@ -65,7 +66,7 @@ body.dark-theme {
   height: 100%;
   color: transparent;
   user-select: none;
-  background-color: #333;
+  background-color: #c9c9c9;
   border-radius: inherit;
   z-index: 1;
   cursor: pointer;
