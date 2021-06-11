@@ -10,12 +10,14 @@ import './js/Api/MovieDataBaseSearchService';
 import ApiServiceMarkup from './js/Api/ApiServiceMarkUp';
 import clearContainer from './js/search-on-query';
 import './js/team.js';
-//import clearContainer from './js/search-on-query';
+
 import './js/Api/auth';
 import './js/pagination';
 
-// document.querySelectorAll('[href="#home"]').forEach(e => e.addEventListener('click', getMovies));
-// document.querySelector('[href="#library"]').addEventListener('click', clearContainer);
-
 const apiData = new ApiServiceMarkup();
 apiData.getMarkUp();
+
+document
+  .querySelectorAll('[href="#home"]')
+  .forEach(e => e.addEventListener('click', apiData.getMarkUp.bind(apiData)));
+document.querySelector('[href="#library"]').addEventListener('click', clearContainer);
