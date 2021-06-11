@@ -110,13 +110,13 @@ export default class FetchMovieData {
   addEventListeners() {
     document.querySelectorAll('[href="#home"]').forEach(e =>
       e.addEventListener('click', () => {
-        this.raiting = true;
+        this.raiting = false;
         this.getMarkUp();
       }),
     );
 
     document.querySelector('[href="#library"]').addEventListener('click', () => {
-      this.raiting = false;
+      this.raiting = true;
       document.querySelector('.main__section-list').innerHTML = '';
     });
   }
