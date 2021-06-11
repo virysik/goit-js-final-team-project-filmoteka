@@ -65,6 +65,7 @@ export default class FetchMovieData {
         return {
           ...data,
           genre: this.getCorrectGenreArray(data.genre_ids, asyncGenresList),
+          year: this.getCorrectYear(data.release_date),
         };
       });
     } catch (error) {
@@ -73,7 +74,7 @@ export default class FetchMovieData {
   }
 
   getCorrectGenreArray(genreTrendingMovieList, genreExplainedList) {
-    const correctGenreArr = genreTrendingMovieList.map((el, i, arr) => {
+    const correctGenreArr = genreTrendingMovieList.map(el => {
       genreExplainedList.forEach(entry => {
         if (entry.id === el) {
           el = ' ' + entry.name;
@@ -89,5 +90,9 @@ export default class FetchMovieData {
     }
 
     return correctGenreArr;
+  }
+
+  getCorrectYear(year) {
+    return year.split('-').slice(0, 1);
   }
 }
