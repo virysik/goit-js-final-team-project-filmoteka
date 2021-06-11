@@ -19,9 +19,11 @@
             {{genre}}
             |
             {{year}}
-            <span class='movie-rating'>
-              {{vote_average}}
-            </span>
+            {{#if raiting}}
+              <span class='movie-rating'>
+                {{vote_average}}
+              </span>
+            {{/if}}
           </p>
         </div>
       </div>
