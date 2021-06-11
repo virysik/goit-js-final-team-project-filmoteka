@@ -20,4 +20,5 @@ apiData.getMarkUp();
 document
   .querySelectorAll('[href="#home"]')
   .forEach(e => e.addEventListener('click', apiData.getMarkUp.bind(apiData)));
+
 document.querySelector('[href="#library"]').addEventListener('click', clearContainer);
