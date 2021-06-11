@@ -20,7 +20,9 @@
             |
             {{year}}
             <span class='movie-rating'>
-              {{vote_average}}
+              {{#if raiting}}
+                {{vote_average}}
+              {{/if}}
             </span>
           </p>
         </div>
