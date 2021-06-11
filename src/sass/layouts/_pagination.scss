@@ -29,6 +29,10 @@
   &__item.first,
   &__item.last {
     background: var(--grey-100);
+
+    .pagination__link {
+      color: var(--primary-text-color);
+    }
   }
 
   &__link {
