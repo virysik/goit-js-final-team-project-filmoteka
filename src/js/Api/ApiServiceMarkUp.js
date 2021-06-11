@@ -76,7 +76,7 @@ export default class FetchMovieData {
     const correctGenreArr = genreTrendingMovieList.map((el, i, arr) => {
       genreExplainedList.forEach(entry => {
         if (entry.id === el) {
-          el = entry.name + ' ';
+          el = ' ' + entry.name;
         }
       });
       return el;
