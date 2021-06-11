@@ -8,6 +8,9 @@ import './js/render-year-on-movie-card'
 
 import './js/Api/MovieDataBaseSearchService';
 import './js/Api/genreTranspil';
+
+import './js/Api/auth';
+
 import getMovies from './js/Api/genreTranspil';
 import clearContainer from './js/search-on-query';
 import './js/team.js';
