@@ -2,6 +2,7 @@
 import axios from 'axios';
 import API_KEY from '../api-key';
 
+
 class MovieDataBaseSearchService {
   constructor() {
     this._searchQuery = '';
