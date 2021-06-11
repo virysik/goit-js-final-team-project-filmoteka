@@ -44,8 +44,8 @@ function registeringWithEmailAndPassword(email, password) {
 
 regForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = e.target.querySelector('#email').value;
-    const password = e.target.querySelector('#password').value;
+    const email = e.target.querySelector('#reg-email').value;
+    const password = e.target.querySelector('#reg-password').value;
    
     registeringWithEmailAndPassword(email, password)
 })
@@ -72,8 +72,8 @@ function authWithMailAndPassword(email, password) {
 logForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const email = e.target.querySelector('#email').value;
-    const password = e.target.querySelector('#password').value;
+    const email = e.target.querySelector('#log-email').value;
+    const password = e.target.querySelector('#log-password').value;
 
     console.log(email)
     console.log(password)
@@ -85,4 +85,3 @@ logForm.addEventListener('submit', (e) => {
 
 
 // const bazaD = 'https://goit-js-team-project-filmoteka-default-rtdb.europe-west1.firebasedatabase.app/';
-

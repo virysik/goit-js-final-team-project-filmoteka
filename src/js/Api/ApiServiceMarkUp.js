@@ -7,6 +7,7 @@ export default class FetchMovieData {
     this._key = API_KEY;
     this._genres = this.fetchGenreCodes();
     this._data = this.fetchTrendingMovies();
+    this._raitingStatus = false;
   }
 
   async fetchTrendingMovies() {
@@ -50,10 +51,19 @@ export default class FetchMovieData {
     return this._data;
   }
 
+  get raiting() {
+    return this._raitingStatus;
+  }
+
+  set raiting(newRaitingStatus) {
+    this._raitingStatus = newRaitingStatus;
+  }
+
   async getMarkUp() {
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
     document.querySelector('.main__section-list').insertAdjacentHTML('beforeend', markUp);
+    this.addEventListeners();
   }
 
   async getMarkUpData() {
@@ -65,6 +75,8 @@ export default class FetchMovieData {
         return {
           ...data,
           genre: this.getCorrectGenreArray(data.genre_ids, asyncGenresList),
+          year: this.getCorrectYear(data.release_date),
+          raiting: this.raiting,
         };
       });
     } catch (error) {
@@ -73,7 +85,7 @@ export default class FetchMovieData {
   }
 
   getCorrectGenreArray(genreTrendingMovieList, genreExplainedList) {
-    const correctGenreArr = genreTrendingMovieList.map((el, i, arr) => {
+    const correctGenreArr = genreTrendingMovieList.map(el => {
       genreExplainedList.forEach(entry => {
         if (entry.id === el) {
           el = ' ' + entry.name;
@@ -89,5 +101,23 @@ export default class FetchMovieData {
     }
 
     return correctGenreArr;
+  }
+
+  getCorrectYear(year) {
+    return year.split('-').slice(0, 1);
+  }
+
+  addEventListeners() {
+    document.querySelectorAll('[href="#home"]').forEach(e =>
+      e.addEventListener('click', () => {
+        this.raiting = false;
+        this.getMarkUp();
+      }),
+    );
+
+    document.querySelector('[href="#library"]').addEventListener('click', () => {
+      this.raiting = true;
+      document.querySelector('.main__section-list').innerHTML = '';
+    });
   }
 }
