@@ -15,3 +15,4 @@ import './js/pagination';
 
 const apiData = new ApiServiceMarkup();
 apiData.getMarkUp();
+
