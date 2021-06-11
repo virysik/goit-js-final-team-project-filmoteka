@@ -1,5 +1,3 @@
-
-
 const checkBox = document.querySelector('#theme-switch-toggle');
 
 const Theme = {
@@ -29,5 +27,3 @@ function onSwitchTrackChange(e) {
     classOnBody.replace(Theme.DARK, Theme.LIGHT);
   }
 }
-
-log
