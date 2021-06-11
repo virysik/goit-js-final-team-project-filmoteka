@@ -21,7 +21,9 @@ body.dark-theme {
 .theme-switch {
   position: absolute;
 
-  bottom: 35%;
+  top: 60%;
+  right: 6px;
+  transform: translate(0, -50%);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -33,6 +35,11 @@ body.dark-theme {
   width: 24px;
   margin-right: 8px;
   margin-left: 8px;
+  display: block;
+
+  @media screen and (max-width: 360px) {
+    display: none;
+  }
 }
 
 .theme-switch__control {
