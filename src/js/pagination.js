@@ -1,6 +1,6 @@
 
 //-------Переменные иммитируют загрузку страниц с фильмами
-let l = console.log;
+
 const MAX_PAGE = 45;
 const totalPage = Math.round(Math.random() * MAX_PAGE);
 let activePage = 1 + Math.round(Math.random() * (totalPage - 1));
