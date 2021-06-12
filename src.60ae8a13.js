@@ -105,4 +105,4 @@ const i=45,n=Math.round(45*Math.random());let t=1+Math.round(Math.random()*(n-1)
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/toggleHeaders"),require("./js/theme-switch"),require("./js/Api/MovieDataBaseSearchService");var e=r(require("./js/Api/ApiServiceMarkUp"));function r(e){return e&&e.__esModule?e:{default:e}}require("./js/team.js"),require("./js/Api/auth"),require("./js/pagination");const i=new e.default;i.getMarkUp();
 },{"./sass/main.scss":"clu1","./js/toggleHeaders":"wjhs","./js/theme-switch":"JIhF","./js/Api/MovieDataBaseSearchService":"YVWD","./js/Api/ApiServiceMarkUp":"IGeD","./js/team.js":"ZxpD","./js/Api/auth":"eZFI","./js/pagination":"o8lo"}]},{},["Focm"], null)
-//# sourceMappingURL=/goit-js-final-team-project-filmoteka/src.56d15a12.js.map
+//# sourceMappingURL=/goit-js-final-team-project-filmoteka/src.60ae8a13.js.map
