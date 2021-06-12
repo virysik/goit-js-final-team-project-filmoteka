@@ -1,0 +1,22 @@
+.scrollToTopBtn {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  z-index: 100;
+  display: block;
+  width: 30px;
+  height: 30px;
+
+  @media screen and (max-width: 360px) {
+    position: static;
+    margin-left: auto;
+  }
+}
+.arrow-svg {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  stroke-width: 0;
+  stroke: rgb(255, 107, 0.5);
+  fill: rgb(255, 107, 0.5);
+}

@@ -9,7 +9,7 @@ import './js/modal-film-card';
 import './js/Api/MovieDataBaseSearchService';
 import ApiServiceMarkup from './js/Api/ApiServiceMarkUp';
 import './js/team.js';
-
+import './js/scroll-to-top'
 import './js/Api/auth';
 import './js/pagination';
 
