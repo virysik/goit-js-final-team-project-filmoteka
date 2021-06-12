@@ -2,7 +2,7 @@
 const scrollToTopBtn = document.querySelector(".scrollToTopBtn"); 
 const paginationRef = document.querySelector('.pagination__list')
 
-const observer = new IntersectionObserver(callback, options)
+
 
 scrollToTopBtn.addEventListener("click", scrollToTop);
 
@@ -34,6 +34,6 @@ let callback = function(entries){
 }
 
 
-
+const observer = new IntersectionObserver(callback, options)
 
 observer.observe(paginationRef)
