@@ -4,16 +4,27 @@ import refs from './refs.js';
 import * as basicLightbox from 'basiclightbox';
 import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
-refs.teamBtn.addEventListener('click', onTeamBtnClick);
+const modal = basicLightbox.create(document.querySelector('.lightbox'), {
+  onShow: () => {
+    document.body.classList.add('body-lightbox');
+    window.addEventListener('keydown', onKeyPressEsc);
+  },
+  onClose: () => {
+    document.body.classList.remove('body-lightbox');
+    window.removeEventListener('keydown', onKeyPressEsc);
+  },
+});
 
-const modal = basicLightbox.create(document.querySelector('.lightbox'));
-function onTeamBtnClick() {
-  modal.show();
-  refs.lightboxBtn.addEventListener('click', modal.close);
-}
-
+refs.teamBtn.addEventListener('click', modal.show);
 markupTeamCards(teamOfList);
+refs.lightboxBtn.addEventListener('click', modal.close);
 
 function markupTeamCards(team) {
   refs.teamList.insertAdjacentHTML('beforeend', teamCardTpl(team));
+}
+
+function onKeyPressEsc(e) {
+  if (e.code === 'Escape') {
+    modal.close();
+  }
 }

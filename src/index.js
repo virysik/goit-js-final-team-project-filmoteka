@@ -5,7 +5,7 @@ import './js/toggleHeaders';
 //import './js/Api/MovieDataBaseSearchService'
 //import './js/render-year-on-movie-card'
 import './js/theme-switch';
-
+import './js/modal-film-card';
 import './js/Api/MovieDataBaseSearchService';
 import ApiServiceMarkup from './js/Api/ApiServiceMarkUp';
 import './js/team.js';
