@@ -1,6 +1,8 @@
 import MovieDataBaseSearchService from './Api/MovieDataBaseSearchService';
 import movieCardTemplate from '../templates/movie-card-template.hbs';
 
+import refs from './refs/'
+
 /* Надо сделать чтоб кнопка Поиска "лупа"  и сам Input( у инпута должен быть name="query") 
 лежал в теге Form с
 классом search-form-js, а кнопка имела type = "submit" */
@@ -8,17 +10,12 @@ import movieCardTemplate from '../templates/movie-card-template.hbs';
 // Поисковик по слову
 const serchMovie = new MovieDataBaseSearchService();
 
-// Ссылка на  форму
-const serchForm = document.querySelector('.search-form-js');
-// Ссылка на контейнер с карточками
-const mainMovieCardContainer = document.querySelector('.main__section-list');
 // Ссылка на кнопку ->   ****Надо раскаментировать как будет готовы кнопки пагинации
-// const nextBtn = document.querySelector('.next-btn-js')
 
 // слушатель на клик по лупе,тоесть сабмиту формы
-serchForm.addEventListener('submit', onSerchFormSubmit);
-// nextBtn && nextBtn.addEventListener('click', onNextBtnClick);
-//nextBtn.addEventListener('click', onNextBtnClick);
+refs.serchForm.addEventListener('submit', onSerchFormSubmit);
+// refs.nextBtn && refs.nextBtn.addEventListener('click', onNextBtnClick);
+//refs.nextBtn.addEventListener('click', onNextBtnClick);
 
 function onSerchFormSubmit() {
   e.preventDefault();
@@ -31,11 +28,11 @@ function onSerchFormSubmit() {
 
 // // Функция удаления всего старого содержимого при предыдущем поиске, в main после нового запроса в форме
 function clearGalleryContainer() {
-  mainMovieCardContainer.innerHTML = '';
+  refs.movieList.innerHTML = '';
 }
 function insertMovieCardMarkup(movie) {
   const markup = movieCardTemplate(movie);
-  mainMovieCardContainer.insertAdjacentHTML('beforeend', markup);
+  refs.movieList.insertAdjacentHTML('beforeend', markup);
 }
 
 export default clearGalleryContainer;

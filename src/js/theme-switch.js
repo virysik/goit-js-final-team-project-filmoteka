@@ -1,29 +1,31 @@
-const checkBox = document.querySelector('#theme-switch-toggle');
-const themeLocalStorage = localStorage.getItem('theme')
-const Theme = {
-  LIGHT: 'light-theme',
-  DARK: 'dark-theme',
-};
+
+import { theme } from './constants/'
+import refs from './refs/'
+
 const classOnBody = document.body.classList;
+const LOCAL_STORAGE_THEME_KEY = 'theme'
+
 setDefaultTheme();
+
 function setDefaultTheme() {
-  if (!themeLocalStorage) {
-    classOnBody.add(Theme.LIGHT);
-  } else if (themeLocalStorage === 'light') {
-    classOnBody.add(Theme.LIGHT);
-  } else if (themeLocalStorage === 'dark') {
-    checkBox.checked = true;
-    classOnBody.add(Theme.DARK);
+  if (!localStorage.getItem(LOCAL_STORAGE_THEME_KEY)) {
+    classOnBody.add(theme.LIGHT);
+  } else if (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === theme.LIGHT) {
+    classOnBody.add(theme.LIGHT);
+  } else if (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === theme.DARK) {
+    refs.checkBox.checked = true;
+    classOnBody.add(theme.DARK);
   }
 }
 
-checkBox.addEventListener('change', onSwitchTrackChange);
+refs.checkBox.addEventListener('change', onSwitchTrackChange);
+
 function onSwitchTrackChange(e) {
-  if (checkBox.checked) {
-    localStorage.setItem('theme', 'dark');
-    classOnBody.replace(Theme.LIGHT, Theme.DARK);
-  } else if (!checkBox.checked) {
-    localStorage.setItem('theme', 'light');
-    classOnBody.replace(Theme.DARK, Theme.LIGHT);
+  if (refs.checkBox.checked) {
+    localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme.DARK);
+    classOnBody.replace(theme.LIGHT, theme.DARK);
+  } else if (!refs.checkBox.checked) {
+    localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme.LIGHT);
+    classOnBody.replace(theme.DARK, theme.LIGHT);
   }
 }

@@ -1,37 +1,30 @@
-const loginModal = document.querySelector('.login-page')
-const closeBtn = document.querySelector('.close-icon-container')
-
-const loginBtn = document.querySelector('#login')
-
-const regForm = document.querySelector('.register-form')
-const logForm = document.querySelector('.login-form')
-
-const createLink = document.querySelector('.create-message a');
-const loginLink = document.querySelector('.login-message a')
+import refs from '../refs/'
+import { AUTH_API_KEY } from './api-key'
+import { hiddenClass, BASE_AUTH_URL } from '../constants'
 
 //======================================
-closeBtn.addEventListener('click', () => {
-    loginModal.classList.add('is-hidden');
+refs.closeBtn.addEventListener('click', () => {
+    refs.loginModal.classList.add(hiddenClass);
 })
-loginBtn.addEventListener('click',()=> {
-    loginModal.classList.remove('is-hidden');
+refs.loginBtn.addEventListener('click', () => {
+    refs.loginModal.classList.remove(hiddenClass);
 })
 
 //===Переключение на форму реєстрації===
-createLink.addEventListener('click', () => {
-    regForm.style.display = 'block'
-    logForm.style.display = 'none'
+refs.createLink.addEventListener('click', () => {
+    refs.regForm.style.display = 'block'
+    refs.logForm.style.display = 'none'
 })
 //===Перключение на фому логіна===
-loginLink.addEventListener('click', () => {
-    regForm.style.display = 'none'
-    logForm.style.display = 'block'
+refs.loginLink.addEventListener('click', () => {
+    refs.regForm.style.display = 'none'
+    refs.logForm.style.display = 'block'
 })
 
 //================register==============
 function registeringWithEmailAndPassword(email, password) {
-    const API_KEY = 'AIzaSyBtnalvJhfnAWRZlTM1VDPywHEPPs20Yhs';
-    return fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`, {
+
+    return fetch(`${BASE_AUTH_URL}:signUp?key=${AUTH_API_KEY}`, {
         method: 'POST',
         body: JSON.stringify({
             email, password,
@@ -39,47 +32,51 @@ function registeringWithEmailAndPassword(email, password) {
         })
     })
         .then(response => response.json())
-        .then(data=>console.log(data))
+        .then(data => console.log(data))
 }
 
-regForm.addEventListener('submit', (e) => {
+refs.regForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = e.target.querySelector('#reg-email').value;
-    const password = e.target.querySelector('#reg-password').value;
-   
+    const formElements = e.currentTarget.elements;
+    const password = formElements.regPassword.value;
+    const email = formElements.regEmail.value;
+
     registeringWithEmailAndPassword(email, password)
 })
 
 //================login=================
 function authWithMailAndPassword(email, password) {
-    const API_KEY = 'AIzaSyBtnalvJhfnAWRZlTM1VDPywHEPPs20Yhs';
-    return fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`, {
+    return fetch(`${BASE_AUTH_URL}:signInWithPassword?key=${AUTH_API_KEY}`, {
         method: 'POST',
         body: JSON.stringify({
-            email,password,
+            email, password,
             returnSecureToken: 'true',
         }),
         headers: {
             'Content-Type': 'application/json'
         },
-        
+
     })
         .then(respon => respon.json())
         //Токен юзера
         .then(data => console.log(data.idToken))
 }
 
-logForm.addEventListener('submit', (e) => {
+refs.logForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const email = e.target.querySelector('#log-email').value;
-    const password = e.target.querySelector('#log-password').value;
+    const formElements = e.currentTarget.elements;
+    const password = formElements.loginPassword.value;
+    const email = formElements.loginEmail.value;
+
+    // const email = e.target.querySelector('#log-email').value;
+    // const password = e.target.querySelector('#log-password').value;
 
     console.log(email)
     console.log(password)
 
     authWithMailAndPassword(email, password);
-    
+
 })
 //======================================
 
