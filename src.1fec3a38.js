@@ -113,4 +113,4 @@ const i=45,n=Math.round(45*Math.random());let t=1+Math.round(Math.random()*(n-1)
 },{}],"Focm":[function(require,module,exports) {
 "use strict";var e=r(require("./js/Api/api-service-markup"));function r(e){return e&&e.__esModule?e:{default:e}}require("./sass/main.scss"),require("./js/Api/movie-data-base-search-service"),require("./js/Api/auth"),require("./js/toggle-headers"),require("./js/theme-switch"),require("./js/modal-film-card"),require("./js/team"),require("./js/pagination");const s=new e.default;s.getMarkUp();
 },{"./js/Api/api-service-markup":"bCEY","./sass/main.scss":"clu1","./js/Api/movie-data-base-search-service":"aV8F","./js/Api/auth":"eZFI","./js/toggle-headers":"lYhF","./js/theme-switch":"JIhF","./js/modal-film-card":"MzUv","./js/team":"ZxpD","./js/pagination":"o8lo"}]},{},["Focm"], null)
-//# sourceMappingURL=/goit-js-final-team-project-filmoteka/src.81f57ac8.js.map
+//# sourceMappingURL=/goit-js-final-team-project-filmoteka/src.1fec3a38.js.map
