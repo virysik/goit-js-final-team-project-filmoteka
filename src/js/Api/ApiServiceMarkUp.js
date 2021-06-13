@@ -70,9 +70,8 @@ export default class FetchMovieData {
 
   async getMarkUpData() {
     try {
-      const asyncMoviesData = await this.fetchTrendingMovies();
-      //console.log('this.data', asyncMoviesData);
-      //const asyncMoviesData = await this.data;
+     
+      const asyncMoviesData = await this.data;
       const asyncGenresList = await this.genres;
 
       return asyncMoviesData.results.map(data => {
