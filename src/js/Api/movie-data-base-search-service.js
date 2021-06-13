@@ -13,7 +13,7 @@ class MovieDataBaseSearchService {
     try {
       const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
 
-      const response = await axios(url);
+      const response = await axios.get(url);
 
       //   ----Если надо определенное кол-во показываемых результатов-----
       //   if (data.results.length > 5) {
