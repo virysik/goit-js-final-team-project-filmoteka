@@ -1,4 +1,4 @@
-import refs from './refs.js';
+import refs from './refs/';
 import modalFilmCardTpl from '../templates/movie-card-template.hbs';
 import * as basicLightbox from 'basiclightbox';
 import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
