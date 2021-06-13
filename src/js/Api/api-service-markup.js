@@ -11,13 +11,18 @@ export default class FetchMovieData {
     this._genres = this.fetchGenreCodes();
     this._data = this.fetchTrendingMovies();
     this._raitingStatus = false;
+    this._searchQuery = '';
   }
 
   async fetchTrendingMovies() {
     try {
-      const response = await axios.get(
-        `${BASE_URL}trending/movie/day?api_key=${this._key}&page=${this._page}`,
-      );
+      let url = '';
+      const searchInputUrl = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
+      const mainSearchUrl = `${BASE_URL}trending/movie/day?api_key=${this._key}&page=${this._page}`;
+
+      url = this._searchQuery ? searchInputUrl : mainSearchUrl;
+
+      const response = await axios.get(url);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -125,5 +130,28 @@ export default class FetchMovieData {
         document.querySelector('.main__section-list').innerHTML = '';
       }
     });
+
+    refs.serchForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      let newQuery = e.currentTarget.elements.query.value;
+      this._searchQuery = newQuery;
+      this.clearGalleryContainer();
+      const apiData = await this.getMarkUpData();
+      const markUp = await template(apiData);
+      refs.movieList.innerHTML = markUp;
+      this._searchQuery = '';
+      refs.searchFormInput.value = '';
+    });
+  }
+
+  clearGalleryContainer() {
+    refs.movieList.innerHTML = '';
+  }
+
+  incrementPage() {
+    this._page += 1;
+  }
+  resetPage() {
+    this._page = 1;
   }
 }
