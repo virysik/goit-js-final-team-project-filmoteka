@@ -17,6 +17,7 @@
 @import './layouts/page-header/auth-modal-style';
 @import './layouts/page-modal';
 @import './layouts/team';
-
-@import './layouts/color-switch-theme.scss';
+@import './layouts/color-switch-theme';
 @import './layouts/scroll-up-arrow';
+@import './base/overrides'; //всегда в самом низу!
+

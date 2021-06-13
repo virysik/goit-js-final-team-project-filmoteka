@@ -1,6 +1,6 @@
-import teamOfList from './teamList.js';
+import teamOfList from './data/team-list';
 import teamCardTpl from '../templates/team-card.hbs';
-import refs from './refs.js';
+import refs from './refs/';
 import * as basicLightbox from 'basiclightbox';
 import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 

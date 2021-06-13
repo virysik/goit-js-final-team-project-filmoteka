@@ -1,6 +1,7 @@
 // Класс поиска по запросу
 import axios from 'axios';
-import API_KEY from '../api-key';
+import API_KEY from './api-key';
+import BASE_URL from '../constants';
 
 
 class MovieDataBaseSearchService {
@@ -10,9 +11,9 @@ class MovieDataBaseSearchService {
   }
   async fetchMoviesByName() {
     try {
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
+      const url = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
 
-      const response = await axios(url);
+      const response = await axios.get(url);
 
       //   ----Если надо определенное кол-во показываемых результатов-----
       //   if (data.results.length > 5) {

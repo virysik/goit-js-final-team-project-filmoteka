@@ -1,16 +1,15 @@
+import ApiServiceMarkup from './js/Api/api-service-markup';
+
 import './sass/main.scss';
-import './js/toggleHeaders';
-//import * as basicLightbox from 'basiclightbox';
-//import '/basiclightbox/dist/basicLightbox.min.css';
-//import './js/Api/MovieDataBaseSearchService'
-//import './js/render-year-on-movie-card'
+//import ApiServiceMarkup from './js/Api/ApiServiceMarkUp';
+//?ApiServiceMarkUP?
+import './js/scroll-to-top'
+import './js/Api/movie-data-base-search-service';
+import './js/Api/auth';
+import './js/toggle-headers';
 import './js/theme-switch';
 import './js/modal-film-card';
-import './js/Api/MovieDataBaseSearchService';
-import ApiServiceMarkup from './js/Api/ApiServiceMarkUp';
-import './js/team.js';
-import './js/scroll-to-top'
-import './js/Api/auth';
+import './js/team';
 import './js/pagination';
 
 const apiData = new ApiServiceMarkup();
