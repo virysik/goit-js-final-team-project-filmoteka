@@ -17,6 +17,7 @@ const refs = {
   navLinks: document.querySelectorAll('.link-nav'),
   checkBox: document.querySelector('#theme-switch-toggle'),
   serchForm: document.querySelector('.search-form-js'),
+  searchFormInput: document.querySelector('.search-form__input'),
   nextBtn: document.querySelector('.next-btn-js'),
 };
 
