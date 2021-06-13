@@ -7,6 +7,7 @@ import template from '../../templates/movie-card-template';
 export default class FetchMovieData {
   constructor() {
     this._key = API_KEY;
+    this._page = 1;
     this._genres = this.fetchGenreCodes();
     this._data = this.fetchTrendingMovies();
     this._raitingStatus = false;
@@ -15,7 +16,7 @@ export default class FetchMovieData {
   async fetchTrendingMovies() {
     try {
       const response = await axios.get(
-        `${BASE_URL}trending/movie/day?api_key=${this._key}`,
+        `${BASE_URL}trending/movie/day?api_key=${this._key}&page=${this._page}`,
       );
       return response.data;
     } catch (error) {
@@ -64,13 +65,13 @@ export default class FetchMovieData {
   async getMarkUp() {
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
-    refs.movieList.insertAdjacentHTML('beforeend', markUp);
+    refs.movieList.innerHTML = markUp;
     this.addEventListeners();
   }
 
   async getMarkUpData() {
     try {
-      const asyncMoviesData = await this.data;
+      const asyncMoviesData = await this.fetchTrendingMovies();
       const asyncGenresList = await this.genres;
 
       return asyncMoviesData.results.map(data => {
@@ -106,20 +107,23 @@ export default class FetchMovieData {
   }
 
   getCorrectYear(year) {
+    if (year === undefined) return '';
     return year.split('-').slice(0, 1);
   }
 
   addEventListeners() {
-    document.querySelectorAll('[href="#home"]').forEach(e =>
-      e.addEventListener('click', () => {
+    document.querySelector('.header-container-js').addEventListener('click', e => {
+      const target = e.target;
+      console.log(target.classList);
+      if (target.classList.contains('home-page-js')) {
         this.raiting = false;
         this.getMarkUp();
-      }),
-    );
+      }
 
-    document.querySelector('[href="#library"]').addEventListener('click', () => {
-      this.raiting = true;
-      refs.movieList.innerHTML = '';
+      if (target.classList.contains('library-page-js')) {
+        this.raiting = true;
+        document.querySelector('.main__section-list').innerHTML = '';
+      }
     });
   }
 }
