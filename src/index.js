@@ -1,7 +1,9 @@
 import ApiServiceMarkup from './js/Api/api-service-markup';
 
 import './sass/main.scss';
-
+//import ApiServiceMarkup from './js/Api/ApiServiceMarkUp';
+//?ApiServiceMarkUP?
+import './js/scroll-to-top'
 import './js/Api/movie-data-base-search-service';
 import './js/Api/auth';
 import './js/toggle-headers';
