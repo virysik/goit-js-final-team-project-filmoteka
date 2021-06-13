@@ -108,16 +108,18 @@ export default class FetchMovieData {
   }
 
   addEventListeners() {
-    document.querySelectorAll('[href="#home"]').forEach(e =>
-      e.addEventListener('click', () => {
+    document.querySelector('.header-container-js').addEventListener('click', e => {
+      const target = e.target;
+      console.log(target.classList);
+      if (target.classList.contains('home-page-js')) {
         this.raiting = false;
         this.getMarkUp();
-      }),
-    );
+      }
 
-    document.querySelector('[href="#library"]').addEventListener('click', () => {
-      this.raiting = true;
-      document.querySelector('.main__section-list').innerHTML = '';
+      if (target.classList.contains('library-page-js')) {
+        this.raiting = true;
+        document.querySelector('.main__section-list').innerHTML = '';
+      }
     });
   }
 }
