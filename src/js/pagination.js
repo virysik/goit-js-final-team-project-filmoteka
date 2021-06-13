@@ -1,9 +1,11 @@
+import ApiServiceMarkup from './Api/ApiServiceMarkUp';
+const apiData = new ApiServiceMarkup();
 
 //-------Переменные иммитируют загрузку страниц с фильмами
-
-const MAX_PAGE = 45;
-const totalPage = Math.round(Math.random() * MAX_PAGE);
-let activePage = 1 + Math.round(Math.random() * (totalPage - 1));
+//l = console.log;
+//const MAX_PAGE = 5;
+//const totalPage = Math.round(Math.random() * MAX_PAGE);
+//let activePage = 1 + Math.round(Math.random() * (totalPage - 1));
 //const listPagesEl = document.querySelector('.pagination__list');
 //--------
 
@@ -23,11 +25,11 @@ function createMarkup(totalPage, page) {
           </li>`;
     }
     
-    if (page > 3) {
+    if (page > 3 & totalPage > 5) {
         markup += `<li class="pagination__item mobile">
                 <a href="" class="pagination__link">1</a>
             </li>`;
-        if (page > 4) {
+        if (page > 4 & totalPage > 6) {
                     markup += `<li class="pagination__item mobile">
                 <a href="" class="pagination__link dots-hover">...</a>
             </li>`;
@@ -52,11 +54,8 @@ function createMarkup(totalPage, page) {
 
     for (let pageGroup = beforePages; pageGroup <= afterPages; pageGroup++) {
         let active = '';
-        if (pageGroup > totalPage) {
-            return;
-        }
-        if (pageGroup === 0) {
-            pageGroup += 1;
+        if (pageGroup > totalPage || pageGroup <= 0) {
+            continue;
         }
         if (pageGroup === page) {
             active = 'active';
@@ -66,8 +65,8 @@ function createMarkup(totalPage, page) {
             </li>`;
     }
 
-    if (page < totalPage - 2) {
-        if (page < totalPage - 3) {
+    if (page < totalPage - 2 & totalPage > 5) {
+        if (page < totalPage - 3 & totalPage > 6) {
             markup += `<li class="pagination__item mobile">
                 <a href="" class="pagination__link dots-hover">...</a>
             </li>`;
@@ -90,7 +89,10 @@ function createMarkup(totalPage, page) {
     return markup;
 }
 
-function pagination(totalPage, activePage = 1, listPagesEl = document.querySelector('.pagination__list')) {
+export function pagination(totalPage, activePage = 1, listPagesEl = document.querySelector('.pagination__list')) {
+    if (totalPage <= 1) {
+        return;
+    };
     
     function renderMarkupPage(totalPage, activePage, listPagesEl) {
         listPagesEl.innerHTML = createMarkup(totalPage, activePage);
@@ -109,11 +111,13 @@ function pagination(totalPage, activePage = 1, listPagesEl = document.querySelec
 
     if (e.target.id === 'left') {
         renderMarkupPage(totalPage, --activePage, listPagesEl);
+        showNumberCurrentPage(activePage);
         return;
     }
 
     if (e.target.id === 'right') {
         renderMarkupPage(totalPage, ++activePage, listPagesEl);
+        showNumberCurrentPage(activePage);
         return;
     }
 
@@ -121,12 +125,14 @@ function pagination(totalPage, activePage = 1, listPagesEl = document.querySelec
     
         renderMarkupPage(totalPage, activePage, listPagesEl);
 
+        showNumberCurrentPage(activePage);
     }
 
 }
 
-pagination(totalPage, activePage);
+//pagination(totalPage, activePage);
 
-function showNumberCurrentPage(activePage = 1) {
-    return activePage;
+export function showNumberCurrentPage(activePage = 1) {
+    apiData._page = activePage;
+    apiData.getMarkUp();
 }

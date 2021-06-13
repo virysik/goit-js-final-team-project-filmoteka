@@ -5,6 +5,7 @@ import template from '../../templates/movie-card-template';
 export default class FetchMovieData {
   constructor() {
     this._key = API_KEY;
+    this._page = 1;
     this._genres = this.fetchGenreCodes();
     this._data = this.fetchTrendingMovies();
     this._raitingStatus = false;
@@ -13,7 +14,7 @@ export default class FetchMovieData {
   async fetchTrendingMovies() {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/trending/movie/day?api_key=${this._key}`,
+        `https://api.themoviedb.org/3/trending/movie/day?api_key=${this._key}&page=${this._page}`,
       );
       return response.data;
     } catch (error) {
@@ -62,12 +63,14 @@ export default class FetchMovieData {
   async getMarkUp() {
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
-    document.querySelector('.main__section-list').insertAdjacentHTML('beforeend', markUp);
+    document.querySelector('.main__section-list').innerHTML = markUp;
+
     this.addEventListeners();
   }
 
   async getMarkUpData() {
     try {
+      
       const asyncMoviesData = await this.data;
       const asyncGenresList = await this.genres;
 
@@ -104,10 +107,13 @@ export default class FetchMovieData {
   }
 
   getCorrectYear(year) {
+
+    if (year === undefined) return '';
     return year.split('-').slice(0, 1);
   }
 
   addEventListeners() {
+
     document.querySelector('.header-container-js').addEventListener('click', e => {
       const target = e.target;
       console.log(target.classList);
@@ -120,6 +126,7 @@ export default class FetchMovieData {
         this.raiting = true;
         document.querySelector('.main__section-list').innerHTML = '';
       }
+
     });
   }
 }
