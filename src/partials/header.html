@@ -1,21 +1,21 @@
 <header id="page-header" class="header header-home">
   <!--class="header-library"-->
-  <div class="container">
+  <div class="container header-container-js">
     <nav class="header-nav header__nav">
-      <a href="#home" class="logo" data-link>
-        <svg class="logo-svg" width="24" height="24" aria-label="Логотип Фильмотеки">
+      <a href="#home" class="logo home-page-js" data-link>
+        <svg class="logo-svg home-page-js" width="24" height="24" aria-label="Логотип Фильмотеки">
           <use href="./img/sprite.svg#icon-film"></use>
         </svg>
         <!--"/" - вернуться на главную страницу-->
-        <span class="logo-film">Filmoteka</span>
+        <span class="logo-film home-page-js">Filmoteka</span>
       </a>
 
       <ul id="page-nav" class="nav">
         <li class="nav-item">
-          <a href="#home" class="link-nav current" data-link> home </a>
+          <a href="#home" class="link-nav home-page-js current" data-link> home </a>
         </li>
         <li class="nav-item">
-          <a href="#library" class="link-nav" data-link> my library </a>
+          <a href="#library" class="link-nav library-page-js" data-link> my library </a>
         </li>
         <li class="nav-item">
           <a href="#login" class="link-nav" id="login"> login </a>
@@ -65,12 +65,7 @@
         id="theme-switch-toggle"
         aria-label="Переключить между тёмной и светлой темой"
       />
-      <label
-        aria-hidden="true"
-        class="theme-switch__track"
-        for="theme-switch-toggle"
-      >
-      </label>
+      <label aria-hidden="true" class="theme-switch__track" for="theme-switch-toggle"> </label>
       <div aria-hidden="true" class="theme-switch__marker"></div>
     </div>
 

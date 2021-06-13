@@ -1,11 +1,12 @@
 import axios from 'axios';
-import API_KEY from '../api-key';
+import API_KEY from './api-key';
+import { BASE_URL } from '../constants';
+import refs from '../refs/';
 import template from '../../templates/movie-card-template';
 
 export default class FetchMovieData {
   constructor() {
     this._key = API_KEY;
-    this._page = 1;
     this._genres = this.fetchGenreCodes();
     this._data = this.fetchTrendingMovies();
     this._raitingStatus = false;
@@ -14,7 +15,7 @@ export default class FetchMovieData {
   async fetchTrendingMovies() {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/trending/movie/day?api_key=${this._key}&page=${this._page}`,
+        `${BASE_URL}trending/movie/day?api_key=${this._key}`,
       );
       return response.data;
     } catch (error) {
@@ -25,7 +26,7 @@ export default class FetchMovieData {
   async fetchOneMovie(id) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${this._key}&language=en-US`,
+        `${BASE_URL}movie/${id}?api_key=${this._key}&language=en-US`,
       );
       return response.data;
     } catch (error) {
@@ -36,7 +37,7 @@ export default class FetchMovieData {
   async fetchGenreCodes() {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`,
+        `${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`,
       );
       return response.data.genres;
     } catch (error) {
@@ -63,14 +64,12 @@ export default class FetchMovieData {
   async getMarkUp() {
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
-    document.querySelector('.main__section-list').innerHTML = markUp;
-
+    refs.movieList.insertAdjacentHTML('beforeend', markUp);
     this.addEventListeners();
   }
 
   async getMarkUpData() {
     try {
-      
       const asyncMoviesData = await this.data;
       const asyncGenresList = await this.genres;
 
@@ -107,26 +106,20 @@ export default class FetchMovieData {
   }
 
   getCorrectYear(year) {
-
-    if (year === undefined) return '';
     return year.split('-').slice(0, 1);
   }
 
   addEventListeners() {
-
-    document.querySelector('.header-container-js').addEventListener('click', e => {
-      const target = e.target;
-      console.log(target.classList);
-      if (target.classList.contains('home-page-js')) {
+    document.querySelectorAll('[href="#home"]').forEach(e =>
+      e.addEventListener('click', () => {
         this.raiting = false;
         this.getMarkUp();
-      }
+      }),
+    );
 
-      if (target.classList.contains('library-page-js')) {
-        this.raiting = true;
-        document.querySelector('.main__section-list').innerHTML = '';
-      }
-
+    document.querySelector('[href="#library"]').addEventListener('click', () => {
+      this.raiting = true;
+      refs.movieList.innerHTML = '';
     });
   }
 }

@@ -1,9 +1,9 @@
-import photoNika from '../img/team/nika.jpg';
-import photoCat from '../img/team/cat.jpg';
-import photoVera from '../img/team/vera.jpg';
-import photoMikhail from '../img/team/mikhail.jpg';
-import photoViktor from '../img/team/viktor.jpg';
-import photoGalina from '../img/team/galina.jpg';
+import photoNika from '../../img/team/nika.jpg';
+import photoCat from '../../img/team/cat.jpg';
+import photoVera from '../../img/team/vera.jpg';
+import photoMikhail from '../../img/team/mikhail.jpg';
+import photoViktor from '../../img/team/viktor.jpg';
+import photoGalina from '../../img/team/galina.jpg';
 
 export default [
   {
