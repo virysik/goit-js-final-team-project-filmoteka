@@ -18,7 +18,7 @@ refs.createLink.addEventListener('click', () => {
 //===Перключение на фому логіна===
 refs.loginLink.addEventListener('click', () => {
     refs.regForm.style.display = 'none'
-    lrefs.ogForm.style.display = 'block'
+    refs.logForm.style.display = 'block'
 })
 
 //================register==============
