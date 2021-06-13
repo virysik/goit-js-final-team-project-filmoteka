@@ -11,8 +11,16 @@ import ApiServiceMarkup from './js/Api/ApiServiceMarkUp';
 import './js/team.js';
 
 import './js/Api/auth';
-import './js/pagination';
+//import './js/pagination';
+import * as modulPagination from './js/pagination'
 
 const apiData = new ApiServiceMarkup();
 apiData.getMarkUp();
 
+apiData._data
+    .then(res => {
+        modulPagination.pagination(res.total_pages);
+    })
+    .catch(err => {
+        console.log(err);
+    });
