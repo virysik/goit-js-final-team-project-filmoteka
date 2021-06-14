@@ -104,6 +104,10 @@
   font-size: 12px;
   font-weight: 500;
 
+  &-title {
+    text-transform: uppercase;
+  }
+
   @media (min-width: $tablet) {
     padding-bottom: 10px;
   }
