@@ -47,12 +47,12 @@
   &__title {
     color: var(--white-text-color);
     font-weight: bold;
-    padding: 8px 0;
+    padding: 7px 0;
   }
 }
 
-.movie-card:hover .movie-overview,
-.movie-card:focus .movie-overview {
+.main__section-link:hover .movie-overview,
+.main__section-link:focus .movie-overview {
   transform: translateY(0);
 }
 
