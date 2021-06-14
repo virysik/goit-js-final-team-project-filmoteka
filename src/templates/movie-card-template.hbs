@@ -2,6 +2,7 @@
   <li class='main__section-item'>
     <a href='#' class='main__section-link' id={{id}}>
       <div class='movie-card'>
+        
         <div class='img-wrapper'>
           <img
             loading='lazy'
@@ -10,7 +11,11 @@
             src="https://image.tmdb.org/t/p/w500{{poster_path}}"
             alt="{{original_title}}"
           />
-        </div>
+          <div class="movie-overview">
+            <p class="movie-overview__title">Overview</p>
+            {{overview}}
+          </div>
+          </div>
         <div class='movie-desc'>
           <h2 class='movie-name'>
             {{title}}
@@ -25,10 +30,6 @@
               </span>
             {{/if}}
           </p>
-        </div>
-        <div class="movie-overview">
-          <p class="movie-overview__title">Overview</p>
-          {{overview}}
         </div>
       </div>
     </a>
