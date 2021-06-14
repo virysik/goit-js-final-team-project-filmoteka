@@ -3,6 +3,10 @@ import API_KEY from './api-key';
 import { BASE_URL } from '../constants';
 import refs from '../refs/';
 import template from '../../templates/movie-card-template';
+import oneMovieTemp from '../../templates/one-movie-modal';
+import * as basicLightbox from 'basiclightbox';
+import '../../../node_modules/basiclightbox/dist/basicLightbox.min.css';
+//import '../../js/modal-film-card';
 
 export default class FetchMovieData {
   constructor() {
@@ -151,7 +155,43 @@ export default class FetchMovieData {
   incrementPage() {
     this._page += 1;
   }
+
   resetPage() {
     this._page = 1;
+  }
+
+  renderOneMovie() {
+    document.querySelector('.main__section-list').addEventListener('click', async e => {
+      if (e.target.nodeName !== 'IMG') {
+        return;
+      }
+      const filmId = e.target.id;
+      const markUp = await this.getMarkUpForOneMovie(filmId);
+
+      const modal = basicLightbox.create(oneMovieTemp(markUp));
+      modal.show();
+      this.onEscape(modal);
+    });
+  }
+
+  onEscape(modal) {
+    window.addEventListener('keydown', e => this.onKeyPressEsc(e, modal));
+    window.addEventListener('click', e => {
+      console.log(e.target);
+      if (e.target.classList.contains('close-icon-container')) {
+        modal.close();
+      }
+    });
+  }
+
+  onKeyPressEsc(e, modal) {
+    if (e.code === 'Escape') {
+      modal.close();
+    }
+  }
+
+  async getMarkUpForOneMovie(id) {
+    const asyncOneMovie = await this.fetchOneMovie(id);
+    return asyncOneMovie;
   }
 }
