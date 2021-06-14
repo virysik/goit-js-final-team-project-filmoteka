@@ -43,6 +43,7 @@
   padding: 1rem;
   max-height: 100%;
   transform: translateY(101%);
+  transition: transform 0.3s ease;
   &__title {
     color: var(--white-text-color);
     font-weight: bold;
