@@ -1,5 +1,7 @@
 import ApiServiceMarkup from './Api/api-service-markup';
 const apiData = new ApiServiceMarkup();
+const arrowRight = '&#129130';
+const arrowLeft = '&#129128';
 
 //-------Переменные иммитируют загрузку страниц с фильмами
 //l = console.log;
@@ -16,7 +18,7 @@ function createMarkup(totalPage, page) {
 
   if (page > 1) {
     markup += `<li class="pagination__item first">
-            <a class="pagination__link" id="left">-
+            <a class="pagination__link" id="left">${arrowLeft}
             <!--<svg class="number-pages__svg" width="16" height="16">
                 <use href="./img/sprite.svg#icon-arrow-left"></use>
               </svg>-->
@@ -77,7 +79,7 @@ function createMarkup(totalPage, page) {
 
   if (page < totalPage) {
     markup += `<li class="pagination__item last">
-            <a class="pagination__link" id="right">+
+            <a class="pagination__link" id="right">${arrowRight}
             <!--<svg class="number-pages__svg" width="16" height="16">
                 <use href="./img/sprite.svg#icon-arrow-right"></use>
               </svg>-->
