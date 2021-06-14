@@ -177,7 +177,7 @@ export default class FetchMovieData {
   onEscape(modal) {
     window.addEventListener('keydown', e => this.onKeyPressEsc(e, modal));
     window.addEventListener('click', e => {
-      console.log(e.target);
+      // console.log(e.target);
       if (e.target.classList.contains('close-icon-container')) {
         modal.close();
       }
@@ -194,8 +194,8 @@ export default class FetchMovieData {
     try {
       const asyncOneMovie = await this.fetchOneMovie(id);
 
-      asyncOneMovie.popularity = Math.round(parseFloat(asyncOneMovie.popularity) * 100) / 100;
-
+      // asyncOneMovie.popularity = Math.round(parseFloat(asyncOneMovie.popularity) * 100) / 100;
+      asyncOneMovie.popularity = asyncOneMovie.popularity.toFixed(1);
       const genresArr = asyncOneMovie.genres.map(e => {
         return ' ' + e.name;
       });
