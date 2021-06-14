@@ -1,11 +1,13 @@
 import axios from 'axios';
 import API_KEY from './api-key';
 import { BASE_URL } from '../constants';
-import refs from '../refs/';
+import refs from '../refs/index';
 import template from '../../templates/movie-card-template';
 import oneMovieTemp from '../../templates/one-movie-modal';
 import * as basicLightbox from 'basiclightbox';
 import '../../../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import showSpinner from '../spinner';
+import hideSpinner from '../spinner';
 //import '../../js/modal-film-card';
 
 export default class FetchMovieData {
@@ -72,6 +74,7 @@ export default class FetchMovieData {
   }
 
   async getMarkUp() {
+   
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
@@ -79,6 +82,7 @@ export default class FetchMovieData {
   }
 
   async getMarkUpData() {
+     refs.spinner.classList.remove('spinner-is-hidden');
     try {
       const asyncMoviesData = await this.fetchTrendingMovies();
       const asyncGenresList = await this.genres;
@@ -94,6 +98,9 @@ export default class FetchMovieData {
     } catch (error) {
       console.log(error);
     }
+    finally {
+       refs.spinner.classList.add('spinner-is-hidden');    
+       };
   }
 
   getCorrectGenreArray(genreTrendingMovieList, genreExplainedList) {
