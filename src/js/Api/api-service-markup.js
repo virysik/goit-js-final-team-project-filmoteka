@@ -123,7 +123,7 @@ export default class FetchMovieData {
   addEventListeners() {
     document.querySelector('.header-container-js').addEventListener('click', e => {
       const target = e.target;
-      console.log(target.classList);
+
       if (target.classList.contains('home-page-js')) {
         this.raiting = false;
         this.getMarkUp();
@@ -191,7 +191,19 @@ export default class FetchMovieData {
   }
 
   async getMarkUpForOneMovie(id) {
-    const asyncOneMovie = await this.fetchOneMovie(id);
-    return asyncOneMovie;
+    try {
+      const asyncOneMovie = await this.fetchOneMovie(id);
+
+      asyncOneMovie.popularity = Math.round(parseFloat(asyncOneMovie.popularity) * 100) / 100;
+
+      const genresArr = asyncOneMovie.genres.map(e => {
+        return ' ' + e.name;
+      });
+      asyncOneMovie.genres = genresArr.join(',');
+
+      return asyncOneMovie;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

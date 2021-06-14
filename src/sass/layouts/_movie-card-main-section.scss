@@ -34,7 +34,7 @@
 
 .movie-overview {
   color: var(--accent-color);
-  max-width: 274px;
+  max-width: 294px;
   position: absolute;
   left: 0;
   top: 0;
@@ -44,6 +44,7 @@
   transform: translateY(-110%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
+  pointer-events: none;
 
   &__title {
     color: var(--white-text-color);
