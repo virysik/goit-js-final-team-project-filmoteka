@@ -28,6 +28,36 @@
   color: var(--white-text-color);
 }
 .img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-overview {
+  color: var(--accent-color);
+  max-width: 274px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgb(0, 0, 0, 0.8);
+  padding: 1rem;
+  height: 100%;
+  transform: translateY(-110%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+
+  &__title {
+    color: var(--white-text-color);
+    font-weight: bold;
+    padding: 7px 0;
+  }
+}
+
+.main__section-link:hover .movie-overview,
+.main__section-link:focus .movie-overview {
+  transform: translateY(0);
+}
+
+.img-wrapper {
   margin-bottom: 10px;
   transition: all 0.2s ease;
   border-radius: 5px;
