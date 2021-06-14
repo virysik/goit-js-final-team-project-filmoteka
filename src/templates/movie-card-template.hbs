@@ -1,9 +1,10 @@
 {{#each this}}
   <li class='main__section-item'>
-    <a href='#' class='main__section-link' id={{id}}>
+    <a href='#' class='main__section-link'>
       <div class='movie-card'>
         <div class='img-wrapper'>
           <img
+            id={{id}}
             loading='lazy'
             class='movie-poster'
             data-popularity="{{popularity}}"

@@ -1,0 +1,76 @@
+<div class='backdrop lightbox-film-card'>
+  <div class='modal-images'>
+    <button class='lightbox-button close-icon-container' type='button' title='Close'></button>
+    {{! <button class='close-icon-container' type='button' title='Close'>
+      <svg width='14' height='14' class='close-icon' aria-label='Логотип Фильмотеки'>
+        <use href='./sprite.svg#icon-close'></use>
+      </svg>
+    </button> }}
+
+    <div class='modal-content'>
+      <img class='img-film' src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt='' />
+      <div>
+        <h2 class='modal-title'>
+          {{original_title}}
+        </h2>
+        <table>
+          <tbody>
+            <tr>
+              <td class='description-film'>
+                Vote / Votes
+              </td>
+              <td class='description-film-info'>
+                <div class='rating-vote'>
+                  {{vote_average}}
+                </div>
+                /
+                <div class='rating-votes'>
+                  {{vote_count}}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class='description-film'>
+                Popularity
+              </td>
+              <td class='description-film-info'>
+                {{popularity}}
+              </td>
+            </tr>
+            <tr>
+              <td class='description-film'>
+                Original Title
+              </td>
+              <td class='description-film-info'>
+                {{title}}
+              </td>
+            </tr>
+            <tr>
+              <td class='description-film'>
+                Genre
+              </td>
+              <td class='description-film-info'>
+                {{!-- {{genres}} --}}Comedy
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 class='about-film'>
+          ABOUT
+        </h2>
+        <p class='text-content'>
+          Four of the West’s most infamous outlaws assemble to steal a huge stash of gold from the
+          {{overview}}
+        </p>
+        <div class='btn-card'>
+          <button class='watched-btn'>
+            ADD TO WATCHED
+          </button>
+          <button class='queue-btn'>
+            ADD TO QUEUE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
