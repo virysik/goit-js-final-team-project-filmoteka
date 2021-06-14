@@ -27,6 +27,33 @@
   background-color: var(--accent-color);
   color: var(--white-text-color);
 }
+.movie-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-overview {
+  color: var(--accent-color);
+  max-width: 274px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(0, 0, 0, 0.8);
+  padding: 1rem;
+  max-height: 100%;
+  transform: translateY(101%);
+  &__title {
+    color: var(--white-text-color);
+    font-weight: bold;
+    padding-bottom: 2px;
+  }
+}
+
+.movie-card:hover .movie-overview {
+  transform: translateY(0);
+}
+
 .img-wrapper {
   margin-bottom: 10px;
   transition: all 0.2s ease;
