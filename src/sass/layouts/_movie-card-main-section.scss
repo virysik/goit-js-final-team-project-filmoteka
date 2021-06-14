@@ -10,6 +10,7 @@
   font-family: var(--primary-font);
   color: var(--primary-text-color);
   text-transform: uppercase;
+  max-width: 275px;
   @media screen and(min-widht: $tablet) {
     line-height: 1.132;
   }
@@ -26,10 +27,6 @@
   border-radius: 10px;
   background-color: var(--accent-color);
   color: var(--white-text-color);
-}
-.img-wrapper {
-  position: relative;
-  overflow: hidden;
 }
 
 .movie-overview {
@@ -59,6 +56,8 @@
 }
 
 .img-wrapper {
+  position: relative;
+  overflow: hidden;
   margin-bottom: 10px;
   transition: all 0.2s ease;
   border-radius: 5px;
