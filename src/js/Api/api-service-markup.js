@@ -82,7 +82,15 @@ export default class FetchMovieData {
   async getMarkUpData() {
     showSpinner();
     try {
+      
+      
       const asyncMoviesData = await this.fetchTrendingMovies();
+      console.log(asyncMoviesData.results.length);
+      if (asyncMoviesData.results.length === 0) {
+refs.errorMessage.style.display = 'block'
+        
+      }
+     
       const asyncGenresList = await this.genres;
 
       return asyncMoviesData.results.map(data => {
@@ -141,6 +149,7 @@ export default class FetchMovieData {
 
     refs.serchForm.addEventListener('submit', async e => {
       e.preventDefault();
+      refs.errorMessage.style.display = 'none'
       let newQuery = e.currentTarget.elements.query.value;
       this._searchQuery = newQuery;
       this.clearGalleryContainer();

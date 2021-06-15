@@ -52,6 +52,7 @@
   }
 
   &__field-error {
+    display: none;
     color: var(--error-text-color);
     text-align: left;
     font-size: 14px;
