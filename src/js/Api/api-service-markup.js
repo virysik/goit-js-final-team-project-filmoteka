@@ -168,26 +168,30 @@ export default class FetchMovieData {
       const filmId = e.target.id;
       const markUp = await this.getMarkUpForOneMovie(filmId);
 
-      const modal = basicLightbox.create(oneMovieTemp(markUp));
+      const modal = basicLightbox.create(oneMovieTemp(markUp), {
+        onShow: () => {
+          window.addEventListener('click', onBtnClose);
+          window.addEventListener('keydown', onKeyPressEsc);
+        },
+        onClose: () => {
+          window.removeEventListener('click', onBtnClose);
+          window.removeEventListener('keydown', onKeyPressEsc);
+        },
+      });
       modal.show();
-      this.onEscape(modal);
-    });
-  }
 
-  onEscape(modal) {
-    window.addEventListener('keydown', e => this.onKeyPressEsc(e, modal));
-    window.addEventListener('click', e => {
-      // console.log(e.target);
-      if (e.target.classList.contains('close-icon-container')) {
-        modal.close();
+      function onKeyPressEsc(e) {
+        if (e.code === 'Escape') {
+          modal.close();
+        }
+      }
+
+      function onBtnClose(e) {
+        if (e.target.classList.contains('close-icon-container')) {
+          modal.close();
+        }
       }
     });
-  }
-
-  onKeyPressEsc(e, modal) {
-    if (e.code === 'Escape') {
-      modal.close();
-    }
   }
 
   async getMarkUpForOneMovie(id) {
