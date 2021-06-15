@@ -5,6 +5,7 @@ import './js/scroll-to-top';
 import './js/Api/auth';
 import './js/toggle-headers';
 import './js/theme-switch';
+import './js/spinner';
 
 import './js/team.js';
 import './js/Api/auth';

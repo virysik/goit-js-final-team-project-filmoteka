@@ -19,7 +19,8 @@ const refs = {
   serchForm: document.querySelector('.search-form-js'),
   searchFormInput: document.querySelector('.search-form__input'),
   nextBtn: document.querySelector('.next-btn-js'),
-   spinner: document.querySelector('.spinner'),
+  spinner: document.querySelector('.spinner'),
+  mask: document.querySelector('.mask'),
 };
 
 export default refs;

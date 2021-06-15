@@ -1,17 +1,29 @@
 .spinner {
-  fill: currentColor;
-  display: inline-block;
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+
+  &-is-hidden {
+    display: none;
+  }
 }
 
-.lds-ring {
+/*.lds-ring {
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 80px;
-}
+  left: 100%;
+  transform: translateX(-100%);
+}*/
 
-.spinner-is-hidden {
-  display: none;
+.mask {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  transition: 0, 6s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

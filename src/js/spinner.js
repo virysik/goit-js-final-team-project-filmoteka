@@ -12,3 +12,8 @@ export {
   showSpinner,
   hideSpinner,
 };
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    refs.mask.remove();
+  }, 600);
+})
