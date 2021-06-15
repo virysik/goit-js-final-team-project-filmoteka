@@ -1,0 +1,17 @@
+.spinner {
+  fill: currentColor;
+  display: inline-block;
+  position: absolute;
+}
+
+.lds-ring {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+}
+
+.spinner-is-hidden {
+  display: none;
+}
