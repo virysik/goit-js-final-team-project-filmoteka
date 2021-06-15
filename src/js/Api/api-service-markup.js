@@ -6,7 +6,6 @@ import template from '../../templates/movie-card-template';
 import oneMovieTemp from '../../templates/one-movie-modal';
 import * as basicLightbox from 'basiclightbox';
 import '../../../node_modules/basiclightbox/dist/basicLightbox.min.css';
-//import '../../js/modal-film-card';
 
 export default class FetchMovieData {
   constructor() {
