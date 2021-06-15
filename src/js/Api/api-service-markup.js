@@ -6,7 +6,6 @@ import template from '../../templates/movie-card-template';
 import oneMovieTemp from '../../templates/one-movie-modal';
 import * as basicLightbox from 'basiclightbox';
 import '../../../node_modules/basiclightbox/dist/basicLightbox.min.css';
-//import '../../js/modal-film-card';
 
 export default class FetchMovieData {
   constructor() {
@@ -168,34 +167,38 @@ export default class FetchMovieData {
       const filmId = e.target.id;
       const markUp = await this.getMarkUpForOneMovie(filmId);
 
-      const modal = basicLightbox.create(oneMovieTemp(markUp));
+      const modal = basicLightbox.create(oneMovieTemp(markUp), {
+        onShow: () => {
+          window.addEventListener('click', onBtnClose);
+          window.addEventListener('keydown', onKeyPressEsc);
+        },
+        onClose: () => {
+          window.removeEventListener('click', onBtnClose);
+          window.removeEventListener('keydown', onKeyPressEsc);
+        },
+      });
       modal.show();
-      this.onEscape(modal);
-    });
-  }
 
-  onEscape(modal) {
-    window.addEventListener('keydown', e => this.onKeyPressEsc(e, modal));
-    window.addEventListener('click', e => {
-      console.log(e.target);
-      if (e.target.classList.contains('close-icon-container')) {
-        modal.close();
+      function onKeyPressEsc(e) {
+        if (e.code === 'Escape') {
+          modal.close();
+        }
+      }
+
+      function onBtnClose(e) {
+        if (e.target.classList.contains('close-icon-container')) {
+          modal.close();
+        }
       }
     });
-  }
-
-  onKeyPressEsc(e, modal) {
-    if (e.code === 'Escape') {
-      modal.close();
-    }
   }
 
   async getMarkUpForOneMovie(id) {
     try {
       const asyncOneMovie = await this.fetchOneMovie(id);
 
-      asyncOneMovie.popularity = Math.round(parseFloat(asyncOneMovie.popularity) * 100) / 100;
-
+      // asyncOneMovie.popularity = Math.round(parseFloat(asyncOneMovie.popularity) * 100) / 100;
+      asyncOneMovie.popularity = asyncOneMovie.popularity.toFixed(1);
       const genresArr = asyncOneMovie.genres.map(e => {
         return ' ' + e.name;
       });

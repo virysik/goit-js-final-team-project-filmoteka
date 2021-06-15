@@ -4,6 +4,8 @@ import photoVera from '../../img/team/vera.jpg';
 import photoMikhail from '../../img/team/mikhail.jpg';
 import photoViktor from '../../img/team/viktor.jpg';
 import photoGalina from '../../img/team/galina.jpg';
+import photoNikita from '../../img/team/nikita.jpg';
+import photoDmytro from '../../img/team/dmytro.jpg';
 
 export default [
   {
@@ -14,15 +16,9 @@ export default [
   },
   {
     name: 'Nikita',
-    photo: photoCat,
+    photo: photoNikita,
     position: 'Developer',
     git: 'https://github.com/NikitaIskorka',
-  },
-  {
-    name: 'Dmytro',
-    photo: photoCat,
-    position: 'Developer',
-    git: 'https://github.com/DmytroM029',
   },
   {
     name: 'Galina',
@@ -53,6 +49,12 @@ export default [
     photo: photoCat,
     position: 'Developer',
     git: 'https://github.com/virysik',
+  },
+  {
+    name: 'Dmytro',
+    photo: photoDmytro,
+    position: 'Developer',
+    git: 'https://github.com/DmytroM029',
   },
   {
     name: 'Vlad',
