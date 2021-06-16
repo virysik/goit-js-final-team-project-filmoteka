@@ -21,7 +21,8 @@ const refs = {
   nextBtn: document.querySelector('.next-btn-js'),
   spinner: document.querySelector('.spinner'),
   mask: document.querySelector('.mask'),
-  errorMessage : document.querySelector('.search-form__field-error')
+  errorMessage: document.querySelector('.search-form__field-error'),
+  listPagesEl: document.querySelector('.pagination__list'),
 
 };
 

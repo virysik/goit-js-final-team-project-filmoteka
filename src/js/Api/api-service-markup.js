@@ -14,6 +14,7 @@ export default class FetchMovieData {
   constructor() {
     this._key = API_KEY;
     this._page = 1;
+    this._totalPage = '';
     this._genres = this.fetchGenreCodes();
     this._data = this.fetchTrendingMovies();
     this._raitingStatus = false;
@@ -24,11 +25,12 @@ export default class FetchMovieData {
     try {
       let url = '';
       const searchInputUrl = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
-      const mainSearchUrl = `${BASE_URL}trending/movie/day?api_key=${this._key}&page=${this._page}`;
+      const mainSearchUrl = `${BASE_URL}movie/popular?api_key=${this._key}&page=${this._page}`;
 
       url = this._searchQuery ? searchInputUrl : mainSearchUrl;
 
       const response = await axios.get(url);
+      this._totalPage = response.data.total_pages;
       return response.data;
     } catch (error) {
       console.log(error);
@@ -139,7 +141,11 @@ export default class FetchMovieData {
 
       if (target.classList.contains('home-page-js')) {
         this.raiting = false;
-        this.getMarkUp();
+        this.resetPage();
+        this.resetSearchQuery();
+        refs.searchFormInput.value = '';
+        this.markUpAllMain();
+        //this.getMarkUp();
       }
 
       if (target.classList.contains('library-page-js')) {
@@ -152,13 +158,16 @@ export default class FetchMovieData {
       e.preventDefault();
       refs.errorMessage.style.display = 'none'
       let newQuery = e.currentTarget.elements.query.value;
-      this._searchQuery = newQuery;
+      this.searchQuery(newQuery);
+      this.resetPage();
+      this.markUpAllMain();
+      /*this._searchQuery = newQuery;
       this.clearGalleryContainer();
       const apiData = await this.getMarkUpData();
-      const markUp = await template(apiData);
+      const markUp = await template(apiData);*/
       refs.movieList.innerHTML = markUp;
-      this._searchQuery = '';
-      refs.searchFormInput.value = '';
+      //this._searchQuery = '';
+      //refs.searchFormInput.value = '';
     });
   }
 
@@ -172,6 +181,14 @@ export default class FetchMovieData {
 
   resetPage() {
     this._page = 1;
+  }
+
+  searchQuery(newQuery) {
+    this._searchQuery = newQuery;
+  }
+
+  resetSearchQuery() {
+    this._searchQuery = '';
   }
 
   renderOneMovie() {
@@ -226,4 +243,159 @@ export default class FetchMovieData {
       console.log(error);
     }
   }
+
+  async markUpAllMain (activePage = 1)  { //рендерит разметку контейнера с фильмами и пагинацию
+    try {
+      //console.log('111');
+        const markUpMain = await this.getMarkUp();
+        this.pagination(this._totalPage, activePage);
+      } catch (error) {
+        console.log(error);
+      }
+  };
+
+  ///----
+showNumberCurrentPage(activePage = 1) {
+  this._page = activePage;
+  //console.log('303030 this._page = activePage', this._page)
+  this.getMarkUp();
+  }
+  ///---
+
+  renderMarkupPage(totalPage, activePage, listPagesEl) {
+    listPagesEl.innerHTML = this.createMarkup(totalPage, activePage);
+  }
+
+  createMarkup(totalPage, page) {
+  let markup = '';
+  let beforePages = page - 2;
+  let afterPages = page + 2;
+  const arrowRight = '&#129130';
+  const arrowLeft = '&#129128';
+
+  if (page > 1) {
+    markup += `<li class="pagination__item first">
+            <a class="pagination__link" id="left">-${arrowLeft}
+            <!--<svg class="number-pages__svg" width="16" height="16">
+                <use href="./img/sprite.svg#icon-arrow-left"></use>
+              </svg>-->
+            </a>
+          </li>`;
+  }
+
+  if ((page > 3) & (totalPage > 5)) {
+    markup += `<li class="pagination__item mobile">
+                <a href="" class="pagination__link">1</a>
+            </li>`;
+    if ((page > 4) & (totalPage > 6)) {
+      markup += `<li class="pagination__item mobile">
+                <a href="" class="pagination__link dots-hover">...</a>
+            </li>`;
+    }
+  }
+
+  if (page === totalPage) {
+    beforePages = beforePages - 2;
+    afterPages = afterPages - 2;
+  } else if (page === totalPage - 1) {
+    beforePages = beforePages - 1;
+    afterPages = afterPages - 1;
+  }
+
+  if (page === 1) {
+    afterPages = afterPages + 2;
+    beforePages = beforePages + 2;
+  } else if (page === 2) {
+    afterPages = afterPages + 1;
+    beforePages = beforePages + 1;
+  }
+
+  for (let pageGroup = beforePages; pageGroup <= afterPages; pageGroup++) {
+    let active = '';
+    if (pageGroup > totalPage || pageGroup <= 0) {
+      continue;
+    }
+    if (pageGroup === page) {
+      active = 'active';
+    }
+    markup += `<li class="pagination__item">
+                <a href="" class="pagination__link ${active}">${pageGroup}</a>
+            </li>`;
+  }
+
+  if ((page < totalPage - 2) & (totalPage > 5)) {
+    if ((page < totalPage - 3) & (totalPage > 6)) {
+      markup += `<li class="pagination__item mobile">
+                <a href="" class="pagination__link dots-hover">...</a>
+            </li>`;
+    }
+    markup += `<li class="pagination__item mobile">
+                <a href="" class="pagination__link">${totalPage}</a>
+            </li>`;
+  }
+
+  if (page < totalPage) {
+    markup += `<li class="pagination__item last">
+            <a class="pagination__link" id="right">+${arrowRight}
+            <!--<svg class="number-pages__svg" width="16" height="16">
+                <use href="./img/sprite.svg#icon-arrow-right"></use>
+              </svg>-->
+              </a>
+          </li>`;
+  }
+
+    return markup;
+    
+  }
+
+  pagination(
+  totalPage,
+  activePage = 1,
+  listPagesEl = refs.listPagesEl,
+  ) {
+    if (totalPage <= 1) {
+      return;
+    }  
+    console.log('222');
+    this.renderMarkupPage(totalPage, activePage, listPagesEl);
+
+    listPagesEl.addEventListener('click', (e) => this.onClick(e));
+    
+    
+  }
+
+  async onClick(e) {
+      e.preventDefault();
+
+      if (e.target.tagName === 'UL') return;
+
+      if (e.target.textContent === '...') return;
+
+      if (e.target.id === 'left') {
+        
+        console.log(this._page);
+        
+        let activePage = this._page - 1;
+        console.log(activePage);
+        this.renderMarkupPage(totalPage, activePage, refs.listPagesEl);
+
+        this.showNumberCurrentPage(activePage);
+        return;
+      }
+
+      if (e.target.id === 'right') {
+        renderMarkupPage(totalPage, ++activePage, refs.listPagesEl);
+        this.showNumberCurrentPage(activePage);
+        return;
+      }
+
+      let activePage = +e.target.textContent;
+    console.log('add listner');
+    this._page = activePage;
+    this.getMarkUp();
+    this.renderMarkupPage(this._totalPage, ++activePage, refs.listPagesEl);
+    //this.markUpAllMain(activePage);
+    //this.remLis();
+  };
+  
 }

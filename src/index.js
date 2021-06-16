@@ -12,7 +12,7 @@ import './js/Api/auth';
 import * as modulPagination from './js/pagination';
 
 const apiData = new ApiServiceMarkup();
-apiData.getMarkUp();
+/*apiData.getMarkUp();
 
 apiData._data
   .then(res => {
@@ -20,6 +20,8 @@ apiData._data
   })
   .catch(err => {
     console.log(err);
-  });
+  });*/
+
+apiData.markUpAllMain();
 
 apiData.renderOneMovie();
