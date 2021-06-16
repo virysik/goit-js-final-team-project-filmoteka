@@ -20,10 +20,11 @@ const refs = {
   searchFormInput: document.querySelector('.search-form__input'),
   nextBtn: document.querySelector('.next-btn-js'),
   spinner: document.querySelector('.spinner'),
+  watchedBtn: document.querySelector('.watched-btn'),
+  queueBtn: document.querySelector('queue-btn'),
   mask: document.querySelector('.mask'),
   errorMessage: document.querySelector('.search-form__field-error'),
   listPagesEl: document.querySelector('.pagination__list'),
-
 };
 
 export default refs;
