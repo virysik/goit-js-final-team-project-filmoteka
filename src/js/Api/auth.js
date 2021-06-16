@@ -15,65 +15,63 @@ const firebaseConfig = {
   appId: '1:39626584611:web:ad3feb4c5126ba39fdf796',
   measurementId: 'G-FCHRQM7EC5',
 };
-
 firebase.initializeApp(firebaseConfig);
 
-//======================================
-refs.closeBtn.addEventListener('click', () => {
-  refs.loginModal.classList.add('is-hidden');
-});
-refs.loginBtn.addEventListener('click', () => {
-  refs.loginModal.classList.remove('is-hidden');
-});
+export default class Auth {
+  constructor() {
+    this.auth = firebase.auth();
+    this.db = firebase.firestore();
+  }
 
-//===Переключение на форму реєстрації===
-refs.createLink.addEventListener('click', () => {
-  refs.regForm.style.display = 'block';
-  refs.logForm.style.display = 'none';
-});
-//===Перключение на фому логіна===
-refs.loginLink.addEventListener('click', () => {
-  refs.regForm.style.display = 'none';
-  refs.logForm.style.display = 'block';
-});
+  openModal() {
+    refs.loginModal.classList.remove('is-hidden');
+    refs.logForm.style.display = 'block';
+    refs.regForm.style.display = 'none';
+  }
 
-//================register==============
-function registeringWithEmailAndPassword(email, password) {
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(cred => {
-      return firebase.firestore().collection('users').doc(cred.user.uid).set({
-        watched: [],
-        queue: [],
+  closedModal() {
+    refs.loginModal.classList.add('is-hidden');
+  }
+
+  modalSwitch() {
+    if ((refs.regForm.style.display = 'block')) {
+      refs.logForm.style.display = 'none';
+    }
+  }
+
+  registeringWithEmailAndPassword(e) {
+    e.preventDefault();
+    const email = refs.regForm.querySelector('#reg-email').value;
+    const password = refs.regForm.querySelector('#reg-password').value;
+
+    this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(cred => {
+        return firebase.firestore().collection('users').doc(cred.user.uid).set({
+          watched: [],
+          queue: [],
+        });
+      })
+      .then(() => {
+        this.closedModal();
       });
+  }
+
+  authWithMailAndPassword(e) {
+    e.preventDefault();
+    const email = refs.logForm.querySelector('#log-email').value;
+    const password = refs.logForm.querySelector('#log-password').value;
+    this.auth.signInWithEmailAndPassword(email, password).then(() => {
+      this.closedModal();
     });
+  }
+
+  init() {
+    refs.loginLink.addEventListener('click', this.modalSwitch.bind(this));
+    refs.createLink.addEventListener('click', this.modalSwitch.bind(this));
+    refs.closeBtn.addEventListener('click', this.closedModal.bind(this));
+    refs.loginBtn.addEventListener('click', this.openModal.bind(this));
+    refs.regForm.addEventListener('submit', this.registeringWithEmailAndPassword.bind(this));
+    refs.logForm.addEventListener('submit', this.authWithMailAndPassword.bind(this));
+  }
 }
-
-refs.regForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const formElements = e.currentTarget.elements;
-  const password = formElements.regPassword.value;
-  const email = formElements.regEmail.value;
-
-  registeringWithEmailAndPassword(email, password);
-});
-
-//================login=================
-function authWithMailAndPassword(email, password) {
-  firebase.auth().signInWithEmailAndPassword(email, password);
-  // Написати рендер
-  //...
-}
-
-refs.logForm.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const email = e.target.querySelector('#log-email').value;
-  const password = e.target.querySelector('#log-password').value;
-
-  console.log(email);
-  console.log(password);
-
-  authWithMailAndPassword(email, password);
-});
