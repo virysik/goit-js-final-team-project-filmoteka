@@ -6,6 +6,8 @@ import photoViktor from '../../img/team/viktor.jpg';
 import photoGalina from '../../img/team/galina.jpg';
 import photoNikita from '../../img/team/nikita.jpg';
 import photoDmytro from '../../img/team/dmytro.jpg';
+import photoVlad from '../../img/team/vlad.jpg';
+import photoDenis from '../../img/team/denis.jpg';
 
 export default [
   {
@@ -33,10 +35,10 @@ export default [
     git: 'https://github.com/maralov',
   },
   {
-    name: 'Denis',
-    photo: photoCat,
+    name: 'Vlad',
+    photo: photoVlad,
     position: 'Developer',
-    git: 'https://github.com/Fadeev2000',
+    git: 'https://github.com/VladHlushets',
   },
   {
     name: 'Viktor',
@@ -44,12 +46,7 @@ export default [
     position: 'Developer',
     git: 'https://github.com/KViktorK',
   },
-  {
-    name: 'Ivanka',
-    photo: photoCat,
-    position: 'Developer',
-    git: 'https://github.com/virysik',
-  },
+
   {
     name: 'Dmytro',
     photo: photoDmytro,
@@ -57,10 +54,16 @@ export default [
     git: 'https://github.com/DmytroM029',
   },
   {
-    name: 'Vlad',
+    name: 'Denis',
+    photo: photoDenis,
+    position: 'Developer',
+    git: 'https://github.com/Fadeev2000',
+  },
+  {
+    name: 'Ivanka',
     photo: photoCat,
     position: 'Developer',
-    git: 'https://github.com/VladHlushets',
+    git: 'https://github.com/virysik',
   },
   {
     name: 'Veronika',

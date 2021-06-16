@@ -16,21 +16,27 @@
 .team-info {
   position: relative;
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 48px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
   width: 280px;
   background-color: var(--grey-100);
   color: var(--secondary-text-color);
 
   @media screen and (min-width: 768px) {
     width: 618px;
-    padding: 30px;
+    padding-top: 42px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   @media screen and (min-width: 1024px) {
-    width: 880px;
+    width: 882px;
+    padding-top: 50px;
   }
 }
 .team-heading {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   text-align: center;
   color: var(--accent-color);
 }
@@ -94,8 +100,8 @@
 
 .lightbox-button {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 10px;
+  right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -8,6 +8,7 @@ import * as basicLightbox from 'basiclightbox';
 import '../../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { showSpinner } from '../spinner';
 import { hideSpinner } from '../spinner';
+import errorNotification from '../pnotify'
 
 export default class FetchMovieData {
   constructor() {
@@ -82,7 +83,15 @@ export default class FetchMovieData {
   async getMarkUpData() {
    showSpinner();
     try {
+      
       const asyncMoviesData = await this.fetchTrendingMovies();
+
+      if (asyncMoviesData.results.length === 0) {
+// refs.errorMessage.style.display = 'block'
+        errorNotification()
+        
+      }
+     
       const asyncGenresList = await this.genres;
 
       return asyncMoviesData.results.map(data => {
@@ -141,6 +150,7 @@ export default class FetchMovieData {
 
     refs.serchForm.addEventListener('submit', async e => {
       e.preventDefault();
+      refs.errorMessage.style.display = 'none'
       let newQuery = e.currentTarget.elements.query.value;
       this._searchQuery = newQuery;
       this.clearGalleryContainer();
@@ -174,10 +184,12 @@ export default class FetchMovieData {
 
       const modal = basicLightbox.create(oneMovieTemp(markUp), {
         onShow: () => {
+          document.body.classList.add('body-lightbox');
           window.addEventListener('click', onBtnClose);
           window.addEventListener('keydown', onKeyPressEsc);
         },
         onClose: () => {
+          document.body.classList.remove('body-lightbox');
           window.removeEventListener('click', onBtnClose);
           window.removeEventListener('keydown', onKeyPressEsc);
         },
