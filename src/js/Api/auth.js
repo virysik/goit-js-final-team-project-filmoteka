@@ -1,15 +1,29 @@
-import refs from '../refs/';
-import { AUTH_API_KEY } from './api-key';
-import { hiddenClass, BASE_AUTH_URL } from '../constants';
+import firebase from 'firebase/app';
+import refs from '../refs';
+import 'firebase/database';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyBtnalvJhfnAWRZlTM1VDPywHEPPs20Yhs',
+  authDomain: 'goit-js-team-project-filmoteka.firebaseapp.com',
+  databaseURL:
+    'https://goit-js-team-project-filmoteka-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'goit-js-team-project-filmoteka',
+  storageBucket: 'goit-js-team-project-filmoteka.appspot.com',
+  messagingSenderId: '39626584611',
+  appId: '1:39626584611:web:ad3feb4c5126ba39fdf796',
+  measurementId: 'G-FCHRQM7EC5',
+};
+
+firebase.initializeApp(firebaseConfig);
 
 //======================================
 refs.closeBtn.addEventListener('click', () => {
-  document.body.classList.remove('body-lightbox');
-  refs.loginModal.classList.add(hiddenClass);
+  refs.loginModal.classList.add('is-hidden');
 });
 refs.loginBtn.addEventListener('click', () => {
-  document.body.classList.add('body-lightbox');
-  refs.loginModal.classList.remove(hiddenClass);
+  refs.loginModal.classList.remove('is-hidden');
 });
 
 //===Переключение на форму реєстрації===
@@ -25,16 +39,15 @@ refs.loginLink.addEventListener('click', () => {
 
 //================register==============
 function registeringWithEmailAndPassword(email, password) {
-  return fetch(`${BASE_AUTH_URL}:signUp?key=${AUTH_API_KEY}`, {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      password,
-      returnSecureToken: 'true',
-    }),
-  })
-    .then(response => response.json())
-    .then(data => console.log(data));
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(cred => {
+      return firebase.firestore().collection('users').doc(cred.user.uid).set({
+        watched: [],
+        queue: [],
+      });
+    });
 }
 
 refs.regForm.addEventListener('submit', e => {
@@ -48,39 +61,19 @@ refs.regForm.addEventListener('submit', e => {
 
 //================login=================
 function authWithMailAndPassword(email, password) {
-  return (
-    fetch(`${BASE_AUTH_URL}:signInWithPassword?key=${AUTH_API_KEY}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-        returnSecureToken: 'true',
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(respon => respon.json())
-      //Токен юзера
-      .then(data => console.log(data.idToken))
-  );
+  firebase.auth().signInWithEmailAndPassword(email, password);
+  // Написати рендер
+  //...
 }
 
 refs.logForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  const formElements = e.currentTarget.elements;
-  const password = formElements.loginPassword.value;
-  const email = formElements.loginEmail.value;
-
-  // const email = e.target.querySelector('#log-email').value;
-  // const password = e.target.querySelector('#log-password').value;
+  const email = e.target.querySelector('#log-email').value;
+  const password = e.target.querySelector('#log-password').value;
 
   console.log(email);
   console.log(password);
 
   authWithMailAndPassword(email, password);
 });
-//======================================
-
-// const bazaD = 'https://goit-js-team-project-filmoteka-default-rtdb.europe-west1.firebasedatabase.app/';
