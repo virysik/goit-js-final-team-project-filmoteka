@@ -5,15 +5,27 @@ import './js/scroll-to-top';
 import './js/Api/auth';
 import './js/toggle-headers';
 import './js/theme-switch';
-
-import './js/team.js';
-import './js/Api/auth';
 import firebase from 'firebase/app';
+import './js/team.js';
+import Auth from './js/Api/auth';
+import DataBaseFirebase from './js/Api/firebase-database';
 import './js/Api/firebase-database';
 import * as modulPagination from './js/pagination';
 
 const apiData = new ApiServiceMarkup();
 apiData.getMarkUp();
+
+const auth = new Auth();
+auth.init();
+
+const db = new DataBaseFirebase();
+db.auth.onAuthStateChanged(user => {
+  if (user) {
+    db.addFilmToFirebase(user);
+    console.log(db.getActualWatchedList(user));
+    console.log(db.getActualQueueList(user));
+  }
+});
 
 apiData._data
   .then(res => {
