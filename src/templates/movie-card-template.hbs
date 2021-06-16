@@ -2,21 +2,22 @@
   <li class='main__section-item'>
     <a href='#' class='main__section-link'>
       <div class='movie-card'>
-        
         <div class='img-wrapper'>
           <img
             id={{id}}
             loading='lazy'
             class='movie-poster'
-            data-popularity="{{popularity}}"
-            src="https://image.tmdb.org/t/p/w500{{poster_path}}"
+            data-popularity={{popularity}}
             alt="{{original_title}}"
+            src="{{poster_img}}"
           />
-          <div class="movie-overview">
-            <p class="movie-overview__title">Overview</p>
+          <div class='movie-overview'>
+            <p class='movie-overview__title'>
+              Overview
+            </p>
             {{overview}}
           </div>
-          </div>
+        </div>
         <div class='movie-desc'>
           <h2 class='movie-name'>
             {{title}}

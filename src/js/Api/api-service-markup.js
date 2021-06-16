@@ -95,11 +95,13 @@ export default class FetchMovieData {
       const asyncGenresList = await this.genres;
 
       return asyncMoviesData.results.map(data => {
+        console.log(asyncMoviesData.results.map(data => data.original_title));
         return {
           ...data,
           genre: this.getCorrectGenreArray(data.genre_ids, asyncGenresList),
           year: this.getCorrectYear(data.release_date),
           raiting: this.raiting,
+          poster_img: this.getCorrectImg(data.poster_path),
         };
       });
     } catch (error) {
@@ -131,6 +133,15 @@ export default class FetchMovieData {
   getCorrectYear(year) {
     if (year === undefined) return '';
     return year.split('-').slice(0, 1);
+  }
+
+  getCorrectImg(imgs) {
+    if (imgs === null) {
+      return (imgs = `https://t4.ftcdn.net/jpg/03/76/40/81/360_F_376408140_kiazgwOvkEy0e50oxgF5kllIl7j2q1SQ.jpg`);
+    }
+
+    imgs = `https://image.tmdb.org/t/p/w500${imgs}`;
+    return imgs;
   }
 
   addEventListeners() {
@@ -214,12 +225,12 @@ export default class FetchMovieData {
     try {
       const asyncOneMovie = await this.fetchOneMovie(id);
 
-      // asyncOneMovie.popularity = Math.round(parseFloat(asyncOneMovie.popularity) * 100) / 100;
       asyncOneMovie.popularity = asyncOneMovie.popularity.toFixed(1);
       const genresArr = asyncOneMovie.genres.map(e => {
         return ' ' + e.name;
       });
       asyncOneMovie.genres = genresArr.join(',');
+      asyncOneMovie.poster_img = this.getCorrectImg(asyncOneMovie.poster_path);
 
       return asyncOneMovie;
     } catch (error) {
