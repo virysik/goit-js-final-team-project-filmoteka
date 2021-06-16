@@ -25,7 +25,7 @@ export default class FetchMovieData {
     try {
       let url = '';
       const searchInputUrl = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
-      const mainSearchUrl = `${BASE_URL}movie/popular?api_key=${this._key}&page=${this._page}`;
+      const mainSearchUrl = `${BASE_URL}trending/movie/day?api_key=${this._key}&page=${this._page}`;
 
       url = this._searchQuery ? searchInputUrl : mainSearchUrl;
 
