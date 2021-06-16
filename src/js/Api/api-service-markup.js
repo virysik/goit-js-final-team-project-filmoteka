@@ -153,16 +153,16 @@ export default class FetchMovieData {
 
       if (target.classList.contains('home-page-js')) {
         this.raiting = false;
-        this.resetPage();
-        this.resetSearchQuery();
-        refs.searchFormInput.value = '';
-        this.markUpAllMain();
-        //this.getMarkUp();
+
+        this.getMarkUp();
+        document.querySelector('.main__library-info').classList.add('is-hidden');
       }
 
       if (target.classList.contains('library-page-js')) {
         this.raiting = true;
-        // clearGalleryContainer();
+
+        document.querySelector('.main__section-list').innerHTML = '';
+        document.querySelector('.main__library-info').classList.remove('is-hidden');
       }
     });
 
@@ -188,11 +188,11 @@ export default class FetchMovieData {
   }
 
   incrementPage() {
-    return this._page += 1;
+    return (this._page += 1);
   }
 
   decrementPage() {
-    return this._page -= 1;
+    return (this._page -= 1);
   }
 
   resetPage() {
@@ -208,7 +208,7 @@ export default class FetchMovieData {
   }
 
   renderOneMovie() {
-   refs.movieList.addEventListener('click', async e => {
+    refs.movieList.addEventListener('click', async e => {
       if (e.target.nodeName !== 'IMG') {
         return;
       }
@@ -263,18 +263,17 @@ export default class FetchMovieData {
   async markUpAllMain(activePage = 1) {
     //рендерит разметку контейнера с фильмами и пагинацию
     try {
-
-        const markUpMain = await this.getMarkUp();
-        this.pagination(this._totalPage, activePage);
-      } catch (error) {
-        console.log(error);
-      }
-  };
+      const markUpMain = await this.getMarkUp();
+      this.pagination(this._totalPage, activePage);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   ///----
-showNumberCurrentPage(activePage = 1) {
-  this._page = activePage;
-  this.getMarkUp();
+  showNumberCurrentPage(activePage = 1) {
+    this._page = activePage;
+    this.getMarkUp();
   }
   ///---
 
@@ -373,8 +372,7 @@ showNumberCurrentPage(activePage = 1) {
   }
 
   paginationListner() {
-    refs.listPagesEl.addEventListener('click', (e) => this.onClick(e));
-
+    refs.listPagesEl.addEventListener('click', e => this.onClick(e));
   }
 
   async onClick(e) {
@@ -384,21 +382,20 @@ showNumberCurrentPage(activePage = 1) {
 
     if (e.target.textContent === '...') return;
 
-      if (e.target.id === 'left') {
-        let activePage = this.decrementPage();
-        this.markUpAllMain(activePage);
-        return;
-      }
+    if (e.target.id === 'left') {
+      let activePage = this.decrementPage();
+      this.markUpAllMain(activePage);
+      return;
+    }
 
     if (e.target.id === 'right') {
       let activePage = this.incrementPage();
       this.markUpAllMain(activePage);
-        return;
-      }
+      return;
+    }
 
-      let activePage = +e.target.textContent;
+    let activePage = +e.target.textContent;
     this._page = activePage;
     this.markUpAllMain(activePage);
-  };
-
+  }
 }
