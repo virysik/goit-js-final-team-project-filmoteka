@@ -81,7 +81,7 @@ export default class FetchMovieData {
   }
 
   async getMarkUpData() {
-    showSpinner();
+   showSpinner();
     try {
       
       const asyncMoviesData = await this.fetchTrendingMovies();
