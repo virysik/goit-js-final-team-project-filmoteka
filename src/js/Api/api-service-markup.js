@@ -174,10 +174,12 @@ export default class FetchMovieData {
 
       const modal = basicLightbox.create(oneMovieTemp(markUp), {
         onShow: () => {
+          document.body.classList.add('body-lightbox');
           window.addEventListener('click', onBtnClose);
           window.addEventListener('keydown', onKeyPressEsc);
         },
         onClose: () => {
+          document.body.classList.remove('body-lightbox');
           window.removeEventListener('click', onBtnClose);
           window.removeEventListener('keydown', onKeyPressEsc);
         },
