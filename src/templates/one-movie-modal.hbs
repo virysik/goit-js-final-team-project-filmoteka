@@ -8,7 +8,7 @@
     </button> }}
 
     <div class='modal-content'>
-      <img class='img-film' src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt='' />
+      <img class='img-film' src="{{poster_img}}" alt='' />
       <div>
         <h2 class='modal-title'>
           {{original_title}}
@@ -41,7 +41,7 @@
               <td class='description-film'>
                 Original Title
               </td>
-              <td class='description-film-info description-film-info-title'>
+              <td class='description-film-info'>
                 {{title}}
               </td>
             </tr>
@@ -59,6 +59,7 @@
           ABOUT
         </h2>
         <p class='text-content'>
+          Four of the West’s most infamous outlaws assemble to steal a huge stash of gold from the
           {{overview}}
         </p>
         <div class='btn-card'>

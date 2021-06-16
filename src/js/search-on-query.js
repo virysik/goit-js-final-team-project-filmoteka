@@ -1,7 +1,7 @@
 import MovieDataBaseSearchService from './Api/MovieDataBaseSearchService';
 import movieCardTemplate from '../templates/movie-card-template.hbs';
 
-import refs from './refs/index'
+import refs from './refs/index';
 
 /* Надо сделать чтоб кнопка Поиска "лупа"  и сам Input( у инпута должен быть name="query") 
 лежал в теге Form с

@@ -22,6 +22,9 @@ const refs = {
   spinner: document.querySelector('.spinner'),
   watchedBtn: document.querySelector('.watched-btn'),
   queueBtn: document.querySelector('queue-btn'),
+  mask: document.querySelector('.mask'),
+  errorMessage: document.querySelector('.search-form__field-error'),
+  listPagesEl: document.querySelector('.pagination__list'),
 };
 
 export default refs;
