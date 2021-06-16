@@ -8,6 +8,7 @@ import * as basicLightbox from 'basiclightbox';
 import '../../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { showSpinner } from '../spinner';
 import { hideSpinner } from '../spinner';
+import errorNotification from '../pnotify'
 
 export default class FetchMovieData {
   constructor() {
@@ -87,7 +88,8 @@ export default class FetchMovieData {
       const asyncMoviesData = await this.fetchTrendingMovies();
       console.log(asyncMoviesData.results.length);
       if (asyncMoviesData.results.length === 0) {
-refs.errorMessage.style.display = 'block'
+// refs.errorMessage.style.display = 'block'
+        errorNotification()
         
       }
      
