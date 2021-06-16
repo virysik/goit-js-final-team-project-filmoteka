@@ -356,7 +356,7 @@ showNumberCurrentPage(activePage = 1) {
     if (totalPage <= 1) {
       return;
     }  
-    console.log('222');
+
     this.renderMarkupPage(totalPage, activePage, listPagesEl);
 
     listPagesEl.addEventListener('click', (e) => this.onClick(e));
