@@ -165,7 +165,7 @@ export default class FetchMovieData {
       this.clearGalleryContainer();
       const apiData = await this.getMarkUpData();
       const markUp = await template(apiData);*/
-      refs.movieList.innerHTML = markUp;
+//       refs.movieList.innerHTML = markUp;
       //this._searchQuery = '';
       //refs.searchFormInput.value = '';
     });
