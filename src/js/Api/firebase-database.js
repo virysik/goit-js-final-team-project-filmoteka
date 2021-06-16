@@ -1,98 +1,96 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/firestore';
-
 import FetchMovieData from './api-service-markup';
 const oneMovie = new FetchMovieData();
 
-window.addEventListener('click', e => {
-  const idFilm = Number(e.target.dataset.id);
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      const databaseUser = firebase
-        .firestore()
-        .collection('users')
-        .doc(firebase.auth().currentUser.uid)
-        .get();
+export default class DataBaseFirebase {
+  constructor() {
+    this.auth = firebase.auth();
+    this.db = firebase.firestore();
+  }
 
-      //=================WATCHED=================================
-      // ==============ADD USER-DATABASE WATCHED======================
-      async function pushToWatchedArrFirebase() {
-        let newList = (await databaseUser).data().watched;
-        let fetch = await oneMovie.fetchOneMovie(idFilm);
+  async getActualWatchedList(user) {
+    const databaseUser = this.db.collection('users').doc(user.uid).get();
+    let list = (await databaseUser).data().watched;
+    //Зробити рендер
+    //.....
+    return list;
+  }
 
-        if (newList.find(e => e.id === idFilm)) {
-          newList = newList.filter(e => e.id !== idFilm);
-          e.target.textContent = 'ADD TO WATCHED';
-          return newList;
+  async getActualQueueList(user) {
+    const databaseUser = this.db.collection('users').doc(user.uid).get();
+    let list = (await databaseUser).data().queue;
+    return list;
+  }
+  async pushToWatchedArrFirebase(user, id) {
+    const databaseUser = this.db.collection('users').doc(user.uid).get();
+    let newList = (await databaseUser).data().watched;
+    console.log(newList);
+    let fetch = await oneMovie.fetchOneMovie(id);
+
+    if (newList.find(e => e.id === id)) {
+      newList = newList.filter(e => e.id !== id);
+      return newList;
+    } else {
+      newList.push(fetch);
+
+      return newList;
+    }
+  }
+
+  async pushToQueueArrFirebase(user, id) {
+    const databaseUser = this.db.collection('users').doc(user.uid).get();
+    let newList = (await databaseUser).data().queue;
+    console.log(newList);
+    let fetch = await oneMovie.fetchOneMovie(id);
+
+    if (newList.find(e => e.id === id)) {
+      newList = newList.filter(e => e.id !== id);
+      return newList;
+    } else {
+      newList.push(fetch);
+      return newList;
+    }
+  }
+
+  async addToQueueUserDataBase(user, id) {
+    const data = await this.pushToQueueArrFirebase(user, id);
+    this.db.collection('users').doc(user.uid).set(
+      {
+        queue: data,
+      },
+      { merge: true },
+    );
+  }
+  async addToWatchedUserDataBase(user, id) {
+    const data = await this.pushToWatchedArrFirebase(user, id);
+    this.db.collection('users').doc(user.uid).set(
+      {
+        watched: data,
+      },
+      { merge: true },
+    );
+  }
+
+  async addFilmToFirebase(user) {
+    window.addEventListener('click', e => {
+      if (e.target.className === 'queue-btn') {
+        this.addToQueueUserDataBase(user, Number(e.target.dataset.id));
+        if (e.target.textContent === 'REMOVE FROM QUEUE') {
+          e.target.textContent = 'ADD TO QUEUE';
         } else {
-          newList.push(fetch);
-          e.target.textContent = 'REMOVE FROM WATCHED';
-          return newList;
+          e.target.textContent = 'REMOVE FROM QUEUE';
         }
-      }
-
-      //===============ADD TO ARR=============================
-      async function addToWatchedUserDataBase() {
-        const data = await pushToWatchedArrFirebase();
-        console.log(data);
-        firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).set(
-          {
-            watched: data,
-          },
-          { merge: true },
-        );
       }
       if (e.target.className === 'watched-btn') {
-        addToWatchedUserDataBase();
-      }
-
-      //=====================Queue==============================
-      // ==============ADD USER-DATABASE QUEUE======================
-      async function pushToQueueArrFirebase() {
-        let newList = (await databaseUser).data().queue;
-
-        let fetch = await oneMovie.fetchOneMovie(idFilm);
-
-        if (newList.find(e => e.id === idFilm)) {
-          newList = newList.filter(e => e.id !== idFilm);
-          e.target.textContent = 'ADD TO QUEUE';
-          return newList;
+        this.addToWatchedUserDataBase(user, Number(e.target.dataset.id));
+        if (e.target.textContent === 'REMOVE FROM WATCHED') {
+          e.target.textContent = 'ADD TO WATCHED';
         } else {
-          newList.push(fetch);
-          e.target.textContent = 'REMOVE FROM QUEUE';
-          return newList;
+          e.target.textContent = 'REMOVE FROM WATCHED';
         }
       }
-      //==================ADD TO ARR========================
-      async function addToQueueUserDataBase() {
-        const data = await pushToQueueArrFirebase();
-        firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).set(
-          {
-            queue: data,
-          },
-          { merge: true },
-        );
-      }
-
-      if (e.target.className === 'queue-btn') {
-        addToQueueUserDataBase();
-      }
-    } else {
-      console.log('error');
-    }
-  });
-});
-
-firebase.auth().onAuthStateChanged(async user => {
-  if (user) {
-    const fireBase = firebase
-      .firestore()
-      .collection('users')
-      .doc(firebase.auth().currentUser.uid)
-      .get();
-
-    const userDataBase = (await fireBase).data();
-    console.log(userDataBase);
+    });
   }
-});
+}
