@@ -84,9 +84,8 @@ export default class FetchMovieData {
     showSpinner();
     try {
       
-      
       const asyncMoviesData = await this.fetchTrendingMovies();
-      console.log(asyncMoviesData.results.length);
+
       if (asyncMoviesData.results.length === 0) {
 // refs.errorMessage.style.display = 'block'
         errorNotification()
