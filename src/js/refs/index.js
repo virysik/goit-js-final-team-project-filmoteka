@@ -8,6 +8,7 @@ const refs = {
   loginModal: document.querySelector('.login-page'),
   closeBtn: document.querySelector('.close-icon-container'),
   loginBtn: document.querySelector('#login'),
+  logoutBtn: document.querySelector('#logout'),
   regForm: document.querySelector('.register-form'),
   logForm: document.querySelector('.login-form'),
   createLink: document.querySelector('.create-message a'),
@@ -20,11 +21,12 @@ const refs = {
   searchFormInput: document.querySelector('.search-form__input'),
   nextBtn: document.querySelector('.next-btn-js'),
   spinner: document.querySelector('.spinner'),
-  watchedBtn: document.querySelector('.watched-btn'),
-  queueBtn: document.querySelector('queue-btn'),
+  watchedBtn: document.querySelector('.watched'),
+  queueBtn: document.querySelector('.queue'),
   mask: document.querySelector('.mask'),
   errorMessage: document.querySelector('.search-form__field-error'),
   listPagesEl: document.querySelector('.pagination__list'),
+  libraryPage: document.querySelector('.library-page-js'),
 };
 
 export default refs;

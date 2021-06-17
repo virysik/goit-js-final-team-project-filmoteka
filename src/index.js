@@ -17,6 +17,8 @@ import './js/Api/firebase-database';
 //import * as modulPagination from './js/pagination';
 
 const apiData = new ApiServiceMarkup();
+apiData.getMarkUp();
+
 
 const auth = new Auth();
 auth.init();
@@ -25,12 +27,13 @@ const db = new DataBaseFirebase();
 db.auth.onAuthStateChanged(user => {
   if (user) {
     db.addFilmToFirebase(user);
-    //console.log(db.getActualWatchedList(user));
-    //console.log(db.getActualQueueList(user));
-    //apiData.fetchWatchedList();
+    db.pushWatchedToLibrary(user);
+    db.pushQueueToLibrary(user);
     db.getMarkUpWatched(user);
   }
+  auth.setupLoginBtn(user);
 });
+
 
 // apiData._data
 //   .then(res => {
@@ -39,6 +42,7 @@ db.auth.onAuthStateChanged(user => {
 //   .catch(err => {
 //     console.log(err);
 //   });
+
 
 apiData.markUpAllMain();
 apiData.paginationListner()
