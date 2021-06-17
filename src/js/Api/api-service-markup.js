@@ -24,7 +24,7 @@ export default class FetchMovieData {
   async fetchTrendingMovies() {
     try {
       let url = '';
-      const searchInputUrl = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
+      const searchInputUrl = `${BASE_URL}search/movie?api_key=${this._key}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
       const mainSearchUrl = `${BASE_URL}trending/movie/day?api_key=${this._key}&page=${this._page}`;
 
       url = this._searchQuery ? searchInputUrl : mainSearchUrl;
@@ -93,7 +93,6 @@ export default class FetchMovieData {
         errorNotification()
         
       }
-     
       const asyncGenresList = await this.genres;
 
       return asyncMoviesData.results.map(data => {
@@ -187,7 +186,11 @@ export default class FetchMovieData {
   }
 
   incrementPage() {
-    this._page += 1;
+    return this._page += 1;
+  }
+
+  decrementPage() {
+    return this._page -= 1;
   }
 
   resetPage() {
@@ -257,7 +260,6 @@ export default class FetchMovieData {
 
   async markUpAllMain (activePage = 1)  { //рендерит разметку контейнера с фильмами и пагинацию
     try {
-      //console.log('111');
         const markUpMain = await this.getMarkUp();
         this.pagination(this._totalPage, activePage);
       } catch (error) {
@@ -268,7 +270,6 @@ export default class FetchMovieData {
   ///----
 showNumberCurrentPage(activePage = 1) {
   this._page = activePage;
-  //console.log('303030 this._page = activePage', this._page)
   this.getMarkUp();
   }
   ///---
@@ -370,9 +371,11 @@ showNumberCurrentPage(activePage = 1) {
 
     this.renderMarkupPage(totalPage, activePage, listPagesEl);
 
-    listPagesEl.addEventListener('click', (e) => this.onClick(e));
-    
-    
+    //listPagesEl.addEventListener('click', (e) => this.onClick(e));
+  }
+
+  paginationListner() {
+    refs.listPagesEl.addEventListener('click', (e) => this.onClick(e));
   }
 
   async onClick(e) {
@@ -383,30 +386,20 @@ showNumberCurrentPage(activePage = 1) {
       if (e.target.textContent === '...') return;
 
       if (e.target.id === 'left') {
-        
-        console.log(this._page);
-        
-        let activePage = this._page - 1;
-        console.log(activePage);
-        this.renderMarkupPage(totalPage, activePage, refs.listPagesEl);
-
-        this.showNumberCurrentPage(activePage);
+        let activePage = this.decrementPage();
+        this.markUpAllMain(activePage);
         return;
       }
 
-      if (e.target.id === 'right') {
-        renderMarkupPage(totalPage, ++activePage, refs.listPagesEl);
-        this.showNumberCurrentPage(activePage);
+    if (e.target.id === 'right') {
+      let activePage = this.incrementPage();
+      this.markUpAllMain(activePage);
         return;
       }
 
       let activePage = +e.target.textContent;
-    console.log('add listner');
     this._page = activePage;
-    this.getMarkUp();
-    this.renderMarkupPage(this._totalPage, ++activePage, refs.listPagesEl);
-    //this.markUpAllMain(activePage);
-    //this.remLis();
+    this.markUpAllMain(activePage);
   };
   
 }

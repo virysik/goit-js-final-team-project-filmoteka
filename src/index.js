@@ -9,7 +9,7 @@ import './js/spinner';
 
 import './js/team.js';
 import './js/Api/auth';
-import * as modulPagination from './js/pagination';
+//import * as modulPagination from './js/pagination';
 
 const apiData = new ApiServiceMarkup();
 /*apiData.getMarkUp();
@@ -23,5 +23,6 @@ apiData._data
   });*/
 
 apiData.markUpAllMain();
+apiData.paginationListner()
 
 apiData.renderOneMovie();
