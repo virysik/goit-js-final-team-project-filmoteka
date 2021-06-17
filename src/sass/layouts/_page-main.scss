@@ -45,7 +45,8 @@
   }
 }
 
-.main__library-info {
+.main__library-info,
+.main__library-login {
   text-align: center;
   font-weight: 500;
   margin-bottom: 40px;
@@ -53,5 +54,8 @@
 .main__library-deco {
   font-size: 40px;
   margin-right: 5px;
+  color: var(--accent-color);
+}
+.login-link {
   color: var(--accent-color);
 }

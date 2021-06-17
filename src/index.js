@@ -30,6 +30,9 @@ db.auth.onAuthStateChanged(user => {
     db.addFilmToFirebase(user);
     db.pushWatchedToLibrary(user);
     db.pushQueueToLibrary(user);
+    document.querySelector('.main__library-login').classList.add('is-hidden');
+  } else {
+    document.querySelector('.main__library-login').classList.remove('is-hidden');
   }
   auth.setupLoginBtn(user);
 });
