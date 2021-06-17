@@ -26,11 +26,11 @@ auth.init();
 
 const db = new DataBaseFirebase();
 db.auth.onAuthStateChanged(user => {
+  console.log(user);
   if (user) {
     db.addFilmToFirebase(user);
     db.pushWatchedToLibrary(user);
     db.pushQueueToLibrary(user);
-    db.getMarkUpWatched(user);
   }
   auth.setupLoginBtn(user);
 });
@@ -44,11 +44,12 @@ db.auth.onAuthStateChanged(user => {
 //   });
 
 apiData.getMarkUp();
+apiData.addEventListeners();
 
 // if (refs.header.classList.contains('header-home')) {
 //   console.log(refs.header.classList.contains('header-home'));
 //   apiData.paginationListner();
 //   return;
 // }
-
+apiData.paginationListner();
 apiData.renderOneMovie();

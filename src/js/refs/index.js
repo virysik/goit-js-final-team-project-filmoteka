@@ -27,6 +27,8 @@ const refs = {
   errorMessage: document.querySelector('.search-form__field-error'),
   listPagesEl: document.querySelector('.pagination__list'),
   libraryPage: document.querySelector('.library-page-js'),
+  libraryInfo: document.querySelector('.main__library-info'),
+  headerContainer: document.querySelector('.header-container-js'),
 };
 
 export default refs;

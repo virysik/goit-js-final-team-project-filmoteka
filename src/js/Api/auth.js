@@ -68,6 +68,8 @@ export default class Auth {
   logout(e) {
     e.preventDefault();
     this.auth.signOut();
+    refs.movieList.innerHTML = '';
+    document.location.reload();
   }
 
   setupLoginBtn(user) {
