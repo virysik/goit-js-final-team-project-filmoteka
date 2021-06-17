@@ -78,10 +78,11 @@ export default class FetchMovieData {
     this._raitingStatus = newRaitingStatus;
   }
 
-  async getMarkUp() {
+  async getMarkUp(activePage = 1) {
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
+    this.pagination(this._totalPage, activePage);
     this.addEventListeners();
   }
 
@@ -156,12 +157,16 @@ export default class FetchMovieData {
         this.resetPage();
         this.resetSearchQuery();
         refs.searchFormInput.value = '';
-        this.markUpAllMain();
+        this.getMarkUp();
+        //this.paginationListner();
+
         //this.getMarkUp();
       }
 
       if (target.classList.contains('library-page-js')) {
         this.raiting = true;
+        this.resetPage();
+        this.getMarkUp();
         // clearGalleryContainer();
       }
     });
@@ -172,7 +177,7 @@ export default class FetchMovieData {
       let newQuery = e.currentTarget.elements.query.value;
       this.searchQuery(newQuery);
       this.resetPage();
-      this.markUpAllMain();
+      this.getMarkUp();
       /*this._searchQuery = newQuery;
       this.clearGalleryContainer();
       const apiData = await this.getMarkUpData();
@@ -188,11 +193,11 @@ export default class FetchMovieData {
   }
 
   incrementPage() {
-    return this._page += 1;
+    return (this._page += 1);
   }
 
   decrementPage() {
-    return this._page -= 1;
+    return (this._page -= 1);
   }
 
   resetPage() {
@@ -208,7 +213,7 @@ export default class FetchMovieData {
   }
 
   renderOneMovie() {
-   refs.movieList.addEventListener('click', async e => {
+    refs.movieList.addEventListener('click', async e => {
       if (e.target.nodeName !== 'IMG') {
         return;
       }
@@ -260,21 +265,20 @@ export default class FetchMovieData {
     }
   }
 
-  async markUpAllMain(activePage = 1) {
-    //рендерит разметку контейнера с фильмами и пагинацию
-    try {
-
-        const markUpMain = await this.getMarkUp();
-        this.pagination(this._totalPage, activePage);
-      } catch (error) {
-        console.log(error);
-      }
-  };
+  // async markUpAllMain(activePage = 1) {
+  //   //рендерит разметку контейнера с фильмами и пагинацию
+  //   try {
+  //     //await this.getMarkUp();
+  //     //this.pagination(this._totalPage, activePage);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   ///----
-showNumberCurrentPage(activePage = 1) {
-  this._page = activePage;
-  this.getMarkUp();
+  showNumberCurrentPage(activePage = 1) {
+    this._page = activePage;
+    this.getMarkUp();
   }
   ///---
 
@@ -365,16 +369,16 @@ showNumberCurrentPage(activePage = 1) {
 
   pagination(totalPage, activePage = 1, listPagesEl = refs.listPagesEl) {
     if (totalPage <= 1) {
+      listPagesEl.innerHTML = '';
       return;
     }
-
+    console.log(totalPage, 'from api-service');
     this.renderMarkupPage(totalPage, activePage, listPagesEl);
     //listPagesEl.addEventListener('click', (e) => this.onClick(e));
   }
 
   paginationListner() {
-    refs.listPagesEl.addEventListener('click', (e) => this.onClick(e));
-
+    refs.listPagesEl.addEventListener('click', e => this.onClick(e));
   }
 
   async onClick(e) {
@@ -384,21 +388,20 @@ showNumberCurrentPage(activePage = 1) {
 
     if (e.target.textContent === '...') return;
 
-      if (e.target.id === 'left') {
-        let activePage = this.decrementPage();
-        this.markUpAllMain(activePage);
-        return;
-      }
+    if (e.target.id === 'left') {
+      let activePage = this.decrementPage();
+      this.getMarkUp(activePage);
+      return;
+    }
 
     if (e.target.id === 'right') {
       let activePage = this.incrementPage();
-      this.markUpAllMain(activePage);
-        return;
-      }
+      this.getMarkUp(activePage);
+      return;
+    }
 
-      let activePage = +e.target.textContent;
+    let activePage = +e.target.textContent;
     this._page = activePage;
-    this.markUpAllMain(activePage);
-  };
-
+    this.getMarkUp(activePage);
+  }
 }

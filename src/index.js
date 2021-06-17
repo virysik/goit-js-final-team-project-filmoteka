@@ -14,14 +14,15 @@ import './js/team.js';
 import Auth from './js/Api/auth';
 import DataBaseFirebase from './js/Api/firebase-database';
 import './js/Api/firebase-database';
+import refs from './js/refs';
 //import * as modulPagination from './js/pagination';
 
 const apiData = new ApiServiceMarkup();
-apiData.getMarkUp();
-
+// apiData.getMarkUp();
 
 const auth = new Auth();
 auth.init();
+//
 
 const db = new DataBaseFirebase();
 db.auth.onAuthStateChanged(user => {
@@ -34,7 +35,6 @@ db.auth.onAuthStateChanged(user => {
   auth.setupLoginBtn(user);
 });
 
-
 // apiData._data
 //   .then(res => {
 //     modulPagination.pagination(res.total_pages);
@@ -43,8 +43,12 @@ db.auth.onAuthStateChanged(user => {
 //     console.log(err);
 //   });
 
+apiData.getMarkUp();
 
-apiData.markUpAllMain();
-apiData.paginationListner()
+// if (refs.header.classList.contains('header-home')) {
+//   console.log(refs.header.classList.contains('header-home'));
+//   apiData.paginationListner();
+//   return;
+// }
 
 apiData.renderOneMovie();
