@@ -2,10 +2,13 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/firestore';
 import FetchMovieData from './api-service-markup';
+import refs from '../refs/index';
+import template from '../../templates/movie-card-template';
 const oneMovie = new FetchMovieData();
 
-export default class DataBaseFirebase {
+export default class DataBaseFirebase extends FetchMovieData {
   constructor() {
+    super();
     this.auth = firebase.auth();
     this.db = firebase.firestore();
   }
@@ -13,21 +16,49 @@ export default class DataBaseFirebase {
   async getActualWatchedList(user) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let list = (await databaseUser).data().watched;
-    //Зробити рендер
-    //.....
-    return list;
+
+    return list.map(obj => {
+      return {
+        ...obj,
+        popularity: obj.popularity.toFixed(1),
+        poster_img: super.getCorrectImg(obj.poster_path),
+        title: obj.original_title,
+        genre: obj.genres.map(e => ' ' + e.name),
+        year: super.getCorrectYear(obj.release_date),
+      };
+    });
+  }
+
+  async getMarkUpWatched(user) {
+    const apiData = await this.getActualWatchedList(user);
+    const markUp = await template(apiData);
+    refs.movieList.innerHTML = markUp;
   }
 
   async getActualQueueList(user) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let list = (await databaseUser).data().queue;
-    return list;
+    return list.map(obj => {
+      return {
+        ...obj,
+        popularity: obj.popularity.toFixed(1),
+        poster_img: super.getCorrectImg(obj.poster_path),
+        title: obj.original_title,
+        genre: obj.genres.map(e => ' ' + e.name),
+        year: super.getCorrectYear(obj.release_date),
+      };
+    });
+  }
+  async getMarkUpQueue(user) {
+    const apiData = await this.getActualQueueList(user);
+    const markUp = await template(apiData);
+    refs.movieList.innerHTML = markUp;
   }
   async pushToWatchedArrFirebase(user, id) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let newList = (await databaseUser).data().watched;
-    console.log(newList);
-    let fetch = await oneMovie.fetchOneMovie(id);
+
+    let fetch = await super.fetchOneMovie(id);
 
     if (newList.find(e => e.id === id)) {
       newList = newList.filter(e => e.id !== id);
@@ -42,8 +73,8 @@ export default class DataBaseFirebase {
   async pushToQueueArrFirebase(user, id) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let newList = (await databaseUser).data().queue;
-    console.log(newList);
-    let fetch = await oneMovie.fetchOneMovie(id);
+
+    let fetch = await super.fetchOneMovie(id);
 
     if (newList.find(e => e.id === id)) {
       newList = newList.filter(e => e.id !== id);
@@ -92,5 +123,12 @@ export default class DataBaseFirebase {
         }
       }
     });
+  }
+  async pushWatchedToLibrary(user) {
+    refs.libraryPage.addEventListener('click', this.getMarkUpWatched.bind(this, user));
+    refs.watchedBtn.addEventListener('click', this.getMarkUpWatched.bind(this, user));
+  }
+  async pushQueueToLibrary(user) {
+    refs.queueBtn.addEventListener('click', this.getMarkUpQueue.bind(this, user));
   }
 }
