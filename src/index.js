@@ -10,7 +10,6 @@ import firebase from 'firebase/app';
 
 import './js/spinner';
 
-
 import './js/team.js';
 import Auth from './js/Api/auth';
 import DataBaseFirebase from './js/Api/firebase-database';
@@ -18,7 +17,7 @@ import './js/Api/firebase-database';
 import * as modulPagination from './js/pagination';
 
 const apiData = new ApiServiceMarkup();
-/*apiData.getMarkUp();
+apiData.getMarkUp();
 
 const auth = new Auth();
 auth.init();
@@ -27,9 +26,10 @@ const db = new DataBaseFirebase();
 db.auth.onAuthStateChanged(user => {
   if (user) {
     db.addFilmToFirebase(user);
-    console.log(db.getActualWatchedList(user));
-    console.log(db.getActualQueueList(user));
+    db.pushWatchedToLibrary(user);
+    db.pushQueueToLibrary(user);
   }
+  auth.setupLoginBtn(user);
 });
 
 apiData._data
@@ -38,7 +38,7 @@ apiData._data
   })
   .catch(err => {
     console.log(err);
-  });*/
+  });
 
 apiData.markUpAllMain();
 
