@@ -19,7 +19,6 @@ export default class FetchMovieData {
     this._page = 1;
     this._totalPage = '';
     this._genres = this.fetchGenreCodes();
-    this._data = this.fetchTrendingMovies();
     this._raitingStatus = false;
     this._searchQuery = '';
   }
@@ -66,10 +65,6 @@ export default class FetchMovieData {
     return this._genres;
   }
 
-  get data() {
-    return this._data;
-  }
-
   get raiting() {
     return this._raitingStatus;
   }
@@ -78,12 +73,12 @@ export default class FetchMovieData {
     this._raitingStatus = newRaitingStatus;
   }
 
-  async getMarkUp(activePage = 1) {
+  async getMarkUp(activePage) {
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
     this.pagination(this._totalPage, activePage);
-    this.addEventListeners();
+    // this.addEventListeners();
   }
 
   async getMarkUpData() {
@@ -149,30 +144,24 @@ export default class FetchMovieData {
   }
 
   addEventListeners() {
-    document.querySelector('.header-container-js').addEventListener('click', e => {
+    refs.headerContainer.addEventListener('click', e => {
       const target = e.target;
 
       if (target.classList.contains('home-page-js')) {
         this.raiting = false;
-        document.querySelector('.main__library-info').classList.add('is-hidden');
-
         this.resetPage();
         this.resetSearchQuery();
         refs.searchFormInput.value = '';
         this.getMarkUp();
-        //this.paginationListner();
-
-        //this.getMarkUp();
-
       }
 
       if (target.classList.contains('library-page-js')) {
         this.raiting = true;
 
-        document.querySelector('.main__section-list').innerHTML = '';
+        refs.movieList.innerHTML = '';
 
         this.resetPage();
-        this.getMarkUp();
+        //this.getMarkUp();
         // clearGalleryContainer();
       }
     });
@@ -271,7 +260,6 @@ export default class FetchMovieData {
     }
   }
 
-
   // async markUpAllMain(activePage = 1) {
   //   //рендерит разметку контейнера с фильмами и пагинацию
   //   try {
@@ -290,10 +278,12 @@ export default class FetchMovieData {
   ///---
 
   renderMarkupPage(totalPage, activePage, listPagesEl) {
+    console.log('renderFunction');
     listPagesEl.innerHTML = this.createMarkup(totalPage, activePage);
   }
 
   createMarkup(totalPage, page) {
+    console.log('CreateMarkUp function');
     let markup = '';
     let beforePages = page - 2;
     let afterPages = page + 2;
@@ -375,11 +365,12 @@ export default class FetchMovieData {
   }
 
   pagination(totalPage, activePage = 1, listPagesEl = refs.listPagesEl) {
-    if (totalPage <= 1) {
+    console.log(typeof totalPage === null);
+    if (totalPage <= 1 || typeof totalPage === null) {
       listPagesEl.innerHTML = '';
       return;
     }
-    console.log(totalPage, 'from api-service');
+    console.log('totalPage from api-service:', totalPage);
     this.renderMarkupPage(totalPage, activePage, listPagesEl);
     //listPagesEl.addEventListener('click', (e) => this.onClick(e));
   }
@@ -390,26 +381,29 @@ export default class FetchMovieData {
 
   async onClick(e) {
     e.preventDefault();
-
+    console.log('paginationListener in onClick');
     if (e.target.tagName === 'UL') return;
 
     if (e.target.textContent === '...') return;
 
     if (e.target.id === 'left') {
       let activePage = this.decrementPage();
-      this.getMarkUp(activePage);
+      this.renderOnePageMarkUp(activePage);
       return;
     }
 
     if (e.target.id === 'right') {
       let activePage = this.incrementPage();
-      this.getMarkUp(activePage);
+      this.renderOnePageMarkUp(activePage);
       return;
     }
 
     let activePage = +e.target.textContent;
     this._page = activePage;
-    this.getMarkUp(activePage);
+    this.renderOnePageMarkUp(activePage);
+  }
 
+  renderOnePageMarkUp(active = 1) {
+    this.getMarkUp(active);
   }
 }

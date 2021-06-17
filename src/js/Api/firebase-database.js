@@ -29,7 +29,6 @@ export default class DataBaseFirebase extends FetchMovieData {
     });
   }
 
-
   getCorrectGenreArray(genreOneMovieList) {
     const correctGenreArr = genreOneMovieList.map(el => ' ' + el.name);
 
@@ -43,18 +42,17 @@ export default class DataBaseFirebase extends FetchMovieData {
   }
 
   async getMarkUpWatched(user, activePage = 1) {
-    document.querySelector('.main__library-info').classList.add('is-hidden');
+    refs.libraryInfo.classList.add('is-hidden');
     const apiData = await this.getActualWatchedList(user);
     const markUp = await template(apiData);
     const totalPages = Math.ceil(apiData.length / 20);
-    console.log(totalPages, 'from firebase');
+    console.log(' total Pages from firebase:', totalPages);
     refs.movieList.innerHTML = markUp;
+    super.pagination(totalPages, activePage);
 
     if (markUp === '') {
-      document.querySelector('.main__library-info').classList.remove('is-hidden');
+      refs.libraryInfo.classList.remove('is-hidden');
     }
-
-    super.pagination(totalPages, activePage);
 
     // this.addEventListeners();
   }
@@ -78,12 +76,12 @@ export default class DataBaseFirebase extends FetchMovieData {
   }
 
   async getMarkUpQueue(user) {
-    document.querySelector('.main__library-info').classList.add('is-hidden');
+    refs.libraryInfo.classList.add('is-hidden');
     const apiData = await this.getActualQueueList(user);
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
     if (markUp === '') {
-      document.querySelector('.main__library-info').classList.remove('is-hidden');
+      refs.libraryInfo.classList.remove('is-hidden');
     }
   }
   async pushToWatchedArrFirebase(user, id) {
