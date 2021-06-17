@@ -27,7 +27,7 @@ export default class FetchMovieData {
   async fetchTrendingMovies() {
     try {
       let url = '';
-      const searchInputUrl = `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
+      const searchInputUrl = `${BASE_URL}search/movie?api_key=${this._key}&language=en-US&query=${this._searchQuery}&page=${this._page}&include_adult=false`;
       const mainSearchUrl = `${BASE_URL}trending/movie/day?api_key=${this._key}&page=${this._page}`;
 
       url = this._searchQuery ? searchInputUrl : mainSearchUrl;
@@ -54,7 +54,7 @@ export default class FetchMovieData {
   async fetchGenreCodes() {
     try {
       const response = await axios.get(
-        `${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`,
+        `${BASE_URL}genre/movie/list?api_key=${this._key}&language=en-US`,
       );
       return response.data.genres;
     } catch (error) {
@@ -162,7 +162,7 @@ export default class FetchMovieData {
 
       if (target.classList.contains('library-page-js')) {
         this.raiting = true;
-        // document.querySelector('.main__section-list').innerHTML = '';
+        // clearGalleryContainer();
       }
     });
 
@@ -188,7 +188,11 @@ export default class FetchMovieData {
   }
 
   incrementPage() {
-    this._page += 1;
+    return this._page += 1;
+  }
+
+  decrementPage() {
+    return this._page -= 1;
   }
 
   resetPage() {
@@ -204,7 +208,7 @@ export default class FetchMovieData {
   }
 
   renderOneMovie() {
-    document.querySelector('.main__section-list').addEventListener('click', async e => {
+   refs.movieList.addEventListener('click', async e => {
       if (e.target.nodeName !== 'IMG') {
         return;
       }
@@ -259,19 +263,18 @@ export default class FetchMovieData {
   async markUpAllMain(activePage = 1) {
     //рендерит разметку контейнера с фильмами и пагинацию
     try {
-      //console.log('111');
-      const markUpMain = await this.getMarkUp();
-      this.pagination(this._totalPage, activePage);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
+        const markUpMain = await this.getMarkUp();
+        this.pagination(this._totalPage, activePage);
+      } catch (error) {
+        console.log(error);
+      }
+  };
 
   ///----
-  showNumberCurrentPage(activePage = 1) {
-    this._page = activePage;
-    //console.log('303030 this._page = activePage', this._page)
-    this.getMarkUp();
+showNumberCurrentPage(activePage = 1) {
+  this._page = activePage;
+  this.getMarkUp();
   }
   ///---
 
@@ -366,8 +369,12 @@ export default class FetchMovieData {
     }
 
     this.renderMarkupPage(totalPage, activePage, listPagesEl);
+    //listPagesEl.addEventListener('click', (e) => this.onClick(e));
+  }
 
-    listPagesEl.addEventListener('click', e => this.onClick(e));
+  paginationListner() {
+    refs.listPagesEl.addEventListener('click', (e) => this.onClick(e));
+
   }
 
   async onClick(e) {
@@ -377,29 +384,21 @@ export default class FetchMovieData {
 
     if (e.target.textContent === '...') return;
 
-    if (e.target.id === 'left') {
-      console.log(this._page);
-
-      let activePage = this._page - 1;
-      console.log(activePage);
-      this.renderMarkupPage(totalPage, activePage, refs.listPagesEl);
-
-      this.showNumberCurrentPage(activePage);
-      return;
-    }
+      if (e.target.id === 'left') {
+        let activePage = this.decrementPage();
+        this.markUpAllMain(activePage);
+        return;
+      }
 
     if (e.target.id === 'right') {
-      renderMarkupPage(totalPage, ++activePage, refs.listPagesEl);
-      this.showNumberCurrentPage(activePage);
-      return;
-    }
+      let activePage = this.incrementPage();
+      this.markUpAllMain(activePage);
+        return;
+      }
 
-    let activePage = +e.target.textContent;
-    console.log('add listner');
+      let activePage = +e.target.textContent;
     this._page = activePage;
-    this.getMarkUp();
-    this.renderMarkupPage(this._totalPage, ++activePage, refs.listPagesEl);
-    //this.markUpAllMain(activePage);
-    //this.remLis();
-  }
+    this.markUpAllMain(activePage);
+  };
+
 }

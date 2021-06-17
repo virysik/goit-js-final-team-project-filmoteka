@@ -14,7 +14,7 @@ import './js/team.js';
 import Auth from './js/Api/auth';
 import DataBaseFirebase from './js/Api/firebase-database';
 import './js/Api/firebase-database';
-import * as modulPagination from './js/pagination';
+//import * as modulPagination from './js/pagination';
 
 const apiData = new ApiServiceMarkup();
 
@@ -41,5 +41,6 @@ db.auth.onAuthStateChanged(user => {
 //   });
 
 apiData.markUpAllMain();
+apiData.paginationListner()
 
 apiData.renderOneMovie();
