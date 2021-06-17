@@ -16,7 +16,6 @@ export default class DataBaseFirebase extends FetchMovieData {
   async getActualWatchedList(user) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let list = (await databaseUser).data().watched;
-
     return list.map(obj => {
       return {
         ...obj,
@@ -29,6 +28,7 @@ export default class DataBaseFirebase extends FetchMovieData {
       };
     });
   }
+
 
   getCorrectGenreArray(genreOneMovieList) {
     const correctGenreArr = genreOneMovieList.map(el => ' ' + el.name);
@@ -43,12 +43,16 @@ export default class DataBaseFirebase extends FetchMovieData {
   }
 
   async getMarkUpWatched(user, activePage = 1) {
+    document.querySelector('.main__library-info').classList.add('is-hidden');
     const apiData = await this.getActualWatchedList(user);
-
     const markUp = await template(apiData);
     const totalPages = Math.ceil(apiData.length / 20);
     console.log(totalPages, 'from firebase');
     refs.movieList.innerHTML = markUp;
+
+    if (markUp === '') {
+      document.querySelector('.main__library-info').classList.remove('is-hidden');
+    }
 
     super.pagination(totalPages, activePage);
 
@@ -74,14 +78,18 @@ export default class DataBaseFirebase extends FetchMovieData {
   }
 
   async getMarkUpQueue(user) {
+    document.querySelector('.main__library-info').classList.add('is-hidden');
     const apiData = await this.getActualQueueList(user);
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
+    if (markUp === '') {
+      document.querySelector('.main__library-info').classList.remove('is-hidden');
+    }
   }
   async pushToWatchedArrFirebase(user, id) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let newList = (await databaseUser).data().watched;
-    console.log(newList);
+    // console.log(newList);
 
     let fetch = await super.fetchOneMovie(id);
 
@@ -98,7 +106,7 @@ export default class DataBaseFirebase extends FetchMovieData {
   async pushToQueueArrFirebase(user, id) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let newList = (await databaseUser).data().queue;
-    console.log(newList);
+    // console.log(newList);
 
     let fetch = await super.fetchOneMovie(id);
 

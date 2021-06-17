@@ -154,6 +154,8 @@ export default class FetchMovieData {
 
       if (target.classList.contains('home-page-js')) {
         this.raiting = false;
+        document.querySelector('.main__library-info').classList.add('is-hidden');
+
         this.resetPage();
         this.resetSearchQuery();
         refs.searchFormInput.value = '';
@@ -161,10 +163,14 @@ export default class FetchMovieData {
         //this.paginationListner();
 
         //this.getMarkUp();
+
       }
 
       if (target.classList.contains('library-page-js')) {
         this.raiting = true;
+
+        document.querySelector('.main__section-list').innerHTML = '';
+
         this.resetPage();
         this.getMarkUp();
         // clearGalleryContainer();
@@ -264,6 +270,7 @@ export default class FetchMovieData {
       console.log(error);
     }
   }
+
 
   // async markUpAllMain(activePage = 1) {
   //   //рендерит разметку контейнера с фильмами и пагинацию
@@ -403,5 +410,6 @@ export default class FetchMovieData {
     let activePage = +e.target.textContent;
     this._page = activePage;
     this.getMarkUp(activePage);
+
   }
 }
