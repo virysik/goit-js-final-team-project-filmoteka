@@ -162,7 +162,6 @@ export default class FetchMovieData {
         this.raiting = true;
 
         document.querySelector('.main__section-list').innerHTML = '';
-        document.querySelector('.main__library-info').classList.remove('is-hidden');
       }
     });
 
