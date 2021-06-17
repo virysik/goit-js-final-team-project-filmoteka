@@ -65,8 +65,23 @@ export default class Auth {
       this.closedModal();
     });
   }
+  logout(e) {
+    e.preventDefault();
+    this.auth.signOut();
+  }
+
+  setupLoginBtn(user) {
+    if (user) {
+      refs.loginBtn.style.display = 'none';
+      refs.logoutBtn.style.display = 'block';
+    } else {
+      refs.loginBtn.style.display = 'block';
+      refs.logoutBtn.style.display = 'none';
+    }
+  }
 
   init() {
+    refs.logoutBtn.addEventListener('click', this.logout.bind(this));
     refs.loginLink.addEventListener('click', this.modalSwitch.bind(this));
     refs.createLink.addEventListener('click', this.modalSwitch.bind(this));
     refs.closeBtn.addEventListener('click', this.closedModal.bind(this));
