@@ -78,10 +78,11 @@ export default class FetchMovieData {
     this._raitingStatus = newRaitingStatus;
   }
 
-  async getMarkUp() {
+  async getMarkUp(activePage = 1) {
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
+    this.pagination(this._totalPage, activePage);
     this.addEventListeners();
   }
 
@@ -153,15 +154,26 @@ export default class FetchMovieData {
 
       if (target.classList.contains('home-page-js')) {
         this.raiting = false;
-
-        this.getMarkUp();
         document.querySelector('.main__library-info').classList.add('is-hidden');
+
+        this.resetPage();
+        this.resetSearchQuery();
+        refs.searchFormInput.value = '';
+        this.getMarkUp();
+        //this.paginationListner();
+
+        //this.getMarkUp();
+
       }
 
       if (target.classList.contains('library-page-js')) {
         this.raiting = true;
 
         document.querySelector('.main__section-list').innerHTML = '';
+
+        this.resetPage();
+        this.getMarkUp();
+        // clearGalleryContainer();
       }
     });
 
@@ -171,7 +183,7 @@ export default class FetchMovieData {
       let newQuery = e.currentTarget.elements.query.value;
       this.searchQuery(newQuery);
       this.resetPage();
-      this.markUpAllMain();
+      this.getMarkUp();
       /*this._searchQuery = newQuery;
       this.clearGalleryContainer();
       const apiData = await this.getMarkUpData();
@@ -259,15 +271,16 @@ export default class FetchMovieData {
     }
   }
 
-  async markUpAllMain(activePage = 1) {
-    //рендерит разметку контейнера с фильмами и пагинацию
-    try {
-      const markUpMain = await this.getMarkUp();
-      this.pagination(this._totalPage, activePage);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
+  // async markUpAllMain(activePage = 1) {
+  //   //рендерит разметку контейнера с фильмами и пагинацию
+  //   try {
+  //     //await this.getMarkUp();
+  //     //this.pagination(this._totalPage, activePage);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   ///----
   showNumberCurrentPage(activePage = 1) {
@@ -363,9 +376,10 @@ export default class FetchMovieData {
 
   pagination(totalPage, activePage = 1, listPagesEl = refs.listPagesEl) {
     if (totalPage <= 1) {
+      listPagesEl.innerHTML = '';
       return;
     }
-
+    console.log(totalPage, 'from api-service');
     this.renderMarkupPage(totalPage, activePage, listPagesEl);
     //listPagesEl.addEventListener('click', (e) => this.onClick(e));
   }
@@ -383,18 +397,19 @@ export default class FetchMovieData {
 
     if (e.target.id === 'left') {
       let activePage = this.decrementPage();
-      this.markUpAllMain(activePage);
+      this.getMarkUp(activePage);
       return;
     }
 
     if (e.target.id === 'right') {
       let activePage = this.incrementPage();
-      this.markUpAllMain(activePage);
+      this.getMarkUp(activePage);
       return;
     }
 
     let activePage = +e.target.textContent;
     this._page = activePage;
-    this.markUpAllMain(activePage);
+    this.getMarkUp(activePage);
+
   }
 }

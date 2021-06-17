@@ -4,12 +4,11 @@ import 'firebase/firestore';
 import refs from '../refs/index';
 import template from '../../templates/movie-card-template';
 import FetchMovieData from './api-service-markup';
-// import refs from '../refs/index';
-const oneMovie = new FetchMovieData();
 
 export default class DataBaseFirebase extends FetchMovieData {
   constructor() {
     super();
+
     this.auth = firebase.auth();
     this.db = firebase.firestore();
   }
@@ -23,25 +22,40 @@ export default class DataBaseFirebase extends FetchMovieData {
         popularity: obj.popularity.toFixed(1),
         poster_img: super.getCorrectImg(obj.poster_path),
         title: obj.original_title,
-        genre: obj.genres.map(e => ' ' + e.name),
+        genre: this.getCorrectGenreArray(obj.genres),
+        //genre: obj.genres.map(e => ' ' + e.name),
         year: super.getCorrectYear(obj.release_date),
       };
     });
   }
-  async getMarkUpWatched(user) {
-    const apiData = await this.getActualWatchedList(user);
-    const markUp = await template(apiData);
-    refs.movieList.innerHTML = markUp;
+
+
+  getCorrectGenreArray(genreOneMovieList) {
+    const correctGenreArr = genreOneMovieList.map(el => ' ' + el.name);
+
+    if (correctGenreArr.length >= 3) {
+      correctGenreArr.splice(2, 1, ' Other');
+      let copyOfCorrectGenreArr = correctGenreArr.slice(0, 3);
+      return copyOfCorrectGenreArr;
+    }
+
+    return correctGenreArr;
   }
 
-  async getMarkUpWatched(user) {
+  async getMarkUpWatched(user, activePage = 1) {
     document.querySelector('.main__library-info').classList.add('is-hidden');
     const apiData = await this.getActualWatchedList(user);
     const markUp = await template(apiData);
+    const totalPages = Math.ceil(apiData.length / 20);
+    console.log(totalPages, 'from firebase');
     refs.movieList.innerHTML = markUp;
+
     if (markUp === '') {
       document.querySelector('.main__library-info').classList.remove('is-hidden');
     }
+
+    super.pagination(totalPages, activePage);
+
     // this.addEventListeners();
   }
 
@@ -57,11 +71,12 @@ export default class DataBaseFirebase extends FetchMovieData {
         popularity: obj.popularity.toFixed(1),
         poster_img: super.getCorrectImg(obj.poster_path),
         title: obj.original_title,
-        genre: obj.genres.map(e => ' ' + e.name),
+        genre: this.getCorrectGenreArray(obj.genres),
         year: super.getCorrectYear(obj.release_date),
       };
     });
   }
+
   async getMarkUpQueue(user) {
     document.querySelector('.main__library-info').classList.add('is-hidden');
     const apiData = await this.getActualQueueList(user);
