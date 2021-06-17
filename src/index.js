@@ -14,10 +14,11 @@ import './js/team.js';
 import Auth from './js/Api/auth';
 import DataBaseFirebase from './js/Api/firebase-database';
 import './js/Api/firebase-database';
-import * as modulPagination from './js/pagination';
+//import * as modulPagination from './js/pagination';
 
 const apiData = new ApiServiceMarkup();
 apiData.getMarkUp();
+
 
 const auth = new Auth();
 auth.init();
@@ -28,18 +29,22 @@ db.auth.onAuthStateChanged(user => {
     db.addFilmToFirebase(user);
     db.pushWatchedToLibrary(user);
     db.pushQueueToLibrary(user);
+    db.getMarkUpWatched(user);
   }
   auth.setupLoginBtn(user);
 });
 
-apiData._data
-  .then(res => {
-    modulPagination.pagination(res.total_pages);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+
+// apiData._data
+//   .then(res => {
+//     modulPagination.pagination(res.total_pages);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
 
 apiData.markUpAllMain();
+apiData.paginationListner()
 
 apiData.renderOneMovie();

@@ -1,10 +1,12 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/firestore';
-import FetchMovieData from './api-service-markup';
 import refs from '../refs/index';
 import template from '../../templates/movie-card-template';
+import FetchMovieData from './api-service-markup';
+import refs from '../refs/index';
 const oneMovie = new FetchMovieData();
+
 
 export default class DataBaseFirebase extends FetchMovieData {
   constructor() {
@@ -28,12 +30,23 @@ export default class DataBaseFirebase extends FetchMovieData {
       };
     });
   }
+  async getMarkUpWatched(user) {
+    const apiData = await this.getActualWatchedList(user);
+    const markUp = await template(apiData);
+    refs.movieList.innerHTML = markUp;
+
+  }
 
   async getMarkUpWatched(user) {
     const apiData = await this.getActualWatchedList(user);
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
+
+    // this.addEventListeners();
   }
+
+  //Зробити рендер
+  //.....
 
   async getActualQueueList(user) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
@@ -57,6 +70,7 @@ export default class DataBaseFirebase extends FetchMovieData {
   async pushToWatchedArrFirebase(user, id) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let newList = (await databaseUser).data().watched;
+    console.log(newList);
 
     let fetch = await super.fetchOneMovie(id);
 
@@ -73,6 +87,7 @@ export default class DataBaseFirebase extends FetchMovieData {
   async pushToQueueArrFirebase(user, id) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let newList = (await databaseUser).data().queue;
+    console.log(newList);
 
     let fetch = await super.fetchOneMovie(id);
 
