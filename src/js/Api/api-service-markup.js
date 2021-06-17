@@ -9,7 +9,7 @@ import '../../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { showSpinner } from '../spinner';
 import { hideSpinner } from '../spinner';
 
-import firebase from 'firebase/app';
+//import firebase from 'firebase/app';
 
 import errorNotification from '../pnotify';
 
@@ -19,7 +19,7 @@ export default class FetchMovieData {
     this._page = 1;
     this._totalPage = '';
     this._genres = this.fetchGenreCodes();
-    this._raitingStatus = false;
+    //this._raitingStatus = false;
     this._searchQuery = '';
   }
 
@@ -65,13 +65,13 @@ export default class FetchMovieData {
     return this._genres;
   }
 
-  get raiting() {
-    return this._raitingStatus;
-  }
+  // get raiting() {
+  //   return this._raitingStatus;
+  // }
 
-  set raiting(newRaitingStatus) {
-    this._raitingStatus = newRaitingStatus;
-  }
+  // set raiting(newRaitingStatus) {
+  //   this._raitingStatus = newRaitingStatus;
+  // }
 
   async getMarkUp(activePage) {
     const apiData = await this.getMarkUpData();
@@ -99,7 +99,7 @@ export default class FetchMovieData {
           ...data,
           genre: this.getCorrectGenreArray(data.genre_ids, asyncGenresList),
           year: this.getCorrectYear(data.release_date),
-          raiting: this.raiting,
+          raiting: false,
           poster_img: this.getCorrectImg(data.poster_path),
         };
       });
@@ -156,8 +156,6 @@ export default class FetchMovieData {
       }
 
       if (target.classList.contains('library-page-js')) {
-        this.raiting = true;
-
         refs.movieList.innerHTML = '';
 
         this.resetPage();
@@ -270,13 +268,6 @@ export default class FetchMovieData {
   //   }
   // }
 
-  ///----
-  showNumberCurrentPage(activePage = 1) {
-    this._page = activePage;
-    this.getMarkUp();
-  }
-  ///---
-
   renderMarkupPage(totalPage, activePage, listPagesEl) {
     console.log('renderFunction');
     listPagesEl.innerHTML = this.createMarkup(totalPage, activePage);
@@ -371,6 +362,8 @@ export default class FetchMovieData {
       return;
     }
     console.log('totalPage from api-service:', totalPage);
+    console.log('activePage', activePage);
+    console.log('listPagesEl', listPagesEl);
     this.renderMarkupPage(totalPage, activePage, listPagesEl);
     //listPagesEl.addEventListener('click', (e) => this.onClick(e));
   }

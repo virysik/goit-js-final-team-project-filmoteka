@@ -23,8 +23,8 @@ export default class DataBaseFirebase extends FetchMovieData {
         poster_img: super.getCorrectImg(obj.poster_path),
         title: obj.original_title,
         genre: this.getCorrectGenreArray(obj.genres),
-        //genre: obj.genres.map(e => ' ' + e.name),
         year: super.getCorrectYear(obj.release_date),
+        raiting: true,
       };
     });
   }
@@ -48,7 +48,7 @@ export default class DataBaseFirebase extends FetchMovieData {
     const totalPages = Math.ceil(apiData.length / 20);
     console.log(' total Pages from firebase:', totalPages);
     refs.movieList.innerHTML = markUp;
-    super.pagination(totalPages, activePage);
+    super.pagination(totalPages, 1);
 
     if (markUp === '') {
       refs.libraryInfo.classList.remove('is-hidden');
@@ -71,6 +71,7 @@ export default class DataBaseFirebase extends FetchMovieData {
         title: obj.original_title,
         genre: this.getCorrectGenreArray(obj.genres),
         year: super.getCorrectYear(obj.release_date),
+        raiting: true,
       };
     });
   }
@@ -140,6 +141,8 @@ export default class DataBaseFirebase extends FetchMovieData {
     window.addEventListener('click', e => {
       if (e.target.className === 'queue-btn') {
         this.addToQueueUserDataBase(user, Number(e.target.dataset.id));
+        // const qList = this.pushToQueueArrFirebase(user, Number(e.target.dataset.id));
+        // console.log(qList);
         if (e.target.textContent === 'REMOVE FROM QUEUE') {
           e.target.textContent = 'ADD TO QUEUE';
         } else {
@@ -148,6 +151,12 @@ export default class DataBaseFirebase extends FetchMovieData {
       }
       if (e.target.className === 'watched-btn') {
         this.addToWatchedUserDataBase(user, Number(e.target.dataset.id));
+
+        // const databaseUser = this.db.collection('users').doc(user.uid).get();
+        // let newListWatched = (await databaseUser).data().watched;
+
+        // console.log(newListWatched);
+
         if (e.target.textContent === 'REMOVE FROM WATCHED') {
           e.target.textContent = 'ADD TO WATCHED';
         } else {

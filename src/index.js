@@ -1,8 +1,8 @@
-import ApiServiceMarkup from './js/Api/api-service-markup';
+import ApiServiceMarkup from './js/api/api-service-markup';
 
 import './sass/main.scss';
 import './js/scroll-to-top';
-import './js/Api/auth';
+import './js/api/auth';
 import './js/toggle-headers';
 import './js/theme-switch';
 
@@ -11,9 +11,9 @@ import firebase from 'firebase/app';
 import './js/spinner';
 
 import './js/team.js';
-import Auth from './js/Api/auth';
-import DataBaseFirebase from './js/Api/firebase-database';
-import './js/Api/firebase-database';
+import Auth from './js/api/auth';
+import DataBaseFirebase from './js/api/firebase-database';
+import './js/api/firebase-database';
 import refs from './js/refs';
 //import * as modulPagination from './js/pagination';
 
@@ -26,7 +26,6 @@ auth.init();
 
 const db = new DataBaseFirebase();
 db.auth.onAuthStateChanged(user => {
-  console.log(user);
   if (user) {
     db.addFilmToFirebase(user);
     db.pushWatchedToLibrary(user);
