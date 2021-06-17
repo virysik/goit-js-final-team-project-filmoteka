@@ -4,9 +4,8 @@ import 'firebase/firestore';
 import refs from '../refs/index';
 import template from '../../templates/movie-card-template';
 import FetchMovieData from './api-service-markup';
-import refs from '../refs/index';
+// import refs from '../refs/index';
 const oneMovie = new FetchMovieData();
-
 
 export default class DataBaseFirebase extends FetchMovieData {
   constructor() {
@@ -34,7 +33,6 @@ export default class DataBaseFirebase extends FetchMovieData {
     const apiData = await this.getActualWatchedList(user);
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
-
   }
 
   async getMarkUpWatched(user) {
