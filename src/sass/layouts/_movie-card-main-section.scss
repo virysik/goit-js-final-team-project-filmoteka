@@ -31,7 +31,7 @@
 
 .movie-overview {
   color: var(--accent-color);
-  max-width: 294px;
+  min-width: 294px;
   position: absolute;
   left: 0;
   top: 0;
@@ -63,7 +63,7 @@
   border-radius: 5px;
   overflow: hidden;
   @include hover {
-    transform: scale(1.03);
+    transform: scale(1.2);
     box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
   }
 
