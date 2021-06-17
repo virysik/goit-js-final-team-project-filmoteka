@@ -5,7 +5,7 @@ import './js/scroll-to-top';
 import './js/api/auth';
 import './js/toggle-headers';
 import './js/theme-switch';
-
+import './js/library-btns';
 import firebase from 'firebase/app';
 
 import './js/spinner';
