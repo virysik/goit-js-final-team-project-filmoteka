@@ -32,7 +32,9 @@ db.auth.onAuthStateChanged(user => {
     db.pushQueueToLibrary(user);
     document.querySelector('.main__library-login').classList.add('is-hidden');
   } else {
-    document.querySelector('.main__library-login').classList.remove('is-hidden');
+    refs.libraryPage.addEventListener('click', () => {
+      document.querySelector('.main__library-login').classList.remove('is-hidden');
+    });
   }
   auth.setupLoginBtn(user);
 });
