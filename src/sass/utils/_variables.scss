@@ -1,0 +1,25 @@
+:root {
+  --primary-font: 'Roboto', sans-serif;
+
+  --grey-100: #f7f7f7;
+  --grey-900: #545454;
+
+  --primary-text-color: #000000;
+  --secondary-text-color: #545454;
+  --accent-color: rgb(255, 107, 8);
+  --white-text-color: #ffffff;
+  --error-text-color: #ff001b;
+  --transparent: rgba(0, 0, 0, 0); // transparent color for safari bug-fix
+  --footer-text-color: var(--grey-900);
+  //bg-colors:
+  --bg-light: var(--grey-100);
+
+  //animations
+  --transition-timing: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+//media breackpoints
+
+$mob: 320px;
+$tablet: 767.99px;
+$desktop: 1023.99px;

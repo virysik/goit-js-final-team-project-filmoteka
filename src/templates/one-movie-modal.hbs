@@ -1,0 +1,70 @@
+<div class='backdrop lightbox-film-card'>
+  <div class='modal-images'>
+    <button class='lightbox-button close-icon-container' type='button' title='Close'></button>
+    <div class='modal-content'>
+      <img class='img-film' src="{{poster_img}}" alt='' />
+      <div>
+        <h2 class='modal-title'>
+          {{original_title}}
+        </h2>
+        <table>
+          <tbody>
+            <tr>
+              <td class='description-film'>
+                Vote / Votes
+              </td>
+              <td class='description-film-info'>
+                <div class='rating-vote'>
+                  {{vote_average}}
+                </div>
+                /
+                <div class='rating-votes'>
+                  {{vote_count}}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class='description-film'>
+                Popularity
+              </td>
+              <td class='description-film-info'>
+                {{popularity}}
+              </td>
+            </tr>
+            <tr>
+              <td class='description-film'>
+                Original Title
+              </td>
+              <td class='description-film-info'>
+                {{title}}
+              </td>
+            </tr>
+            <tr>
+              <td class='description-film'>
+                Genre
+              </td>
+              <td class='description-film-info'>
+                {{genres}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 class='about-film'>
+          ABOUT
+        </h2>
+        <p class='text-content'>
+          Four of the West’s most infamous outlaws assemble to steal a huge stash of gold from the
+          {{overview}}
+        </p>
+        <div class='btn-card'>
+          <button type='button' class='watched-btn' data-id={{id}}>
+            ADD TO WATCHED
+          </button>
+          <button type='button' class='queue-btn' data-id={{id}}>
+            ADD TO QUEUE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

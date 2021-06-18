@@ -1,0 +1,18 @@
+.scrollToTopBtn {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  z-index: 100;
+  display: block;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 107, 1, 0.6);
+  border-left: 0;
+  border-top: 0;
+  transform: rotate(225deg);
+
+  @media screen and (max-width: 360px) {
+    display: none;
+  }
+}

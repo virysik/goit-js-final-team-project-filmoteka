@@ -1,0 +1,23 @@
+//==============UTILS=============
+@import './utils/variables';
+@import './utils/visually-hidden';
+
+//==============HELPERS=============
+@import './helpers/mixins';
+
+// ==============BASE==============
+@import './base/common';
+@import './base/container';
+
+@import './layouts/page-header/index';
+@import './layouts/page-main';
+@import './layouts/pagination';
+@import './layouts/page-footer';
+@import './layouts/movie-card-main-section';
+@import './layouts/page-header/auth-modal-style';
+@import './layouts/page-modal';
+@import './layouts/team';
+@import './layouts/color-switch-theme';
+@import './layouts/spinner';
+@import './layouts/scroll-up-arrow';
+@import './base/overrides'; //всегда в самом низу!

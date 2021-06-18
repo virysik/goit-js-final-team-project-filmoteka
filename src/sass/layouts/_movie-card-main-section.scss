@@ -1,0 +1,77 @@
+.movie-poster {
+  height: 100%;
+  width: 100%;
+}
+.movie-name {
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 8px;
+  line-height: 1.167;
+  font-family: var(--primary-font);
+  color: var(--primary-text-color);
+  text-transform: uppercase;
+  max-width: 275px;
+  @media screen and(min-widht: $tablet) {
+    line-height: 1.132;
+  }
+}
+.movie-details {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.132;
+  color: var(--accent-color);
+}
+.movie-rating {
+  line-height: 1.167;
+  padding: 1px 9px;
+  border-radius: 10px;
+  background-color: var(--accent-color);
+  color: var(--white-text-color);
+}
+
+.movie-overview {
+  color: var(--accent-color);
+  min-width: 294px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgb(0, 0, 0, 0.8);
+  padding: 1rem;
+  height: 100%;
+  transform: translateY(-110%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  pointer-events: none;
+
+  &__title {
+    color: var(--white-text-color);
+    font-weight: bold;
+    padding: 7px 0;
+  }
+}
+
+.main__section-link:hover .movie-overview,
+.main__section-link:focus .movie-overview {
+  transform: translateY(0);
+}
+
+.img-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+  border-radius: 5px;
+  overflow: hidden;
+  @include hover {
+    transform: scale(1.2);
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 294px;
+    height: 398px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 274px;
+  }
+}
