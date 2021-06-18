@@ -283,7 +283,11 @@ export default class FetchMovieData {
 
     if (page > 1) {
       markup += `<li class="pagination__item first">
+<<<<<<< Updated upstream
             <a class="pagination__link" id="left">-
+=======
+            <a class="pagination__link" id="left">-${arrowLeft}
+>>>>>>> Stashed changes
             <!--<svg class="number-pages__svg" width="16" height="16">
                 <use href="./img/sprite.svg#icon-arrow-left"></use>
               </svg>-->
@@ -344,7 +348,11 @@ export default class FetchMovieData {
 
     if (page < totalPage) {
       markup += `<li class="pagination__item last">
+<<<<<<< Updated upstream
             <a class="pagination__link" id="right">+
+=======
+            <a class="pagination__link" id="right">+${arrowRight}
+>>>>>>> Stashed changes
             <!--<svg class="number-pages__svg" width="16" height="16">
                 <use href="./img/sprite.svg#icon-arrow-right"></use>
               </svg>-->

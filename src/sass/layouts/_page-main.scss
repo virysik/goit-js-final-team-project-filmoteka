@@ -45,8 +45,12 @@
   }
 }
 
+<<<<<<< Updated upstream
 .main__library-info,
 .main__library-login {
+=======
+.main__library-info {
+>>>>>>> Stashed changes
   text-align: center;
   font-weight: 500;
   margin-bottom: 40px;
@@ -54,8 +58,5 @@
 .main__library-deco {
   font-size: 40px;
   margin-right: 5px;
-  color: var(--accent-color);
-}
-.login-link {
   color: var(--accent-color);
 }

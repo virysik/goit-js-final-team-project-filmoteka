@@ -5,7 +5,11 @@ import './js/scroll-to-top';
 import './js/api/auth';
 import './js/toggle-headers';
 import './js/theme-switch';
+<<<<<<< Updated upstream
 import './js/library-btns';
+=======
+
+>>>>>>> Stashed changes
 import firebase from 'firebase/app';
 
 import './js/spinner';
@@ -30,11 +34,6 @@ db.auth.onAuthStateChanged(user => {
     db.addFilmToFirebase(user);
     db.pushWatchedToLibrary(user);
     db.pushQueueToLibrary(user);
-    document.querySelector('.main__library-login').classList.add('is-hidden');
-  } else {
-    refs.libraryPage.addEventListener('click', () => {
-      document.querySelector('.main__library-login').classList.remove('is-hidden');
-    });
   }
   auth.setupLoginBtn(user);
 });
