@@ -16,9 +16,13 @@ refs.header.addEventListener('click', e => {
     refs.navMenu.querySelector(`[href='#${path}']`).classList.add(currentLinkNavClass);
 
     if (path === 'home') {
+      refs.movieList.classList.remove('is-hidden');
+      refs.libraryContainer.classList.add('is-hidden');
       refs.header.classList.replace(headerLibraryClass, headerHomeClass);
     } else {
+      refs.movieList.classList.add('is-hidden');
+      refs.libraryContainer.classList.remove('is-hidden');
       refs.header.classList.replace(headerHomeClass, headerLibraryClass);
     }
   }
-})
+});
