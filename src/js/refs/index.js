@@ -29,6 +29,8 @@ const refs = {
   libraryPage: document.querySelector('.library-page-js'),
   libraryInfo: document.querySelector('.main__library-info'),
   headerContainer: document.querySelector('.header-container-js'),
+  libraryContainer: document.querySelector('.library__section-list'),
+  mainWrapper: document.querySelector('.main__section-wrapper'),
 };
 
 export default refs;

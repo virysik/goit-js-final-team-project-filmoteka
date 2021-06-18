@@ -45,6 +45,15 @@
   }
 }
 
+.library__section-list {
+  @media screen and(min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -29px;
+    margin-left: -29px;
+  }
+}
+
 .main__library-info {
   text-align: center;
   font-weight: 500;

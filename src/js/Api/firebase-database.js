@@ -11,6 +11,7 @@ export default class DataBaseFirebase extends FetchMovieData {
 
     this.auth = firebase.auth();
     this.db = firebase.firestore();
+    this._activePage = 1;
   }
 
   async getActualWatchedList(user) {
@@ -29,6 +30,13 @@ export default class DataBaseFirebase extends FetchMovieData {
     });
   }
 
+  async getWatchedList(user) {
+    const databaseUser = this.db.collection('users').doc(user.uid).get();
+    let list = (await databaseUser).data().watched;
+    let watchedList = list.map(e => e.id);
+    return watchedList;
+  }
+
   getCorrectGenreArray(genreOneMovieList) {
     const correctGenreArr = genreOneMovieList.map(el => ' ' + el.name);
 
@@ -41,24 +49,18 @@ export default class DataBaseFirebase extends FetchMovieData {
     return correctGenreArr;
   }
 
-  async getMarkUpWatched(user, activePage = 1) {
+  async getMarkUpWatched(user) {
     refs.libraryInfo.classList.add('is-hidden');
     const apiData = await this.getActualWatchedList(user);
     const markUp = await template(apiData);
-    const totalPages = Math.ceil(apiData.length / 20);
-    console.log(' total Pages from firebase:', totalPages);
-    refs.movieList.innerHTML = markUp;
-    super.pagination(totalPages, 1);
+    const totalPages = Math.ceil(apiData.length / 9);
+    refs.libraryContainer.innerHTML = markUp;
+    super.pagination(totalPages, this._activePage);
 
     if (markUp === '') {
       refs.libraryInfo.classList.remove('is-hidden');
     }
-
-    // this.addEventListeners();
   }
-
-  //Зробити рендер
-  //.....
 
   async getActualQueueList(user) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
@@ -80,15 +82,17 @@ export default class DataBaseFirebase extends FetchMovieData {
     refs.libraryInfo.classList.add('is-hidden');
     const apiData = await this.getActualQueueList(user);
     const markUp = await template(apiData);
-    refs.movieList.innerHTML = markUp;
+    refs.libraryContainer.innerHTML = markUp;
+    const totalPages = Math.ceil(apiData.length / 9);
+    super.pagination(totalPages, this._activePage);
     if (markUp === '') {
       refs.libraryInfo.classList.remove('is-hidden');
     }
   }
+
   async pushToWatchedArrFirebase(user, id) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let newList = (await databaseUser).data().watched;
-    // console.log(newList);
 
     let fetch = await super.fetchOneMovie(id);
 
@@ -105,7 +109,6 @@ export default class DataBaseFirebase extends FetchMovieData {
   async pushToQueueArrFirebase(user, id) {
     const databaseUser = this.db.collection('users').doc(user.uid).get();
     let newList = (await databaseUser).data().queue;
-    // console.log(newList);
 
     let fetch = await super.fetchOneMovie(id);
 
@@ -120,42 +123,45 @@ export default class DataBaseFirebase extends FetchMovieData {
 
   async addToQueueUserDataBase(user, id) {
     const data = await this.pushToQueueArrFirebase(user, id);
-    this.db.collection('users').doc(user.uid).set(
-      {
-        queue: data,
-      },
-      { merge: true },
-    );
+    this.db
+      .collection('users')
+      .doc(user.uid)
+      .set(
+        {
+          queue: data,
+        },
+        { merge: true },
+      )
+      .then(this.getMarkUpQueue(user));
   }
   async addToWatchedUserDataBase(user, id) {
     const data = await this.pushToWatchedArrFirebase(user, id);
-    this.db.collection('users').doc(user.uid).set(
-      {
-        watched: data,
-      },
-      { merge: true },
-    );
+    this.db
+      .collection('users')
+      .doc(user.uid)
+      .set(
+        {
+          watched: data,
+        },
+        { merge: true },
+      )
+      .then(this.getMarkUpWatched(user));
   }
 
   async addFilmToFirebase(user) {
-    window.addEventListener('click', e => {
+    document.body.addEventListener('click', e => {
       if (e.target.className === 'queue-btn') {
         this.addToQueueUserDataBase(user, Number(e.target.dataset.id));
-        // const qList = this.pushToQueueArrFirebase(user, Number(e.target.dataset.id));
-        // console.log(qList);
+
         if (e.target.textContent === 'REMOVE FROM QUEUE') {
           e.target.textContent = 'ADD TO QUEUE';
         } else {
           e.target.textContent = 'REMOVE FROM QUEUE';
         }
       }
+
       if (e.target.className === 'watched-btn') {
         this.addToWatchedUserDataBase(user, Number(e.target.dataset.id));
-
-        // const databaseUser = this.db.collection('users').doc(user.uid).get();
-        // let newListWatched = (await databaseUser).data().watched;
-
-        // console.log(newListWatched);
 
         if (e.target.textContent === 'REMOVE FROM WATCHED') {
           e.target.textContent = 'ADD TO WATCHED';
