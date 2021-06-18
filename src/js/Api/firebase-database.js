@@ -156,7 +156,6 @@ export default class DataBaseFirebase extends FetchMovieData {
         if (e.target.textContent === 'REMOVE FROM QUEUE') {
           e.target.textContent = 'ADD TO QUEUE';
         } else {
-          e.target.classList.add();
           e.target.textContent = 'REMOVE FROM QUEUE';
         }
       }
