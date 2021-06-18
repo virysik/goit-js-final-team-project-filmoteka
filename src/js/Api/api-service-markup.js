@@ -8,9 +8,6 @@ import * as basicLightbox from 'basiclightbox';
 import '../../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { showSpinner } from '../spinner';
 import { hideSpinner } from '../spinner';
-
-//import firebase from 'firebase/app';
-
 import errorNotification from '../pnotify';
 
 export default class FetchMovieData {
@@ -19,7 +16,6 @@ export default class FetchMovieData {
     this._page = 1;
     this._totalPage = '';
     this._genres = this.fetchGenreCodes();
-    //this._raitingStatus = false;
     this._searchQuery = '';
   }
 
@@ -65,20 +61,11 @@ export default class FetchMovieData {
     return this._genres;
   }
 
-  // get raiting() {
-  //   return this._raitingStatus;
-  // }
-
-  // set raiting(newRaitingStatus) {
-  //   this._raitingStatus = newRaitingStatus;
-  // }
-
   async getMarkUp(activePage) {
     const apiData = await this.getMarkUpData();
     const markUp = await template(apiData);
     refs.movieList.innerHTML = markUp;
     this.pagination(this._totalPage, activePage);
-    // this.addEventListeners();
   }
 
   async getMarkUpData() {
@@ -87,14 +74,12 @@ export default class FetchMovieData {
       const asyncMoviesData = await this.fetchTrendingMovies();
 
       if (asyncMoviesData.results.length === 0) {
-        // refs.errorMessage.style.display = 'block'
         errorNotification();
       }
 
       const asyncGenresList = await this.genres;
 
       return asyncMoviesData.results.map(data => {
-        //console.log(asyncMoviesData.results.map(data => data.original_title));
         return {
           ...data,
           genre: this.getCorrectGenreArray(data.genre_ids, asyncGenresList),
@@ -157,10 +142,7 @@ export default class FetchMovieData {
 
       if (target.classList.contains('library-page-js')) {
         refs.movieList.innerHTML = '';
-
         this.resetPage();
-        //this.getMarkUp();
-        // clearGalleryContainer();
       }
     });
 
@@ -171,13 +153,6 @@ export default class FetchMovieData {
       this.searchQuery(newQuery);
       this.resetPage();
       this.getMarkUp();
-      /*this._searchQuery = newQuery;
-      this.clearGalleryContainer();
-      const apiData = await this.getMarkUpData();
-      const markUp = await template(apiData);*/
-      //       refs.movieList.innerHTML = markUp;
-      //this._searchQuery = '';
-      //refs.searchFormInput.value = '';
     });
   }
 
@@ -206,23 +181,24 @@ export default class FetchMovieData {
   }
 
   renderOneMovie() {
-    refs.movieList.addEventListener('click', async e => {
+    refs.mainWrapper.addEventListener('click', async e => {
       if (e.target.nodeName !== 'IMG') {
         return;
       }
       const filmId = e.target.id;
+
       const markUp = await this.getMarkUpForOneMovie(filmId);
 
       const modal = basicLightbox.create(oneMovieTemp(markUp), {
         onShow: () => {
           document.body.classList.add('body-lightbox');
-          window.addEventListener('click', onBtnClose);
-          window.addEventListener('keydown', onKeyPressEsc);
+          document.body.addEventListener('click', onBtnClose);
+          document.body.addEventListener('keydown', onKeyPressEsc);
         },
         onClose: () => {
           document.body.classList.remove('body-lightbox');
-          window.removeEventListener('click', onBtnClose);
-          window.removeEventListener('keydown', onKeyPressEsc);
+          document.body.removeEventListener('click', onBtnClose);
+          document.body.removeEventListener('keydown', onKeyPressEsc);
         },
       });
       modal.show();
@@ -258,35 +234,18 @@ export default class FetchMovieData {
     }
   }
 
-  // async markUpAllMain(activePage = 1) {
-  //   //рендерит разметку контейнера с фильмами и пагинацию
-  //   try {
-  //     //await this.getMarkUp();
-  //     //this.pagination(this._totalPage, activePage);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   renderMarkupPage(totalPage, activePage, listPagesEl) {
-    console.log('renderFunction');
     listPagesEl.innerHTML = this.createMarkup(totalPage, activePage);
   }
 
   createMarkup(totalPage, page) {
-    console.log('CreateMarkUp function');
     let markup = '';
     let beforePages = page - 2;
     let afterPages = page + 2;
-    const arrowRight = '&#129130';
-    const arrowLeft = '&#129128';
 
     if (page > 1) {
       markup += `<li class="pagination__item first">
-            <a class="pagination__link" id="left">-
-            <!--<svg class="number-pages__svg" width="16" height="16">
-                <use href="./img/sprite.svg#icon-arrow-left"></use>
-              </svg>-->
+            <a class="pagination__link" id="left"><-
             </a>
           </li>`;
     }
@@ -344,10 +303,7 @@ export default class FetchMovieData {
 
     if (page < totalPage) {
       markup += `<li class="pagination__item last">
-            <a class="pagination__link" id="right">+
-            <!--<svg class="number-pages__svg" width="16" height="16">
-                <use href="./img/sprite.svg#icon-arrow-right"></use>
-              </svg>-->
+            <a class="pagination__link" id="right">->
               </a>
           </li>`;
     }
@@ -356,16 +312,12 @@ export default class FetchMovieData {
   }
 
   pagination(totalPage, activePage = 1, listPagesEl = refs.listPagesEl) {
-    console.log(typeof totalPage === null);
     if (totalPage <= 1 || typeof totalPage === null) {
       listPagesEl.innerHTML = '';
       return;
     }
-    console.log('totalPage from api-service:', totalPage);
-    console.log('activePage', activePage);
-    console.log('listPagesEl', listPagesEl);
+
     this.renderMarkupPage(totalPage, activePage, listPagesEl);
-    //listPagesEl.addEventListener('click', (e) => this.onClick(e));
   }
 
   paginationListner() {
@@ -374,7 +326,6 @@ export default class FetchMovieData {
 
   async onClick(e) {
     e.preventDefault();
-    console.log('paginationListener in onClick');
     if (e.target.tagName === 'UL') return;
 
     if (e.target.textContent === '...') return;

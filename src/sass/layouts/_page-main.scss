@@ -45,8 +45,18 @@
   }
 }
 
+
+.library__section-list {
+  @media screen and(min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -29px;
+    margin-left: -29px;
+  }
+}
+
 .main__library-info,
-.main__library-login {
+  .main__library-login {
   text-align: center;
   font-weight: 500;
   margin-bottom: 40px;
