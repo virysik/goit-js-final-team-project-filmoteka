@@ -31,10 +31,8 @@ db.auth.onAuthStateChanged(user => {
     db.pushWatchedToLibrary(user);
     db.pushQueueToLibrary(user);
     document.querySelector('.main__library-login').classList.add('is-hidden');
-    refs.listPagesEl.classList.remove('is-hidden');
   } else {
     document.querySelector('.main__library-login').classList.remove('is-hidden');
-    refs.listPagesEl.classList.add('is-hidden');
   }
   auth.setupLoginBtn(user);
 });
